@@ -4,12 +4,20 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
 }
 
 const {
-  title = 'Noise Decibel Meter — Free Real-Time Sound Level Meter',
-  description = 'Measure real-time environmental noise levels directly from your browser using your microphone. Free online decibel meter with live dB readings.',
+  title = 'Decibel Meter Online — Free Real-Time Sound Level Meter',
+  description = 'Use our free online decibel meter to measure real-time sound levels directly in your browser. No download needed. Get instant dB readings with our professional-grade noise decibel meter.',
+  keywords = 'decibel meter, decibel meter online, online decibel meter, sound decibel meter, decibel meter free, free decibel meter, decibel meter online free, best decibel meter, decibel meter chart, professional decibel meter, noise decibel meter, outdoor decibel meter',
+  canonicalUrl = 'https://noisedecibelmeter.com/',
+  ogImage = 'https://noisedecibelmeter.com/og-image.png',
 } = Astro.props;
+
+const siteName = 'Noise Decibel Meter';
 ---
 
 <!doctype html>
@@ -17,15 +25,66 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Primary SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Noise Decibel Meter — Free Online Sound Level Meter" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicons -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="NoiseDb" />
     <link rel="manifest" href="/site.webmanifest" />
+
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Noise Decibel Meter",
+      "url": canonicalUrl,
+      "description": description,
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Real-time decibel measurement",
+        "dBA and dBC weighting",
+        "60-second history graph",
+        "CSV export",
+        "No installation required",
+        "Works in any modern browser"
+      ]
+    })} />
   </head>
   <body class="min-h-screen bg-[#fafafa]">
     <slot />

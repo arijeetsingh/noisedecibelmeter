@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const title = 'Decibel Meter Online Free — Real-Time Sound Level Meter | Noise Decibel Meter';
+const description = 'Free online decibel meter that measures sound levels in real time using your browser microphone. No download required. The best noise decibel meter for home, office, and outdoor use.';
 ---
 
 <style>
@@ -73,6 +76,30 @@ import Layout from '../layouts/Layout.astro';
   html[data-dark] .footer-tagline { color: #555 !important; }
   html[data-dark] .footer-note { color: #555 !important; }
 
+  /* FAQ collapsible */
+  .faq-details { border-bottom: 1px solid #ebebeb; }
+  .faq-details:last-child { border-bottom: none; }
+  .faq-details summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 20px 0; cursor: pointer; list-style: none;
+    font-size: 17px; font-weight: 600; color: #171717; letter-spacing: -0.3px; line-height: 1.3;
+  }
+  .faq-details summary::-webkit-details-marker { display: none; }
+  .faq-chevron {
+    flex-shrink: 0; width: 16px; height: 16px;
+    border-right: 1.5px solid #888; border-bottom: 1.5px solid #888;
+    transform: rotate(45deg); margin-bottom: 6px;
+    transition: transform 0.2s, margin-bottom 0.2s;
+  }
+  .faq-details[open] .faq-chevron { transform: rotate(-135deg); margin-bottom: -6px; }
+  .faq-answer { padding: 0 0 20px; font-size: 15px; color: #4d4d4d; line-height: 1.75; margin: 0; }
+
+  html[data-dark] .faq-section-title { color: #f2f2f2 !important; }
+  html[data-dark] .faq-details { border-bottom-color: #222 !important; }
+  html[data-dark] .faq-details summary { color: #f2f2f2 !important; }
+  html[data-dark] .faq-chevron { border-color: #555 !important; }
+  html[data-dark] .faq-answer { color: #888 !important; }
+
   /* Dark toggle button */
   .dark-toggle {
     width: 36px; height: 36px; border-radius: 100px;
@@ -91,7 +118,7 @@ import Layout from '../layouts/Layout.astro';
   html[data-dark] .icon-sun  { display: block; }
 </style>
 
-<Layout>
+<Layout title={title} description={description}>
   <!-- Nav -->
   <nav style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:blur(12px);border-bottom:1px solid #ebebeb;">
     <div style="max-width:960px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
@@ -134,12 +161,12 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- Hero -->
     <div style="text-align:center;margin-bottom:48px;">
-      <p class="hero-tag" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px;">Free online sound level meter</p>
+      <p class="hero-tag" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px;">Free online decibel meter — no download required</p>
       <h1 class="hero-h1" style="font-size:48px;font-weight:600;color:#171717;letter-spacing:-2.4px;line-height:1.05;margin:0 0 16px;">
-        Real-time noise<br/>decibel meter.
+        Online decibel meter.<br/>Real-time sound levels.
       </h1>
-      <p class="hero-body" style="font-size:18px;color:#4d4d4d;line-height:1.6;margin:0;max-width:400px;display:inline-block;">
-        Measure environmental noise instantly from your browser. No installs, no accounts.
+      <p class="hero-body" style="font-size:18px;color:#4d4d4d;line-height:1.6;margin:0;max-width:460px;display:inline-block;">
+        The best free decibel meter online — measure noise levels instantly from your browser microphone. No installs, no accounts.
       </p>
     </div>
 
@@ -274,6 +301,140 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
 
+    <!-- SEO Article -->
+    <article style="max-width:720px;margin:0 auto 80px;padding:0 4px;">
+
+      <h2 style="font-size:28px;font-weight:600;color:#171717;letter-spacing:-1px;line-height:1.2;margin:0 0 16px;">
+        Free Online Decibel Meter — Measure Sound Levels Instantly
+      </h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">
+        Our <strong>free online decibel meter</strong> lets you measure real-time sound levels directly in your browser — no app download, no sign-up, no cost. Whether you need a quick noise check at home, want to monitor an outdoor environment, or simply need a professional-grade reading on the go, this <strong>decibel meter online free</strong> tool has you covered. Just click <em>Start Measuring</em>, grant microphone access, and watch live dB values appear instantly.
+      </p>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">
+        What Is a Decibel Meter?
+      </h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">
+        A <strong>decibel meter</strong> — also called a sound level meter — is a device or tool that measures the intensity of sound in decibels (dB). Decibels are a logarithmic unit: every 10 dB increase represents a tenfold jump in sound energy. A traditional <strong>professional decibel meter</strong> is a handheld hardware instrument used by engineers and safety inspectors. Our <strong>online decibel meter</strong> replicates this functionality using your device's built-in microphone and the Web Audio API, giving you browser-based readings that are accurate enough for everyday use.
+      </p>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">
+        Decibel Meter Chart — Common Sound Levels
+      </h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 12px;">
+        Use this <strong>decibel meter chart</strong> as a reference while measuring your environment:
+      </p>
+      <ul style="font-size:15px;color:#4d4d4d;line-height:1.9;margin:0 0 20px;padding-left:24px;">
+        <li><strong>0–20 dB</strong> — Near silence, anechoic chamber</li>
+        <li><strong>20–40 dB</strong> — Whisper, rustling leaves, quiet library</li>
+        <li><strong>40–60 dB</strong> — Normal conversation, quiet office, rainfall</li>
+        <li><strong>60–70 dB</strong> — Busy restaurant, television at normal volume</li>
+        <li><strong>70–85 dB</strong> — Vacuum cleaner, heavy traffic, loud music</li>
+        <li><strong>85–100 dB</strong> — Power tools, motorcycle, hearing damage risk zone</li>
+        <li><strong>100–120 dB</strong> — Concerts, jackhammer, construction site</li>
+        <li><strong>120–140 dB</strong> — Jet engine at close range, threshold of pain</li>
+      </ul>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">
+        How to Use This Sound Decibel Meter
+      </h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">
+        Using this <strong>sound decibel meter</strong> is straightforward. Click <em>Start Measuring</em> and allow your browser to access your microphone. The gauge immediately begins displaying live dB readings. You can switch between <strong>dBA</strong> (A-weighted, optimised for human hearing sensitivity) and <strong>dBC</strong> (C-weighted, better for low-frequency industrial noise). The 60-second history graph lets you spot noise spikes over time, while the Min / Avg / Max statistics summarise your session. When you're done, hit <em>Stop</em> and optionally <em>Export CSV</em> to save a timestamped log of every reading.
+      </p>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">
+        Why Choose This Free Decibel Meter?
+      </h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">
+        Unlike smartphone apps that require installation or access to your contacts and location, this <strong>free decibel meter</strong> runs entirely in your browser tab. All audio processing happens locally — no sound data is ever sent to a server. The tool is privacy-first, instant, and works on any device with a microphone: laptop, desktop, tablet, or phone. It's the ideal <strong>noise decibel meter</strong> for renters documenting neighbor noise, parents checking bedroom sound levels, musicians setting studio levels, or employees assessing workplace noise compliance.
+      </p>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">
+        Outdoor &amp; Professional Use Cases
+      </h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">
+        As an <strong>outdoor decibel meter</strong>, this tool is handy for measuring traffic noise near a window, checking construction noise in your neighbourhood, or evaluating a venue before an event. For more <strong>professional decibel meter</strong> requirements — such as OSHA compliance checks or engineering surveys — we recommend pairing browser readings with a calibrated hardware meter. That said, for quick assessments and trend monitoring, our online tool delivers reliable relative measurements that are more than sufficient for most real-world scenarios.
+      </p>
+
+    </article>
+
+    <!-- FAQ Section -->
+    <section style="max-width:720px;margin:0 auto 80px;padding:0 4px;">
+      <h2 class="faq-section-title" style="font-size:28px;font-weight:600;color:#171717;letter-spacing:-1px;line-height:1.2;margin:0 0 8px;">
+        Frequently Asked Questions
+      </h2>
+
+      <details class="faq-details">
+        <summary>Can I measure dB with my phone?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">Yes. Any smartphone with a working microphone can measure decibels using a browser-based tool like this one or a dedicated app. Simply open the page in Chrome, Safari, or Firefox on your phone, tap <strong>Start Measuring</strong>, and grant microphone permission. No app download is needed. Results are reliable enough for home, office, and environmental noise checks.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>Is 70 decibels very loud?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">70 dB is noticeably loud but not immediately harmful. It's roughly equivalent to a busy restaurant, a vacuum cleaner running nearby, or heavy traffic heard from the pavement. Prolonged exposure above 70 dB can cause fatigue; sustained exposure above 85 dB for 8+ hours per day is where noise-induced hearing damage risk begins, according to OSHA guidelines.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>Is 100 decibels really loud?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">Yes — 100 dB is very loud and in the hearing-damage zone. It's comparable to a motorcycle at close range, a chainsaw, or standing near the speakers at a live concert. OSHA permits only 2 hours of unprotected exposure at 100 dB before hearing protection is required. Repeated exposure without ear protection can cause permanent hearing loss.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>How loud is 50 dB at night?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">50 dB at night is considered moderately intrusive. The World Health Organization (WHO) recommends keeping outdoor night-time noise below 40 dB for undisturbed sleep, so 50 dB — roughly the level of a quiet conversation or a humming refrigerator — can disrupt light sleepers and reduce sleep quality over time. Many local noise ordinances set night-time limits between 45–55 dB precisely because this range begins to interfere with rest.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>What is the normal decibel range?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">For everyday environments, 40–65 dB is considered the comfortable, normal range. A quiet bedroom sits around 30–40 dB, a normal conversation is 55–65 dB, and a busy office lands around 65–70 dB. The human hearing range spans roughly 0 dB (threshold of hearing) to 140 dB (threshold of pain). Most health guidelines recommend keeping continuous noise exposure below 70 dB to protect long-term hearing health.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>What is a decibel meter?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">A decibel meter — also called a sound level meter — is a device or software tool that measures the intensity of sound in decibels (dB). Because decibels use a logarithmic scale, every 10 dB increase represents roughly a tenfold rise in sound energy. Decibel meters are used by engineers, safety inspectors, musicians, and everyday users to monitor noise in homes, workplaces, and outdoor environments.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>How to use a decibel meter?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">Click <strong>Start Measuring</strong> at the top of this page and allow your browser to access your microphone. The gauge will immediately display live dB readings. You can switch between dBA (A-weighted, tuned to human hearing) and dBC (C-weighted, better for low-frequency noise). Watch the 60-second history graph for noise spikes, and use the Min / Avg / Max stats to summarise your session. Hit <strong>Stop</strong> when done, then optionally <strong>Export CSV</strong> to save a timestamped log.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>Are decibel meter apps accurate?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">Browser-based and smartphone decibel meter apps are accurate enough for everyday use — typically within ±2–3 dB — making them excellent for trend monitoring, noise complaints, and general awareness. Accuracy depends on your device's microphone quality. For legally compliant occupational safety assessments (OSHA, ISO 61672), a certified hardware sound level meter is required, as phone microphones are not factory-calibrated to measurement standards.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>How does a decibel meter work?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">A decibel meter captures sound waves via a microphone, converts them into an electrical signal, and calculates the root mean square (RMS) amplitude. That amplitude is then converted to decibels using a logarithmic formula referenced to the threshold of human hearing (20 µPa). This online tool uses your browser's Web Audio API to perform all of that processing locally — no audio is ever sent to a server.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>What does a decibel meter measure?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">A decibel meter measures sound pressure level (SPL) — the intensity of sound relative to a reference point (0 dB ≈ the quietest sound a healthy human ear can detect). It does not measure pitch or frequency directly, but rather the overall loudness of all frequencies combined. Weighted modes like dBA and dBC apply filters that emphasise or de-emphasise certain frequency ranges to better reflect how humans perceive sound.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>Is this decibel meter free to use?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">Yes — 100% free, forever. No subscription, no account, no hidden costs. The tool runs entirely in your browser with no installation required.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>Does it work on mobile?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">Yes. The tool works on any modern browser including Chrome, Safari, Firefox, and Edge on both desktop and mobile. As long as your device has a microphone and supports the Web Audio API (all modern browsers do), you're good to go.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>Is my audio recorded or stored?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">No. All audio analysis happens locally in your browser using the Web Audio API. No sound data is transmitted to any server, recorded, or stored anywhere. Your privacy is fully protected.</p>
+      </details>
+
+      <details class="faq-details">
+        <summary>What is the difference between dBA and dBC?<span class="faq-chevron"></span></summary>
+        <p class="faq-answer">dBA (A-weighting) filters frequencies the way human ears perceive them — reducing sensitivity to very low and very high frequencies — making it the standard for occupational noise assessments and most everyday measurements. dBC (C-weighting) applies much less filtering and is better for measuring low-frequency sounds like bass-heavy music or heavy machinery.</p>
+      </details>
+    </section>
+
   </main>
 
   <!-- Footer -->
@@ -281,12 +442,133 @@ import Layout from '../layouts/Layout.astro';
     <div style="max-width:960px;margin:0 auto;padding:28px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
       <div style="display:flex;align-items:center;gap:8px;">
         <span class="footer-title" style="font-size:14px;font-weight:600;color:#171717;">Noise Decibel Meter</span>
-        <span class="footer-tagline" style="font-size:14px;color:#888;">— free online sound level meter</span>
+        <span class="footer-tagline" style="font-size:14px;color:#888;">— free online decibel meter &amp; sound level meter</span>
       </div>
       <p class="footer-note" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;margin:0;">Audio processed locally. Never sent to any server.</p>
     </div>
   </footer>
 </Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I measure dB with my phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Any smartphone with a working microphone can measure decibels using a browser-based tool like this one or a dedicated app. Simply open the page in Chrome, Safari, or Firefox on your phone, tap Start Measuring, and grant microphone permission. No app download is needed. Results are reliable enough for home, office, and environmental noise checks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is 70 decibels very loud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "70 dB is noticeably loud but not immediately harmful. It's roughly equivalent to a busy restaurant, a vacuum cleaner running nearby, or heavy traffic heard from the pavement. Prolonged exposure above 70 dB can cause fatigue; sustained exposure above 85 dB for 8+ hours per day is where noise-induced hearing damage risk begins, according to OSHA guidelines."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is 100 decibels really loud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — 100 dB is very loud and in the hearing-damage zone. It's comparable to a motorcycle at close range, a chainsaw, or standing near the speakers at a live concert. OSHA permits only 2 hours of unprotected exposure at 100 dB before hearing protection is required. Repeated exposure without ear protection can cause permanent hearing loss."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How loud is 50 dB at night?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "50 dB at night is considered moderately intrusive. The World Health Organization (WHO) recommends keeping outdoor night-time noise below 40 dB for undisturbed sleep, so 50 dB — roughly the level of a quiet conversation or a humming refrigerator — can disrupt light sleepers and reduce sleep quality over time. Many local noise ordinances set night-time limits between 45–55 dB precisely because this range begins to interfere with rest."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the normal decibel range?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For everyday environments, 40–65 dB is considered the comfortable, normal range. A quiet bedroom sits around 30–40 dB, a normal conversation is 55–65 dB, and a busy office lands around 65–70 dB. The human hearing range spans roughly 0 dB (threshold of hearing) to 140 dB (threshold of pain). Most health guidelines recommend keeping continuous noise exposure below 70 dB to protect long-term hearing health."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a decibel meter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A decibel meter — also called a sound level meter — is a device or software tool that measures the intensity of sound in decibels (dB). Because decibels use a logarithmic scale, every 10 dB increase represents roughly a tenfold rise in sound energy. Decibel meters are used by engineers, safety inspectors, musicians, and everyday users to monitor noise in homes, workplaces, and outdoor environments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to use a decibel meter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Click Start Measuring and allow your browser to access your microphone. The gauge will immediately display live dB readings. You can switch between dBA (A-weighted, tuned to human hearing) and dBC (C-weighted, better for low-frequency noise). Watch the 60-second history graph for noise spikes, and use the Min / Avg / Max stats to summarise your session. Hit Stop when done, then optionally Export CSV to save a timestamped log."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are decibel meter apps accurate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Browser-based and smartphone decibel meter apps are accurate enough for everyday use — typically within ±2–3 dB — making them excellent for trend monitoring, noise complaints, and general awareness. Accuracy depends on your device's microphone quality. For legally compliant occupational safety assessments (OSHA, ISO 61672), a certified hardware sound level meter is required, as phone microphones are not factory-calibrated to measurement standards."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does a decibel meter work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A decibel meter captures sound waves via a microphone, converts them into an electrical signal, and calculates the root mean square (RMS) amplitude. That amplitude is then converted to decibels using a logarithmic formula referenced to the threshold of human hearing (20 µPa). This online tool uses your browser's Web Audio API to perform all of that processing locally — no audio is ever sent to a server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does a decibel meter measure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A decibel meter measures sound pressure level (SPL) — the intensity of sound relative to a reference point (0 dB ≈ the quietest sound a healthy human ear can detect). It does not measure pitch or frequency directly, but rather the overall loudness of all frequencies combined. Weighted modes like dBA and dBC apply filters that emphasise or de-emphasise certain frequency ranges to better reflect how humans perceive sound."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this decibel meter free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — 100% free, forever. No subscription, no account, no hidden costs. The tool runs entirely in your browser with no installation required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on mobile?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The tool works on any modern browser including Chrome, Safari, Firefox, and Edge on both desktop and mobile. As long as your device has a microphone and supports the Web Audio API (all modern browsers do), you're good to go."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my audio recorded or stored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All audio analysis happens locally in your browser using the Web Audio API. No sound data is transmitted to any server, recorded, or stored anywhere. Your privacy is fully protected."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between dBA and dBC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "dBA (A-weighting) filters frequencies the way human ears perceive them — reducing sensitivity to very low and very high frequencies — making it the standard for occupational noise assessments and most everyday measurements. dBC (C-weighting) applies much less filtering and is better for measuring low-frequency sounds like bass-heavy music or heavy machinery."
+      }
+    }
+  ]
+}
+</script>
 
 <script is:inline>
 // ── Dark mode ──────────────────────────────────────────────────────────────
