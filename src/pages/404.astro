@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = '404 — Page Not Found | Noise Decibel Meter';
+const description = 'The page you were looking for could not be found. Return to the Noise Decibel Meter home page.';
+const canonicalUrl = 'https://noisedecibelmeter.com/404';
+---
+
+<style>
+  html[data-dark] .error-code  { color: #2a2a2a !important; }
+  html[data-dark] .error-title { color: #f2f2f2 !important; }
+  html[data-dark] .error-body  { color: #888 !important; }
+  html[data-dark] .home-btn    { background: #f2f2f2 !important; color: #171717 !important; }
+  html[data-dark] .home-btn:hover { background: #e0e0e0 !important; }
+</style>
+
+<Layout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <main style="max-width:720px;margin:0 auto;padding:96px 24px 128px;text-align:center;">
+
+    <p class="error-code" style="font-family:'JetBrains Mono',monospace;font-size:96px;font-weight:700;color:#ebebeb;letter-spacing:-4px;line-height:1;margin:0 0 24px;">404</p>
+
+    <h1 class="error-title" style="font-size:32px;font-weight:600;color:#171717;letter-spacing:-1.2px;line-height:1.2;margin:0 0 16px;">
+      Page not found
+    </h1>
+    <p class="error-body" style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 40px;max-width:400px;margin-left:auto;margin-right:auto;">
+      The page you were looking for doesn't exist or has been moved. Try heading back to the home page.
+    </p>
+
+    <a href="/" class="home-btn" style="display:inline-flex;align-items:center;gap:8px;background:#171717;color:#fff;font-size:14px;font-weight:500;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.15s;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      Back to home
+    </a>
+
+  </main>
+</Layout>

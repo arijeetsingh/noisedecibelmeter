@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = '500 — Server Error | Noise Decibel Meter';
+const description = 'Something went wrong on our end. Please try again or return to the Noise Decibel Meter home page.';
+const canonicalUrl = 'https://noisedecibelmeter.com/500';
+---
+
+<style>
+  html[data-dark] .error-code  { color: #2a2a2a !important; }
+  html[data-dark] .error-title { color: #f2f2f2 !important; }
+  html[data-dark] .error-body  { color: #888 !important; }
+  html[data-dark] .home-btn    { background: #f2f2f2 !important; color: #171717 !important; }
+  html[data-dark] .home-btn:hover { background: #e0e0e0 !important; }
+</style>
+
+<Layout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <main style="max-width:720px;margin:0 auto;padding:96px 24px 128px;text-align:center;">
+
+    <p class="error-code" style="font-family:'JetBrains Mono',monospace;font-size:96px;font-weight:700;color:#ebebeb;letter-spacing:-4px;line-height:1;margin:0 0 24px;">500</p>
+
+    <h1 class="error-title" style="font-size:32px;font-weight:600;color:#171717;letter-spacing:-1.2px;line-height:1.2;margin:0 0 16px;">
+      Something went wrong
+    </h1>
+    <p class="error-body" style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 40px;max-width:400px;margin-left:auto;margin-right:auto;">
+      An unexpected error occurred on our end. Try refreshing the page, or head back to the home page.
+    </p>
+
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
+      <a href="/" class="home-btn" style="display:inline-flex;align-items:center;gap:8px;background:#171717;color:#fff;font-size:14px;font-weight:500;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.15s;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Back to home
+      </a>
+      <button onclick="location.reload()" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#888;font-size:14px;font-weight:500;padding:12px 24px;border-radius:8px;border:1px solid #ebebeb;cursor:pointer;transition:border-color 0.15s;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+        </svg>
+        Try again
+      </button>
+    </div>
+
+  </main>
+</Layout>
