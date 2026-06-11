@@ -17,6 +17,8 @@
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
-    "playwright": "^1.60.0"
+    "@astrojs/cloudflare": "^13.7.0",
+    "playwright": "^1.60.0",
+    "wrangler": "^4.100.0"
   }
 }
