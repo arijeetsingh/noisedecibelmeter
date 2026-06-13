@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Translations } from '../i18n/en';
+
+interface Props { t: Translations; lang?: string; }
+const { t, lang = 'en' } = Astro.props;
+const tr = t.terms;
+const prefix = lang === 'en' ? '' : `/${lang}`;
+const canonicalUrl = lang === 'en'
+  ? 'https://noisedecibelmeter.com/terms/'
+  : `https://noisedecibelmeter.com/${lang}/terms/`;
+---
+
+<style>
+  html[data-dark] .page-title { color: #f2f2f2 !important; }
+  html[data-dark] .page-date  { color: #555 !important; }
+  html[data-dark] .page-h2    { color: #f2f2f2 !important; }
+  html[data-dark] .page-body  { color: #b0b0b0 !important; }
+</style>
+
+<Layout title={tr.title} description={tr.description} canonicalUrl={canonicalUrl} lang={lang} pagePath="terms" ogLocale={t.ogLocale}>
+  <main style="max-width:720px;margin:0 auto;padding:64px 24px 96px;">
+
+    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px;">{tr.label}</p>
+    <h1 class="page-title" style="font-size:40px;font-weight:600;color:#171717;letter-spacing:-1.8px;line-height:1.1;margin:0 0 12px;">{tr.h1}</h1>
+    <p class="page-date" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#888;margin:0 0 48px;">{tr.updated}</p>
+
+    {tr.sections.map((section, i) => (
+      <div>
+        <h2 class="page-h2" style="font-size:20px;font-weight:600;color:#171717;letter-spacing:-0.5px;margin:0 0 12px;">{section.h2}</h2>
+        {i === tr.sections.length - 1 ? (
+          <p class="page-body" style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0;">
+            {section.body} <a href={`${prefix}/contact/`} style="color:#171717;text-decoration:underline;text-underline-offset:3px;">{tr.contactLink}</a>.
+          </p>
+        ) : (
+          <p class="page-body" style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 32px;">{section.body}</p>
+        )}
+      </div>
+    ))}
+
+  </main>
+</Layout>

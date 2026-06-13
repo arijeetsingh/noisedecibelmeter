@@ -1,0 +1,468 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Translations } from '../i18n/en';
+
+interface Props {
+  t: Translations;
+  lang?: string;
+}
+
+const { t, lang = 'en' } = Astro.props;
+const idx = t.index;
+const canonicalUrl = lang === 'en'
+  ? 'https://noisedecibelmeter.com/'
+  : `https://noisedecibelmeter.com/${lang}/`;
+---
+
+<style>
+  @media (max-width: 600px) {
+    .legend-grid { grid-template-columns: 1fr 1fr !important; }
+    .hero-h1 { font-size: 36px !important; letter-spacing: -1.5px !important; }
+    .btn-row { flex-direction: column !important; align-items: stretch !important; }
+    .btn-row button { width: 100% !important; }
+  }
+  #btn-start:hover { background: #333 !important; }
+  #btn-stop:hover:not(:disabled), #btn-export:hover:not(:disabled) { border-color: #a1a1a1 !important; }
+
+  html[data-dark] { background: #0a0a0a !important; color: #f2f2f2 !important; }
+  html[data-dark] body { background: #0a0a0a !important; }
+  html[data-dark] nav { background: rgba(10,10,10,0.85) !important; border-bottom-color: #222 !important; }
+  html[data-dark] .nav-brand-text { color: #f2f2f2 !important; }
+  html[data-dark] .nav-logo-circle-ring { stroke: #e0e0e0 !important; }
+  html[data-dark] .nav-logo-circle-dot { fill: #e0e0e0 !important; }
+  html[data-dark] .nav-logo-path { stroke: #e0e0e0 !important; }
+  html[data-dark] .hero-tag { color: #777 !important; }
+  html[data-dark] .hero-h1 { color: #f2f2f2 !important; }
+  html[data-dark] .hero-body { color: #b0b0b0 !important; }
+  html[data-dark] .main-card { background: #1a1a1a !important; border-color: #272727 !important; box-shadow: 0 2px 2px rgba(0,0,0,0.3),0 8px 16px -4px rgba(0,0,0,0.4) !important; }
+  html[data-dark] #classification-badge { background: #111 !important; border-color: #2a2a2a !important; }
+  html[data-dark] .gauge-track { stroke: #2a2a2a !important; }
+  html[data-dark] .gauge-tick { fill: #444 !important; }
+  html[data-dark] #gauge-needle { stroke: #e0e0e0 !important; }
+  html[data-dark] #gauge-center { fill: #e0e0e0 !important; }
+  html[data-dark] #db-value { color: #f2f2f2 !important; }
+  html[data-dark] .db-unit { color: #888 !important; }
+  html[data-dark] .weight-inactive { background: #222 !important; color: #777 !important; border-color: #333 !important; }
+  html[data-dark] .stat-box { background: #111 !important; border-color: #222 !important; }
+  html[data-dark] .stat-label { color: #888 !important; }
+  html[data-dark] .stat-val { color: #f2f2f2 !important; }
+  html[data-dark] #btn-stop, html[data-dark] #btn-export { background: #1a1a1a !important; border-color: #2a2a2a !important; color: #f2f2f2 !important; }
+  html[data-dark] #btn-stop:hover:not(:disabled), html[data-dark] #btn-export:hover:not(:disabled) { border-color: #555 !important; }
+  html[data-dark] .history-section { border-top-color: #222 !important; }
+  html[data-dark] #history-canvas { background: #111 !important; border-color: #222 !important; }
+  html[data-dark] .history-axis-label { color: #666 !important; }
+  html[data-dark] .legend-card { background: #1a1a1a !important; border-color: #272727 !important; }
+  html[data-dark] .legend-title { color: #f2f2f2 !important; }
+  html[data-dark] .legend-range { color: #555 !important; }
+  html[data-dark] .legend-desc { color: #b0b0b0 !important; }
+
+  .faq-details { border-bottom: 1px solid #ebebeb; }
+  .faq-details:last-child { border-bottom: none; }
+  .faq-details summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 20px 0; cursor: pointer; list-style: none;
+    font-size: 17px; font-weight: 600; color: #171717; letter-spacing: -0.3px; line-height: 1.3;
+  }
+  .faq-details summary::-webkit-details-marker { display: none; }
+  .faq-chevron {
+    flex-shrink: 0; width: 16px; height: 16px;
+    border-right: 1.5px solid #888; border-bottom: 1.5px solid #888;
+    transform: rotate(45deg); margin-bottom: 6px;
+    transition: transform 0.2s, margin-bottom 0.2s;
+  }
+  .faq-details[open] .faq-chevron { transform: rotate(-135deg); margin-bottom: -6px; }
+  .faq-answer { padding: 0 0 20px; font-size: 15px; color: #4d4d4d; line-height: 1.75; margin: 0; }
+
+  html[data-dark] .faq-section-title { color: #f2f2f2 !important; }
+  html[data-dark] .faq-details { border-bottom-color: #222 !important; }
+  html[data-dark] .faq-details summary { color: #f2f2f2 !important; }
+  html[data-dark] .faq-chevron { border-color: #777 !important; }
+  html[data-dark] .faq-answer { color: #b0b0b0 !important; }
+</style>
+
+<Layout
+  title={idx.title}
+  description={idx.description}
+  canonicalUrl={canonicalUrl}
+  lang={lang}
+  pagePath=""
+  ogLocale={t.ogLocale}
+>
+  <main style="max-width:960px;margin:0 auto;padding:48px 24px 80px;">
+
+    <!-- Hero -->
+    <div style="text-align:center;margin-bottom:48px;">
+      <p class="hero-tag" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px;">{idx.hero.tag}</p>
+      <h1 class="hero-h1" style="font-size:48px;font-weight:600;color:#171717;letter-spacing:-2.4px;line-height:1.05;margin:0 0 16px;">
+        {idx.hero.h1_1}<br/>{idx.hero.h1_2}
+      </h1>
+      <p class="hero-body" style="font-size:18px;color:#4d4d4d;line-height:1.6;margin:0;max-width:460px;display:inline-block;">
+        {idx.hero.body}
+      </p>
+    </div>
+
+    <!-- Main card -->
+    <div class="main-card" style="background:#fff;border-radius:16px;border:1px solid #ebebeb;box-shadow:0 2px 2px rgba(0,0,0,0.04),0 8px 16px -4px rgba(0,0,0,0.06);overflow:hidden;margin-bottom:16px;">
+
+      <!-- Classification badge -->
+      <div style="padding:24px 32px 0;display:flex;justify-content:center;">
+        <div id="classification-badge" style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;background:#fafafa;border:1px solid #ebebeb;font-size:13px;font-weight:500;color:#888;transition:all 0.4s;">
+          <span id="badge-dot" style="width:8px;height:8px;border-radius:50%;background:#ddd;flex-shrink:0;transition:background 0.4s;"></span>
+          <span id="badge-label">{idx.badge.idle}</span>
+        </div>
+      </div>
+
+      <!-- Gauge + reading -->
+      <div style="display:flex;flex-direction:column;align-items:center;padding:32px 32px 24px;">
+
+        <!-- SVG Gauge -->
+        <div style="width:280px;height:148px;position:relative;margin-bottom:24px;">
+          <svg viewBox="0 0 280 148" width="280" height="148">
+            <path class="gauge-track" d="M 20 140 A 120 120 0 0 1 260 140" fill="none" stroke="#ebebeb" stroke-width="14" stroke-linecap="round"/>
+            <path id="arc-silent"   d="M 20 140 A 120 120 0 0 1 260 140" fill="none" stroke="#50e3c2" stroke-width="14" stroke-linecap="butt" stroke-dasharray="0 377"/>
+            <path id="arc-moderate" d="M 20 140 A 120 120 0 0 1 260 140" fill="none" stroke="#f5a623" stroke-width="14" stroke-linecap="butt" stroke-dasharray="0 377"/>
+            <path id="arc-loud"     d="M 20 140 A 120 120 0 0 1 260 140" fill="none" stroke="#ff4d4d" stroke-width="14" stroke-linecap="butt" stroke-dasharray="0 377"/>
+            <path id="arc-danger"   d="M 20 140 A 120 120 0 0 1 260 140" fill="none" stroke="#c50000" stroke-width="14" stroke-linecap="butt" stroke-dasharray="0 377"/>
+            <text class="gauge-tick" x="16"  y="148" fill="#aaa" font-size="9" font-family="JetBrains Mono,monospace" text-anchor="middle">0</text>
+            <text class="gauge-tick" x="140" y="16"  fill="#aaa" font-size="9" font-family="JetBrains Mono,monospace" text-anchor="middle">65</text>
+            <text class="gauge-tick" x="264" y="148" fill="#aaa" font-size="9" font-family="JetBrains Mono,monospace" text-anchor="middle">130</text>
+            <line id="gauge-needle" x1="140" y1="140" x2="140" y2="32" stroke="#171717" stroke-width="2" stroke-linecap="round" transform="rotate(-90 140 140)"/>
+            <circle id="gauge-center" cx="140" cy="140" r="5" fill="#171717"/>
+          </svg>
+        </div>
+
+        <!-- dB number -->
+        <div style="text-align:center;margin-bottom:20px;">
+          <div style="display:flex;align-items:flex-end;justify-content:center;gap:8px;line-height:1;">
+            <span id="db-value" style="font-family:'JetBrains Mono',monospace;font-size:72px;font-weight:600;color:#171717;letter-spacing:-3px;line-height:1;">--</span>
+            <span class="db-unit" style="font-family:'JetBrains Mono',monospace;font-size:22px;color:#888;margin-bottom:10px;">dB</span>
+          </div>
+          <div style="display:flex;justify-content:center;gap:4px;margin-top:12px;">
+            <button id="weight-a" onclick="setWeighting('A')" style="padding:4px 12px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;background:#171717;color:#fff;border:none;cursor:pointer;">dBA</button>
+            <button id="weight-c" onclick="setWeighting('C')" class="weight-inactive" style="padding:4px 12px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;background:#fafafa;color:#888;border:1px solid #ebebeb;cursor:pointer;">dBC</button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%;max-width:360px;margin-bottom:28px;">
+          <div class="stat-box" style="background:#fafafa;border-radius:10px;border:1px solid #ebebeb;padding:12px;text-align:center;">
+            <div class="stat-label" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">{idx.stats.min}</div>
+            <div id="stat-min" class="stat-val" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:#171717;">--</div>
+          </div>
+          <div class="stat-box" style="background:#fafafa;border-radius:10px;border:1px solid #ebebeb;padding:12px;text-align:center;">
+            <div class="stat-label" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">{idx.stats.avg}</div>
+            <div id="stat-avg" class="stat-val" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:#171717;">--</div>
+          </div>
+          <div class="stat-box" style="background:#fafafa;border-radius:10px;border:1px solid #ebebeb;padding:12px;text-align:center;">
+            <div class="stat-label" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">{idx.stats.max}</div>
+            <div id="stat-max" class="stat-val" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:#171717;">--</div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-row" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
+          <button id="btn-start" onclick="startMeasuring()"
+            style="padding:0 24px;height:44px;border-radius:100px;background:#171717;color:#fff;font-size:14px;font-weight:500;border:none;cursor:pointer;letter-spacing:-0.2px;">
+            {idx.btn.start}
+          </button>
+          <button id="btn-stop" onclick="stopMeasuring()" disabled
+            style="padding:0 24px;height:44px;border-radius:100px;background:#fff;color:#171717;font-size:14px;font-weight:500;border:1px solid #ebebeb;cursor:pointer;opacity:0.4;">
+            {idx.btn.stop}
+          </button>
+          <button id="btn-export" onclick="exportCsv()" disabled
+            style="padding:0 24px;height:44px;border-radius:100px;background:#fff;color:#171717;font-size:14px;font-weight:500;border:1px solid #ebebeb;cursor:pointer;opacity:0.4;">
+            {idx.btn.export}
+          </button>
+        </div>
+      </div>
+
+      <!-- History graph -->
+      <div class="history-section" style="border-top:1px solid #ebebeb;padding:24px 32px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span class="history-axis-label" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.08em;">{idx.history}</span>
+          <span id="duration-label" class="history-axis-label" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;">0:00</span>
+        </div>
+        <canvas id="history-canvas" height="72" style="width:100%;display:block;border-radius:8px;background:#fafafa;border:1px solid #ebebeb;"></canvas>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;">
+          <span class="history-axis-label" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#aaa;">0 dB</span>
+          <span class="history-axis-label" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#aaa;">65 dB</span>
+          <span class="history-axis-label" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#aaa;">130 dB</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:48px;">
+      <div class="legend-card" style="background:#fff;border-radius:10px;border:1px solid #ebebeb;padding:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:#50e3c2;flex-shrink:0;"></span>
+          <span class="legend-title" style="font-size:13px;font-weight:500;color:#171717;">{idx.legend.silent.label}</span>
+        </div>
+        <div class="legend-range" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;margin-bottom:4px;">0–40 dB</div>
+        <div class="legend-desc" style="font-size:12px;color:#4d4d4d;">{idx.legend.silent.desc}</div>
+      </div>
+      <div class="legend-card" style="background:#fff;border-radius:10px;border:1px solid #ebebeb;padding:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:#f5a623;flex-shrink:0;"></span>
+          <span class="legend-title" style="font-size:13px;font-weight:500;color:#171717;">{idx.legend.moderate.label}</span>
+        </div>
+        <div class="legend-range" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;margin-bottom:4px;">40–70 dB</div>
+        <div class="legend-desc" style="font-size:12px;color:#4d4d4d;">{idx.legend.moderate.desc}</div>
+      </div>
+      <div class="legend-card" style="background:#fff;border-radius:10px;border:1px solid #ebebeb;padding:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:#ff4d4d;flex-shrink:0;"></span>
+          <span class="legend-title" style="font-size:13px;font-weight:500;color:#171717;">{idx.legend.loud.label}</span>
+        </div>
+        <div class="legend-range" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;margin-bottom:4px;">70–90 dB</div>
+        <div class="legend-desc" style="font-size:12px;color:#4d4d4d;">{idx.legend.loud.desc}</div>
+      </div>
+      <div class="legend-card" style="background:#fff;border-radius:10px;border:1px solid #ebebeb;padding:16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:#c50000;flex-shrink:0;"></span>
+          <span class="legend-title" style="font-size:13px;font-weight:500;color:#171717;">{idx.legend.danger.label}</span>
+        </div>
+        <div class="legend-range" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;margin-bottom:4px;">90+ dB</div>
+        <div class="legend-desc" style="font-size:12px;color:#4d4d4d;">{idx.legend.danger.desc}</div>
+      </div>
+    </div>
+
+    <!-- SEO Article -->
+    <article style="max-width:720px;margin:0 auto 80px;padding:0 4px;">
+      <h2 style="font-size:28px;font-weight:600;color:#171717;letter-spacing:-1px;line-height:1.2;margin:0 0 16px;">{idx.article.h1}</h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">{idx.article.p1}</p>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">{idx.article.whatIsH2}</h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">{idx.article.whatIsP}</p>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">{idx.article.chartH2}</h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 12px;">{idx.article.chartIntro}</p>
+      <ul style="font-size:15px;color:#4d4d4d;line-height:1.9;margin:0 0 20px;padding-left:24px;">
+        {idx.article.chartItems.map(item => <li set:html={item} />)}
+      </ul>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">{idx.article.howToH2}</h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">{idx.article.howToP}</p>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">{idx.article.whyH2}</h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">{idx.article.whyP}</p>
+
+      <h2 style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:0 0 12px;">{idx.article.outdoorH2}</h2>
+      <p style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">{idx.article.outdoorP}</p>
+    </article>
+
+    <!-- FAQ -->
+    <section style="max-width:720px;margin:0 auto 80px;padding:0 4px;">
+      <h2 class="faq-section-title" style="font-size:28px;font-weight:600;color:#171717;letter-spacing:-1px;line-height:1.2;margin:0 0 8px;">{idx.faq.title}</h2>
+      {idx.faq.items.map(item => (
+        <details class="faq-details">
+          <summary>{item.q}<span class="faq-chevron"></span></summary>
+          <p class="faq-answer">{item.a}</p>
+        </details>
+      ))}
+    </section>
+
+  </main>
+</Layout>
+
+<!-- Inject i18n strings for JS -->
+<script define:vars={{ __i18n: { classes: idx.jsClasses, denied: idx.badge.denied, stopped: idx.badge.stopped } }}>
+  window.__i18n = __i18n;
+</script>
+
+<script is:inline>
+var audioCtx = null, analyser = null, stream = null, animFrame = null;
+var weighting = 'A', samples = [], sessionStart = 0, durationInterval = null;
+var HISTORY_SECONDS = 60, DB_MAX = 130, ARC_TOTAL = Math.PI * 120;
+
+var btnStart   = document.getElementById('btn-start');
+var btnStop    = document.getElementById('btn-stop');
+var btnExport  = document.getElementById('btn-export');
+var dbValue    = document.getElementById('db-value');
+var statMin    = document.getElementById('stat-min');
+var statAvg    = document.getElementById('stat-avg');
+var statMax    = document.getElementById('stat-max');
+var badgeLabel = document.getElementById('badge-label');
+var badgeDot   = document.getElementById('badge-dot');
+var badge      = document.getElementById('classification-badge');
+var needle     = document.getElementById('gauge-needle');
+var navLive    = document.getElementById('nav-live');
+var canvas     = document.getElementById('history-canvas');
+var durLabel   = document.getElementById('duration-label');
+var arcSilent   = document.getElementById('arc-silent');
+var arcModerate = document.getElementById('arc-moderate');
+var arcLoud     = document.getElementById('arc-loud');
+var arcDanger   = document.getElementById('arc-danger');
+
+var __c = window.__i18n.classes;
+var CLASSES = [
+  { max:20,  label: __c[0], dot:'#50e3c2', bg:'#fafafa',  border:'#ddd',    text:'#888' },
+  { max:40,  label: __c[1], dot:'#50e3c2', bg:'#fafafa',  border:'#ddd',    text:'#888' },
+  { max:55,  label: __c[2], dot:'#50e3c2', bg:'#e6faf6',  border:'#50e3c2', text:'#29bc9b' },
+  { max:65,  label: __c[3], dot:'#50e3c2', bg:'#e6faf6',  border:'#50e3c2', text:'#29bc9b' },
+  { max:70,  label: __c[4], dot:'#f5a623', bg:'#fff8ec',  border:'#f5a623', text:'#ab570a' },
+  { max:75,  label: __c[5], dot:'#f5a623', bg:'#fff8ec',  border:'#f5a623', text:'#ab570a' },
+  { max:85,  label: __c[6], dot:'#ff4d4d', bg:'#fff0f0',  border:'#ff4d4d', text:'#c50000' },
+  { max:95,  label: __c[7], dot:'#ff4d4d', bg:'#fff0f0',  border:'#ff4d4d', text:'#c50000' },
+  { max:110, label: __c[8], dot:'#c50000', bg:'#ffe5e5',  border:'#c50000', text:'#8b0000' },
+  { max:130, label: __c[9], dot:'#c50000', bg:'#ffe5e5',  border:'#c50000', text:'#8b0000' },
+];
+
+function classify(db) {
+  for (var i = 0; i < CLASSES.length; i++) { if (db < CLASSES[i].max) return CLASSES[i]; }
+  return CLASSES[CLASSES.length - 1];
+}
+
+function updateGauge(db) {
+  var fraction = Math.max(0, Math.min(1, db / DB_MAX));
+  needle.setAttribute('transform', 'rotate(' + (-90 + fraction * 180) + ' 140 140)');
+  var zones = [
+    { el: arcSilent,   start: 0,  end: 40  },
+    { el: arcModerate, start: 40, end: 70  },
+    { el: arcLoud,     start: 70, end: 90  },
+    { el: arcDanger,   start: 90, end: 130 },
+  ];
+  for (var i = 0; i < zones.length; i++) {
+    var z = zones[i], clampedDb = Math.max(0, Math.min(DB_MAX, db));
+    if (clampedDb <= z.start) { z.el.setAttribute('stroke-dasharray', '0 ' + ARC_TOTAL); continue; }
+    var startPct = z.start / DB_MAX, endPct = Math.min(clampedDb, z.end) / DB_MAX;
+    var drawn = (endPct - startPct) * ARC_TOTAL;
+    z.el.setAttribute('stroke-dasharray', drawn + ' ' + ARC_TOTAL);
+    z.el.setAttribute('stroke-dashoffset', (ARC_TOTAL * (1 - startPct) - drawn).toString());
+  }
+}
+
+function drawHistory() {
+  var dark = isDark(), ctx = canvas.getContext('2d');
+  var rect = canvas.getBoundingClientRect();
+  if (canvas.width !== Math.round(rect.width)) canvas.width = Math.round(rect.width);
+  var W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = dark ? '#111111' : '#fafafa'; ctx.fillRect(0, 0, W, H);
+  var bands = [
+    {min:0,  max:40,  c: dark ? 'rgba(80,227,194,0.05)' : 'rgba(80,227,194,0.07)'},
+    {min:40, max:70,  c: dark ? 'rgba(245,166,35,0.05)'  : 'rgba(245,166,35,0.07)'},
+    {min:70, max:90,  c: dark ? 'rgba(255,77,77,0.05)'   : 'rgba(255,77,77,0.07)'},
+    {min:90, max:130, c: dark ? 'rgba(197,0,0,0.05)'     : 'rgba(197,0,0,0.07)'},
+  ];
+  for (var i = 0; i < bands.length; i++) {
+    var b = bands[i]; ctx.fillStyle = b.c;
+    ctx.fillRect(0, H - (b.max / DB_MAX) * H, W, ((b.max - b.min) / DB_MAX) * H);
+  }
+  ctx.strokeStyle = dark ? '#2a2a2a' : '#e0e0e0'; ctx.lineWidth = 1;
+  ctx.setLineDash([3, 3]); ctx.beginPath();
+  ctx.moveTo(0, H - (65 / DB_MAX) * H); ctx.lineTo(W, H - (65 / DB_MAX) * H); ctx.stroke(); ctx.setLineDash([]);
+  if (samples.length < 2) return;
+  var now = Date.now(), windowMs = HISTORY_SECONDS * 1000;
+  var visible = samples.filter(function(s) { return (now - s.time) <= windowMs; });
+  if (visible.length < 2) return;
+  ctx.beginPath();
+  ctx.moveTo(W - ((now - visible[0].time) / windowMs) * W, H);
+  ctx.lineTo(W - ((now - visible[0].time) / windowMs) * W, H - (visible[0].db / DB_MAX) * H);
+  for (var i = 1; i < visible.length; i++) {
+    ctx.lineTo(W - ((now - visible[i].time) / windowMs) * W, H - (visible[i].db / DB_MAX) * H);
+  }
+  ctx.lineTo(W, H); ctx.closePath();
+  var grad = ctx.createLinearGradient(0, 0, 0, H);
+  if (dark) { grad.addColorStop(0, 'rgba(200,200,200,0.15)'); grad.addColorStop(1, 'rgba(200,200,200,0.01)'); }
+  else { grad.addColorStop(0, 'rgba(23,23,23,0.12)'); grad.addColorStop(1, 'rgba(23,23,23,0.01)'); }
+  ctx.fillStyle = grad; ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(W - ((now - visible[0].time) / windowMs) * W, H - (visible[0].db / DB_MAX) * H);
+  for (var i = 1; i < visible.length; i++) {
+    ctx.lineTo(W - ((now - visible[i].time) / windowMs) * W, H - (visible[i].db / DB_MAX) * H);
+  }
+  ctx.strokeStyle = dark ? '#e0e0e0' : '#171717'; ctx.lineWidth = 1.5; ctx.stroke();
+}
+
+function getRms(buf) { var sum = 0; for (var i = 0; i < buf.length; i++) sum += buf[i] * buf[i]; return Math.sqrt(sum / buf.length); }
+function rmsToDb(rms) { if (rms < 1e-10) return 0; return Math.max(0, Math.min(130, 20 * Math.log10(rms) + 90 + (weighting === 'A' ? 2 : 0))); }
+
+function tick() {
+  if (!analyser) return;
+  var buf = new Float32Array(analyser.fftSize);
+  analyser.getFloatTimeDomainData(buf);
+  var db = rmsToDb(getRms(buf));
+  dbValue.textContent = db.toFixed(1); updateGauge(db);
+  var cls = classify(db);
+  badgeLabel.textContent = cls.label; badgeDot.style.background = cls.dot;
+  badge.style.background = cls.bg; badge.style.borderColor = cls.border; badge.style.color = cls.text;
+  var now = Date.now();
+  samples.push({ db: db, time: now });
+  samples = samples.filter(function(s) { return s.time >= now - HISTORY_SECONDS * 1000; });
+  if (samples.length) {
+    var dbs = samples.map(function(s) { return s.db; });
+    statMin.textContent = Math.min.apply(null, dbs).toFixed(1);
+    statMax.textContent = Math.max.apply(null, dbs).toFixed(1);
+    statAvg.textContent = (dbs.reduce(function(a, b) { return a + b; }, 0) / dbs.length).toFixed(1);
+  }
+  drawHistory();
+  animFrame = requestAnimationFrame(tick);
+}
+
+function startMeasuring() {
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    .then(function(s) {
+      stream = s; audioCtx = new AudioContext(); analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 2048; analyser.smoothingTimeConstant = 0.3;
+      audioCtx.createMediaStreamSource(stream).connect(analyser);
+      sessionStart = Date.now(); samples = [];
+      btnStart.disabled = true; btnStart.style.opacity = '0.4';
+      btnStop.disabled = false; btnStop.style.opacity = '1';
+      btnExport.disabled = false; btnExport.style.opacity = '1';
+      navLive.style.display = 'flex';
+      durationInterval = setInterval(function() {
+        var elapsed = Math.floor((Date.now() - sessionStart) / 1000);
+        var m = Math.floor(elapsed / 60), sec = elapsed % 60;
+        durLabel.textContent = m + ':' + (sec < 10 ? '0' : '') + sec;
+      }, 1000);
+      var dot = document.getElementById('live-dot');
+      setInterval(function() { dot.style.opacity = dot.style.opacity === '0' ? '1' : '0'; }, 800);
+      tick();
+    })
+    .catch(function() {
+      badgeLabel.textContent = window.__i18n.denied;
+      badge.style.background = '#fff0f0'; badge.style.borderColor = '#ff4d4d';
+      badge.style.color = '#c50000'; badgeDot.style.background = '#ff4d4d';
+    });
+}
+
+function stopMeasuring() {
+  if (animFrame) cancelAnimationFrame(animFrame);
+  if (durationInterval) clearInterval(durationInterval);
+  if (stream) stream.getTracks().forEach(function(t) { t.stop(); });
+  if (audioCtx) audioCtx.close();
+  stream = null; audioCtx = null; analyser = null;
+  btnStart.disabled = false; btnStart.style.opacity = '1';
+  btnStop.disabled = true; btnStop.style.opacity = '0.4';
+  navLive.style.display = 'none';
+  badgeLabel.textContent = window.__i18n.stopped;
+  badge.style.background = ''; badge.style.borderColor = ''; badge.style.color = '';
+  badgeDot.style.background = '#ddd';
+}
+
+function exportCsv() {
+  var lines = ['time_ms,db_value'];
+  for (var i = 0; i < samples.length; i++) lines.push(samples[i].time + ',' + samples[i].db.toFixed(2));
+  var blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href = url;
+  a.download = 'noise-session-' + new Date().toISOString().slice(0,19).replace(/:/g,'-') + '.csv';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+function setWeighting(w) {
+  weighting = w; var dark = isDark();
+  var aBtn = document.getElementById('weight-a'), cBtn = document.getElementById('weight-c');
+  aBtn.style.background = w === 'A' ? '#171717' : (dark ? '#222' : '#fafafa');
+  aBtn.style.color      = w === 'A' ? '#fff'    : (dark ? '#555' : '#888');
+  aBtn.style.border     = w === 'A' ? 'none'    : ('1px solid ' + (dark ? '#333' : '#ebebeb'));
+  cBtn.style.background = w === 'C' ? '#171717' : (dark ? '#222' : '#fafafa');
+  cBtn.style.color      = w === 'C' ? '#fff'    : (dark ? '#555' : '#888');
+  cBtn.style.border     = w === 'C' ? 'none'    : ('1px solid ' + (dark ? '#333' : '#ebebeb'));
+  if (w === 'A') { aBtn.classList.remove('weight-inactive'); cBtn.classList.add('weight-inactive'); }
+  else { cBtn.classList.remove('weight-inactive'); aBtn.classList.add('weight-inactive'); }
+}
+
+updateGauge(0);
+</script>

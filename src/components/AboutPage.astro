@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Translations } from '../i18n/en';
+
+interface Props { t: Translations; lang?: string; }
+const { t, lang = 'en' } = Astro.props;
+const ab = t.about;
+const canonicalUrl = lang === 'en'
+  ? 'https://noisedecibelmeter.com/about/'
+  : `https://noisedecibelmeter.com/${lang}/about/`;
+---
+
+<style>
+  html[data-dark] .page-title  { color: #f2f2f2 !important; }
+  html[data-dark] .page-body   { color: #b0b0b0 !important; }
+  html[data-dark] .page-h2     { color: #f2f2f2 !important; }
+  html[data-dark] .feature-card  { background: #1a1a1a !important; border-color: #272727 !important; }
+  html[data-dark] .feature-icon  { background: #111 !important; border-color: #2a2a2a !important; }
+  html[data-dark] .feature-title { color: #f2f2f2 !important; }
+  html[data-dark] .feature-desc  { color: #b0b0b0 !important; }
+</style>
+
+<Layout title={ab.title} description={ab.description} canonicalUrl={canonicalUrl} lang={lang} pagePath="about" ogLocale={t.ogLocale}>
+  <main style="max-width:720px;margin:0 auto;padding:64px 24px 96px;">
+
+    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px;">{ab.label}</p>
+    <h1 class="page-title" style="font-size:40px;font-weight:600;color:#171717;letter-spacing:-1.8px;line-height:1.1;margin:0 0 20px;">{ab.h1}</h1>
+    <p class="page-body" style="font-size:17px;color:#4d4d4d;line-height:1.75;margin:0 0 48px;">{ab.intro}</p>
+
+    <h2 class="page-h2" style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;margin:0 0 20px;">{ab.whyH2}</h2>
+    <p class="page-body" style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;">{ab.whyP1}</p>
+    <p class="page-body" style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 48px;">{ab.whyP2}</p>
+
+    <h2 class="page-h2" style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;margin:0 0 20px;">{ab.whatH2}</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:48px;">
+      {ab.features.map(f => (
+        <div class="feature-card" style="background:#fff;border:1px solid #ebebeb;border-radius:12px;padding:20px;">
+          <div class="feature-icon" style="width:36px;height:36px;border-radius:8px;background:#fafafa;border:1px solid #ebebeb;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px;">{f.icon}</div>
+          <div class="feature-title" style="font-size:14px;font-weight:600;color:#171717;margin-bottom:6px;">{f.title}</div>
+          <div class="feature-desc" style="font-size:13px;color:#4d4d4d;line-height:1.6;">{f.desc}</div>
+        </div>
+      ))}
+    </div>
+
+    <h2 class="page-h2" style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;margin:0 0 12px;">{ab.accuracyH2}</h2>
+    <p class="page-body" style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 12px;">{ab.accuracyP1}</p>
+    <p class="page-body" style="font-size:16px;color:#4d4d4d;line-height:1.75;margin:0;">{ab.accuracyP2}</p>
+
+  </main>
+</Layout>

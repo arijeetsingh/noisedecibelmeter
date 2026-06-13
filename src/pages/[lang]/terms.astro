@@ -1,0 +1,12 @@
+---
+import TermsPage from '../../components/TermsPage.astro';
+import { getTranslations, LOCALES } from '../../i18n/index';
+
+export function getStaticPaths() {
+  return LOCALES.map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getTranslations(lang);
+---
+<TermsPage t={t} lang={lang} />

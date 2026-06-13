@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Translations } from '../i18n/en';
+
+interface Props { t: Translations; lang?: string; }
+const { t, lang = 'en' } = Astro.props;
+const ct = t.contact;
+const canonicalUrl = lang === 'en'
+  ? 'https://noisedecibelmeter.com/contact/'
+  : `https://noisedecibelmeter.com/${lang}/contact/`;
+---
+
+<style>
+  html[data-dark] .page-title   { color: #f2f2f2 !important; }
+  html[data-dark] .page-body    { color: #888 !important; }
+  html[data-dark] .contact-card { background: #1a1a1a !important; border-color: #272727 !important; }
+  html[data-dark] .contact-label { color: #888 !important; }
+  html[data-dark] .contact-value { color: #f2f2f2 !important; }
+  html[data-dark] .contact-note  { color: #888 !important; }
+  html[data-dark] .topic-card  { background: #1a1a1a !important; border-color: #272727 !important; }
+  html[data-dark] .topic-title { color: #f2f2f2 !important; }
+  html[data-dark] .topic-desc  { color: #b0b0b0 !important; }
+  html[data-dark] .email-link  { color: #f2f2f2 !important; }
+</style>
+
+<Layout title={ct.title} description={ct.description} canonicalUrl={canonicalUrl} lang={lang} pagePath="contact" ogLocale={t.ogLocale}>
+  <main style="max-width:720px;margin:0 auto;padding:64px 24px 96px;">
+
+    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px;">{ct.label}</p>
+    <h1 class="page-title" style="font-size:40px;font-weight:600;color:#171717;letter-spacing:-1.8px;line-height:1.1;margin:0 0 20px;">{ct.h1}</h1>
+    <p class="page-body" style="font-size:17px;color:#4d4d4d;line-height:1.75;margin:0 0 48px;">{ct.intro}</p>
+
+    <div class="contact-card" style="background:#fff;border:1px solid #ebebeb;border-radius:16px;padding:32px;margin-bottom:48px;">
+      <p class="contact-label" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 8px;">{ct.emailLabel}</p>
+      <a class="contact-value email-link" href="mailto:arijeet632@gmail.com" style="font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.5px;text-decoration:none;">
+        arijeet632@gmail.com
+      </a>
+      <p class="contact-note" style="font-size:14px;color:#888;margin:12px 0 0;">{ct.emailNote}</p>
+    </div>
+
+    <p class="page-body" style="font-size:14px;color:#888;font-weight:500;margin:0 0 16px;">{ct.topicsLabel}</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      {ct.topics.map(topic => (
+        <a href={`mailto:arijeet632@gmail.com?subject=${encodeURIComponent(topic.title)}`}
+           class="topic-card"
+           style="background:#fff;border:1px solid #ebebeb;border-radius:12px;padding:20px;text-decoration:none;display:block;transition:border-color 0.15s;">
+          <div style="font-size:20px;margin-bottom:8px;">{topic.icon}</div>
+          <div class="topic-title" style="font-size:14px;font-weight:600;color:#171717;margin-bottom:4px;">{topic.title}</div>
+          <div class="topic-desc" style="font-size:13px;color:#4d4d4d;line-height:1.5;">{topic.desc}</div>
+        </a>
+      ))}
+    </div>
+
+  </main>
+</Layout>
