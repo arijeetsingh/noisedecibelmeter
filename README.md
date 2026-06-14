@@ -1,4 +1,6 @@
-# Astro Starter Kit: Basics
+# Noise Decibel Meter
+
+**Site:** https://noisedecibelmeter.com
 
 ```sh
 npm create astro@latest -- --template basics
