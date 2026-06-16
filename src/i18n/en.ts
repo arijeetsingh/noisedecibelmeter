@@ -79,6 +79,7 @@ const en = {
         { q: 'Does it work on mobile?', a: 'Yes. Works on any modern browser including Chrome, Safari, Firefox, and Edge on both desktop and mobile. As long as your device has a microphone and supports the Web Audio API, you\'re good to go.' },
         { q: 'Is my audio recorded or stored?', a: 'No. All audio analysis happens locally in your browser. No sound data is transmitted to any server, recorded, or stored. Your privacy is fully protected.' },
         { q: 'What is the difference between dBA and dBC?', a: 'dBA (A-weighting) filters frequencies the way human ears perceive them — standard for occupational noise assessments. dBC (C-weighting) applies much less filtering and is better for measuring low-frequency sounds like bass-heavy music or heavy machinery.' },
+        { q: 'What is the best sound meter online?', a: 'A good online sound meter should work directly in your browser without any app install, display real-time dB readings, and support both dBA and dBC weighting. This tool does all of that — plus it adds a 60-second history graph, Min/Avg/Max stats, and CSV export, all for free with no account required.' },
       ],
     },
   },

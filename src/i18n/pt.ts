@@ -81,6 +81,7 @@ const pt: Translations = {
         { q: 'Funciona no celular?', a: 'Sim. Funciona em qualquer navegador moderno, incluindo Chrome, Safari, Firefox e Edge em desktop e celular. Basta ter um dispositivo com microfone que suporte a Web Audio API.' },
         { q: 'Meu áudio é gravado ou armazenado?', a: 'Não. Toda a análise de áudio ocorre localmente no seu navegador. Nenhum dado de som é transmitido a qualquer servidor, gravado ou armazenado. Sua privacidade é totalmente protegida.' },
         { q: 'Qual é a diferença entre dBA e dBC?', a: 'O dBA (ponderação A) filtra as frequências conforme a percepção do ouvido humano — padrão para avaliações de ruído ocupacional. O dBC (ponderação C) aplica muito menos filtragem e é melhor para medir sons de baixa frequência como música com muito grave ou maquinaria pesada.' },
+        { q: 'Qual é o melhor medidor de som online?', a: 'Um bom medidor de som online deve funcionar diretamente no navegador sem instalação de aplicativo, exibir leituras de dB em tempo real e suportar as ponderações dBA e dBC. Esta ferramenta faz tudo isso — e ainda inclui gráfico de histórico de 60 segundos, estatísticas Mín/Méd/Máx e exportação CSV, tudo gratuito e sem necessidade de conta.' },
       ],
     },
   },

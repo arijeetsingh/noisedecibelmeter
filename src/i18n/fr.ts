@@ -81,6 +81,7 @@ const fr: Translations = {
         { q: 'Fonctionne-t-il sur mobile ?', a: 'Oui. Fonctionne sur tout navigateur moderne dont Chrome, Safari, Firefox et Edge sur ordinateur et mobile. Il suffit d\'un appareil avec microphone supportant la Web Audio API.' },
         { q: 'Mon audio est-il enregistré ou stocké ?', a: 'Non. Toute l\'analyse audio s\'effectue localement dans votre navigateur. Aucune donnée sonore n\'est transmise à un serveur, enregistrée ou stockée. Votre vie privée est totalement protégée.' },
         { q: 'Quelle est la différence entre dBA et dBC ?', a: 'Le dBA (pondération A) filtre les fréquences selon la perception de l\'oreille humaine — standard pour les évaluations du bruit au travail. Le dBC (pondération C) applique beaucoup moins de filtrage et convient mieux aux sons basse fréquence.' },
+        { q: 'Quel est le meilleur sonomètre en ligne ?', a: 'Un bon sonomètre en ligne doit fonctionner directement dans le navigateur sans installation, afficher des relevés dB en temps réel et prendre en charge les pondérations dBA et dBC. Cet outil fait tout cela — avec en plus un graphique historique de 60 secondes, des statistiques Min/Moy/Max et un export CSV, entièrement gratuit sans compte requis.' },
       ],
     },
   },
