@@ -80,6 +80,16 @@ const canonicalUrl = lang === 'en'
   html[data-dark] .faq-answer { color: #b0b0b0 !important; }
 </style>
 
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": idx.faq.items.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+})} />
+
 <Layout
   title={idx.title}
   description={idx.description}
