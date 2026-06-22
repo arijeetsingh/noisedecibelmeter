@@ -293,6 +293,7 @@ const canonicalUrl = lang === 'en'
 <script is:inline>
 var audioCtx = null, analyser = null, stream = null, animFrame = null;
 var weighting = 'A', samples = [], sessionStart = 0, durationInterval = null;
+var displayDb = 0, lastDisplayUpdate = 0;
 var HISTORY_SECONDS = 60, DB_MAX = 130, ARC_TOTAL = Math.PI * 120;
 
 var btnStart   = document.getElementById('btn-start');
@@ -348,7 +349,7 @@ function updateGauge(db) {
     var startPct = z.start / DB_MAX, endPct = Math.min(clampedDb, z.end) / DB_MAX;
     var drawn = (endPct - startPct) * ARC_TOTAL;
     z.el.setAttribute('stroke-dasharray', drawn + ' ' + ARC_TOTAL);
-    z.el.setAttribute('stroke-dashoffset', (ARC_TOTAL * (1 - startPct) - drawn).toString());
+    z.el.setAttribute('stroke-dashoffset', (ARC_TOTAL * (1 - startPct) + drawn).toString());
   }
 }
 
@@ -403,11 +404,16 @@ function tick() {
   var buf = new Float32Array(analyser.fftSize);
   analyser.getFloatTimeDomainData(buf);
   var db = rmsToDb(getRms(buf));
-  dbValue.textContent = db.toFixed(1); updateGauge(db);
-  var cls = classify(db);
-  badgeLabel.textContent = cls.label; badgeDot.style.background = cls.dot;
-  badge.style.background = cls.bg; badge.style.borderColor = cls.border; badge.style.color = cls.text;
+  displayDb = displayDb * 0.8 + db * 0.2;
+  updateGauge(displayDb);
   var now = Date.now();
+  if (now - lastDisplayUpdate >= 120) {
+    dbValue.textContent = displayDb.toFixed(1);
+    var cls = classify(displayDb);
+    badgeLabel.textContent = cls.label; badgeDot.style.background = cls.dot;
+    badge.style.background = cls.bg; badge.style.borderColor = cls.border; badge.style.color = cls.text;
+    lastDisplayUpdate = now;
+  }
   samples.push({ db: db, time: now });
   samples = samples.filter(function(s) { return s.time >= now - HISTORY_SECONDS * 1000; });
   if (samples.length) {
@@ -424,7 +430,7 @@ function startMeasuring() {
   navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(s) {
       stream = s; audioCtx = new AudioContext(); analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 2048; analyser.smoothingTimeConstant = 0.3;
+      analyser.fftSize = 2048; analyser.smoothingTimeConstant = 0.7;
       audioCtx.createMediaStreamSource(stream).connect(analyser);
       sessionStart = Date.now(); samples = [];
       btnStart.disabled = true; btnStart.style.opacity = '0.4';
@@ -452,7 +458,7 @@ function stopMeasuring() {
   if (durationInterval) clearInterval(durationInterval);
   if (stream) stream.getTracks().forEach(function(t) { t.stop(); });
   if (audioCtx) audioCtx.close();
-  stream = null; audioCtx = null; analyser = null;
+  stream = null; audioCtx = null; analyser = null; displayDb = 0; lastDisplayUpdate = 0;
   btnStart.disabled = false; btnStart.style.opacity = '1';
   btnStop.disabled = true; btnStop.style.opacity = '0.4';
   navLive.style.display = 'none';
