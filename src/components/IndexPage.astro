@@ -294,7 +294,7 @@ const canonicalUrl = lang === 'en'
 var audioCtx = null, analyser = null, stream = null, animFrame = null;
 var weighting = 'A', samples = [], sessionStart = 0, durationInterval = null;
 var displayDb = 0, lastDisplayUpdate = 0;
-var HISTORY_SECONDS = 60, DB_MAX = 130, ARC_TOTAL = Math.PI * 120;
+var HISTORY_SECONDS = 60, DB_MAX = 130, ARC_TOTAL = Math.PI * 120, WARMUP_MS = 750;
 
 var btnStart   = document.getElementById('btn-start');
 var btnStop    = document.getElementById('btn-stop');
@@ -397,7 +397,8 @@ function drawHistory() {
 }
 
 function getRms(buf) { var sum = 0; for (var i = 0; i < buf.length; i++) sum += buf[i] * buf[i]; return Math.sqrt(sum / buf.length); }
-function rmsToDb(rms) { if (rms < 1e-10) return 0; return Math.max(0, Math.min(130, 20 * Math.log10(rms) + 90 + (weighting === 'A' ? 2 : 0))); }
+var DB_FLOOR = 25; // typical consumer mic self-noise floor; 0 dB SPL is unreachable via built-in mics
+function rmsToDb(rms) { if (rms < 1e-10) return DB_FLOOR; return Math.max(DB_FLOOR, Math.min(130, 20 * Math.log10(rms) + 90 + (weighting === 'A' ? 2 : 0))); }
 
 function tick() {
   if (!analyser) return;
@@ -416,8 +417,9 @@ function tick() {
   }
   samples.push({ db: db, time: now });
   samples = samples.filter(function(s) { return s.time >= now - HISTORY_SECONDS * 1000; });
-  if (samples.length) {
-    var dbs = samples.map(function(s) { return s.db; });
+  var settled = samples.filter(function(s) { return s.time - sessionStart >= WARMUP_MS; });
+  if (settled.length) {
+    var dbs = settled.map(function(s) { return s.db; });
     statMin.textContent = Math.min.apply(null, dbs).toFixed(1);
     statMax.textContent = Math.max.apply(null, dbs).toFixed(1);
     statAvg.textContent = (dbs.reduce(function(a, b) { return a + b; }, 0) / dbs.length).toFixed(1);
