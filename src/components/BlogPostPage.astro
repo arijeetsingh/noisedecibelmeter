@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Translations } from '../i18n/en';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+
+interface Props {
+  t: Translations;
+  lang?: string;
+  entry: CollectionEntry<'blog'>;
+  slug: string;
+}
+const { t, lang = 'en', entry, slug } = Astro.props;
+const bl = t.blog;
+const { Content } = await render(entry);
+const prefix = lang === 'en' ? '' : `/${lang}`;
+const canonicalUrl = lang === 'en'
+  ? `https://noisedecibelmeter.com/blog/${slug}/`
+  : `https://noisedecibelmeter.com/${lang}/blog/${slug}/`;
+const pageTitle = `${entry.data.title} — Noise Decibel Meter`;
+
+const dateFormatter = new Intl.DateTimeFormat(t.htmlLang, { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<style>
+  html[data-dark] .page-title { color: #f2f2f2 !important; }
+  html[data-dark] .post-date  { color: #888 !important; }
+  html[data-dark] .back-link  { color: #888 !important; }
+  html[data-dark] .back-link:hover { color: #b0b0b0 !important; }
+  .post-content :global(h2) { font-size: 22px; font-weight: 600; letter-spacing: -0.6px; color: #171717; margin: 40px 0 16px; }
+  .post-content :global(h3) { font-size: 18px; font-weight: 600; color: #171717; margin: 32px 0 12px; }
+  .post-content :global(p)  { font-size: 16px; color: #4d4d4d; line-height: 1.75; margin: 0 0 20px; }
+  .post-content :global(ul),
+  .post-content :global(ol) { margin: 0 0 20px; padding-left: 22px; }
+  .post-content :global(li) { font-size: 16px; color: #4d4d4d; line-height: 1.75; margin-bottom: 8px; }
+  .post-content :global(a)  { color: #171717; text-decoration: underline; }
+  .post-content :global(code) { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background: #f5f5f5; padding: 2px 6px; border-radius: 4px; }
+  .post-content :global(blockquote) { border-left: 3px solid #ebebeb; margin: 0 0 20px; padding-left: 16px; color: #666; }
+  html[data-dark] .post-content :global(h2),
+  html[data-dark] .post-content :global(h3) { color: #f2f2f2; }
+  html[data-dark] .post-content :global(p),
+  html[data-dark] .post-content :global(li) { color: #b0b0b0; }
+  html[data-dark] .post-content :global(a) { color: #d0d0d0; }
+  html[data-dark] .post-content :global(code) { background: #1a1a1a; }
+</style>
+
+<Layout title={pageTitle} description={entry.data.description} canonicalUrl={canonicalUrl} lang={lang} pagePath={`blog/${slug}`} ogLocale={t.ogLocale}>
+  <main style="max-width:720px;margin:0 auto;padding:64px 24px 96px;">
+
+    <a href={`${prefix}/blog/`} class="back-link" style="display:inline-block;font-size:13px;color:#888;text-decoration:none;margin-bottom:32px;">{bl.backToBlog}</a>
+
+    <div class="post-date" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">
+      {bl.publishedOn} {dateFormatter.format(entry.data.date)}
+    </div>
+    <h1 class="page-title" style="font-size:34px;font-weight:600;color:#171717;letter-spacing:-1.4px;line-height:1.15;margin:0 0 40px;">{entry.data.title}</h1>
+
+    <div class="post-content">
+      <Content />
+    </div>
+
+  </main>
+</Layout>

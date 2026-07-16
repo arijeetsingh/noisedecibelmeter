@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import BlogListPage from '../../components/BlogListPage.astro';
+import { getTranslations } from '../../i18n/index';
+
+const t = getTranslations('en');
+const allPosts = await getCollection('blog', ({ id, data }) => id.startsWith('en/') && !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BlogListPage t={t} lang="en" posts={posts} />

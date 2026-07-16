@@ -258,6 +258,8 @@ const langLabels: Record<string, string> = { en: 'English', es: 'Español', fr: 
           <span class="footer-tagline" style="font-size:14px;color:#888;">— {t.footer.tagline}</span>
         </div>
         <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;">
+          <a href={`${prefix}/blog/`} class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">{t.blog.label}</a>
+          <span class="footer-divider" style="color:#ccc;font-size:13px;">·</span>
           <a href={`${prefix}/about/`} class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">{t.footer.about}</a>
           <span class="footer-divider" style="color:#ccc;font-size:13px;">·</span>
           <a href={`${prefix}/privacy-policy/`} class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">{t.footer.privacy}</a>

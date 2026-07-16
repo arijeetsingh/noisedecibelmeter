@@ -86,6 +86,18 @@ const es: Translations = {
     },
   },
 
+  blog: {
+    title: 'Blog — Noise Decibel Meter',
+    description: 'Guías, comparativas y explicaciones sobre cómo medir y entender los niveles de sonido, decibelios y ruido.',
+    label: 'Blog',
+    h1: 'Blog',
+    intro: 'Guías, comparativas y explicaciones sobre cómo medir y entender el sonido.',
+    empty: 'Aún no hay artículos — vuelve pronto.',
+    readMore: 'Leer más',
+    backToBlog: '← Volver al blog',
+    publishedOn: 'Publicado el',
+  },
+
   about: {
     title: 'Acerca de — Noise Decibel Meter',
     description: 'Conoce Noise Decibel Meter — una herramienta gratuita de navegador que mide los niveles de sonido en tiempo real sin instalación, sin cuenta y sin recopilación de datos.',

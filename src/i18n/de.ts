@@ -86,6 +86,18 @@ const de: Translations = {
     },
   },
 
+  blog: {
+    title: 'Blog — Noise Decibel Meter',
+    description: 'Anleitungen, Vergleiche und Erklärungen zum Messen und Verstehen von Schallpegeln, Dezibel und Lärm.',
+    label: 'Blog',
+    h1: 'Blog',
+    intro: 'Anleitungen, Vergleiche und Erklärungen zum Messen und Verstehen von Schall.',
+    empty: 'Noch keine Beiträge — schauen Sie bald wieder vorbei.',
+    readMore: 'Weiterlesen',
+    backToBlog: '← Zurück zum Blog',
+    publishedOn: 'Veröffentlicht am',
+  },
+
   about: {
     title: 'Über uns — Noise Decibel Meter',
     description: 'Erfahren Sie mehr über Noise Decibel Meter — ein kostenloses, datenschutzorientiertes Browser-Tool, das Schallpegel in Echtzeit ohne Installation, ohne Konto und ohne Datenerhebung misst.',

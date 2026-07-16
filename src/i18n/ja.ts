@@ -86,6 +86,18 @@ const ja: Translations = {
     },
   },
 
+  blog: {
+    title: 'ブログ — Noise Decibel Meter',
+    description: '音量レベル、デシベル、騒音の測定と理解に関するガイド、比較、解説記事。',
+    label: 'ブログ',
+    h1: 'ブログ',
+    intro: '音の測定と理解に関するガイド、比較、解説。',
+    empty: 'まだ記事がありません。近日公開予定です。',
+    readMore: '続きを読む',
+    backToBlog: '← ブログに戻る',
+    publishedOn: '公開日',
+  },
+
   about: {
     title: '概要 — Noise Decibel Meter',
     description: 'Noise Decibel Meterについて — インストール不要、アカウント不要、データ収集なしでリアルタイムの音量レベルを測定する無料のブラウザツール。',
