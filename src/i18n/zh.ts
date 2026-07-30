@@ -23,8 +23,52 @@ const zh: Translations = {
     },
     badge: {
       idle: '请授权麦克风访问以开始测量',
+      requesting: '正在等待麦克风权限…',
       denied: '麦克风访问被拒绝 — 请检查浏览器权限',
       stopped: '测量已停止',
+    },
+    mic: {
+      primeTitle: '需要访问麦克风',
+      primeBody: '接下来浏览器会请求权限。音频在您的设备上分析 — 不会录制、存储或发送到服务器。',
+      allow: '允许使用麦克风',
+      notNow: '暂不',
+      retry: '重试',
+      reload: '重新加载页面',
+      close: '关闭',
+      errors: {
+        blocked: {
+          title: '麦克风已被阻止',
+          body: '浏览器阻止了本站使用麦克风。请点击地址栏中的锁形或摄像头图标，将“麦克风”设为“允许”，然后重新加载页面。在手机上，请在浏览器的网站设置中修改。',
+        },
+        dismissed: {
+          title: '未授予权限',
+          body: '权限提示在您做出选择前被关闭了。请点击“重试”，并在浏览器询问时选择“允许”。',
+        },
+        notAllowed: {
+          title: '麦克风未获允许',
+          body: '请重试并选择“允许”。如果没有出现提示，说明浏览器已阻止它 — 请通过地址栏中的锁形图标允许麦克风，然后重新加载页面。',
+        },
+        notFound: {
+          title: '未找到麦克风',
+          body: '您的设备上没有可用的麦克风。请连接或启用一个后重试。',
+        },
+        inUse: {
+          title: '麦克风正被占用',
+          body: '其他应用或浏览器标签页正在使用您的麦克风。请将其关闭 — 通常是视频通话 — 然后重试。',
+        },
+        insecure: {
+          title: '需要安全连接',
+          body: '浏览器仅允许通过 HTTPS 访问麦克风。请访问 https://noisedecibelmeter.com 来测量声音级别。',
+        },
+        unsupported: {
+          title: '浏览器不受支持',
+          body: '此浏览器不支持麦克风录音。请尝试使用较新版本的 Chrome、Firefox、Safari 或 Edge。',
+        },
+        generic: {
+          title: '无法启动麦克风',
+          body: '打开麦克风时出现问题。请重试，如果问题持续存在，请重新加载页面。',
+        },
+      },
     },
     btn: { start: '开始测量', stop: '停止', export: '导出CSV' },
     stats: { min: '最小', avg: '平均', max: '最大' },

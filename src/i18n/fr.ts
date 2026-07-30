@@ -23,8 +23,52 @@ const fr: Translations = {
     },
     badge: {
       idle: 'Accordez l\'accès au microphone pour commencer',
+      requesting: 'En attente de l\'autorisation du microphone…',
       denied: 'Accès au microphone refusé — vérifiez les autorisations du navigateur',
       stopped: 'Mesure arrêtée',
+    },
+    mic: {
+      primeTitle: 'Accès au microphone nécessaire',
+      primeBody: 'Votre navigateur va vous demander l\'autorisation. L\'audio est analysé sur votre appareil — rien n\'est enregistré, stocké ni envoyé à un serveur.',
+      allow: 'Autoriser le microphone',
+      notNow: 'Pas maintenant',
+      retry: 'Réessayer',
+      reload: 'Recharger la page',
+      close: 'Fermer',
+      errors: {
+        blocked: {
+          title: 'Microphone bloqué',
+          body: 'Votre navigateur bloque le microphone pour ce site. Cliquez sur l\'icône du cadenas ou de la caméra dans la barre d\'adresse, réglez Microphone sur Autoriser, puis rechargez. Sur mobile, modifiez ce réglage dans les paramètres du site de votre navigateur.',
+        },
+        dismissed: {
+          title: 'Autorisation non accordée',
+          body: 'La demande d\'autorisation a été fermée avant votre choix. Sélectionnez Réessayer et choisissez Autoriser lorsque votre navigateur vous le demande.',
+        },
+        notAllowed: {
+          title: 'Microphone non autorisé',
+          body: 'Réessayez et choisissez Autoriser. Si aucune demande n\'apparaît, votre navigateur l\'a déjà bloqué — utilisez l\'icône du cadenas dans la barre d\'adresse pour autoriser le microphone, puis rechargez.',
+        },
+        notFound: {
+          title: 'Aucun microphone détecté',
+          body: 'Aucun microphone n\'est disponible sur votre appareil. Branchez-en un ou activez-le, puis réessayez.',
+        },
+        inUse: {
+          title: 'Le microphone est occupé',
+          body: 'Une autre application ou un autre onglet utilise votre microphone. Fermez-le — les appels vidéo en sont souvent la cause — puis réessayez.',
+        },
+        insecure: {
+          title: 'Connexion sécurisée requise',
+          body: 'Les navigateurs n\'autorisent l\'accès au microphone qu\'en HTTPS. Ouvrez cette page sur https://noisedecibelmeter.com pour mesurer les niveaux sonores.',
+        },
+        unsupported: {
+          title: 'Navigateur non pris en charge',
+          body: 'Ce navigateur ne prend pas en charge l\'enregistrement par microphone. Essayez une version récente de Chrome, Firefox, Safari ou Edge.',
+        },
+        generic: {
+          title: 'Impossible de démarrer le microphone',
+          body: 'Une erreur s\'est produite à l\'ouverture de votre microphone. Réessayez, et rechargez la page si le problème persiste.',
+        },
+      },
     },
     btn: { start: 'Démarrer la mesure', stop: 'Arrêter', export: 'Exporter CSV' },
     stats: { min: 'Min', avg: 'Moy', max: 'Max' },

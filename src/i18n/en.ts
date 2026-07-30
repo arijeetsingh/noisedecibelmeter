@@ -21,8 +21,52 @@ const en = {
     },
     badge: {
       idle: 'Grant microphone access to begin',
+      requesting: 'Waiting for microphone permission…',
       denied: 'Microphone access denied — check browser permissions',
       stopped: 'Measurement stopped',
+    },
+    mic: {
+      primeTitle: 'Microphone access needed',
+      primeBody: 'Your browser will ask for permission next. Audio is analysed on your device — nothing is recorded, stored, or sent to a server.',
+      allow: 'Allow microphone',
+      notNow: 'Not now',
+      retry: 'Try again',
+      reload: 'Reload page',
+      close: 'Close',
+      errors: {
+        blocked: {
+          title: 'Microphone blocked',
+          body: 'Your browser is blocking the microphone for this site. Click the lock or camera icon in the address bar, set Microphone to Allow, then reload. On mobile, change it in your browser\'s site settings.',
+        },
+        dismissed: {
+          title: 'Permission not granted',
+          body: 'The permission prompt was closed before you chose. Select Try again and choose Allow when your browser asks.',
+        },
+        notAllowed: {
+          title: 'Microphone not allowed',
+          body: 'Try again and choose Allow. If no prompt appears, your browser has already blocked it — use the lock icon in the address bar to allow the microphone, then reload.',
+        },
+        notFound: {
+          title: 'No microphone found',
+          body: 'Your device has no microphone available. Connect or enable one, then try again.',
+        },
+        inUse: {
+          title: 'Microphone is busy',
+          body: 'Another app or browser tab is using your microphone. Close it — video calls are the usual culprit — then try again.',
+        },
+        insecure: {
+          title: 'Secure connection required',
+          body: 'Browsers only allow microphone access over HTTPS. Open this page at https://noisedecibelmeter.com to measure sound levels.',
+        },
+        unsupported: {
+          title: 'Browser not supported',
+          body: 'This browser does not support microphone recording. Try a recent version of Chrome, Firefox, Safari, or Edge.',
+        },
+        generic: {
+          title: 'Could not start the microphone',
+          body: 'Something went wrong while opening your microphone. Try again, and reload the page if it keeps failing.',
+        },
+      },
     },
     btn: { start: 'Start Measuring', stop: 'Stop', export: 'Export CSV' },
     stats: { min: 'Min', avg: 'Avg', max: 'Max' },

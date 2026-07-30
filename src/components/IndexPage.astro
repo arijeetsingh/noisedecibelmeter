@@ -24,6 +24,12 @@ const canonicalUrl = lang === 'en'
   #btn-start:hover { background: #333 !important; }
   #btn-stop:hover:not(:disabled), #btn-export:hover:not(:disabled) { border-color: #a1a1a1 !important; }
 
+  #mic-panel { margin-bottom: 4px; }
+  #mic-panel-action:hover { background: #333 !important; }
+  #mic-panel-dismiss:hover { color: #171717 !important; text-decoration: underline; }
+  #mic-panel[data-tone="error"] { background: #fff0f0 !important; border-color: #ff4d4d !important; }
+  #mic-panel[data-tone="error"] #mic-panel-title { color: #c50000 !important; }
+
   html[data-dark] { background: #0a0a0a !important; color: #f2f2f2 !important; }
   html[data-dark] body { background: #0a0a0a !important; }
   html[data-dark] nav { background: rgba(10,10,10,0.85) !important; border-bottom-color: #222 !important; }
@@ -46,6 +52,15 @@ const canonicalUrl = lang === 'en'
   html[data-dark] .stat-box { background: #111 !important; border-color: #222 !important; }
   html[data-dark] .stat-label { color: #888 !important; }
   html[data-dark] .stat-val { color: #f2f2f2 !important; }
+  html[data-dark] #mic-panel { background: #111 !important; border-color: #2a2a2a !important; }
+  html[data-dark] #mic-panel-title { color: #f2f2f2 !important; }
+  html[data-dark] #mic-panel-body { color: #b0b0b0 !important; }
+  html[data-dark] #mic-panel-action { background: #f2f2f2 !important; color: #0a0a0a !important; }
+  html[data-dark] #mic-panel-action:hover { background: #fff !important; }
+  html[data-dark] #mic-panel-dismiss { color: #777 !important; }
+  html[data-dark] #mic-panel-dismiss:hover { color: #f2f2f2 !important; }
+  html[data-dark] #mic-panel[data-tone="error"] { background: #2a1212 !important; border-color: #ff4d4d !important; }
+  html[data-dark] #mic-panel[data-tone="error"] #mic-panel-title { color: #ff8080 !important; }
   html[data-dark] #btn-stop, html[data-dark] #btn-export { background: #1a1a1a !important; border-color: #2a2a2a !important; color: #f2f2f2 !important; }
   html[data-dark] #btn-stop:hover:not(:disabled), html[data-dark] #btn-export:hover:not(:disabled) { border-color: #555 !important; }
   html[data-dark] .history-section { border-top-color: #222 !important; }
@@ -169,8 +184,19 @@ const canonicalUrl = lang === 'en'
           </div>
         </div>
 
+        <!-- Microphone permission panel (priming + errors) -->
+        <div id="mic-panel" role="status" aria-live="polite" style="display:none;width:100%;max-width:400px;background:#fafafa;border:1px solid #ebebeb;border-radius:10px;padding:20px;text-align:center;">
+          <div id="mic-panel-icon" aria-hidden="true" style="font-size:24px;line-height:1;margin-bottom:10px;">🎤</div>
+          <div id="mic-panel-title" style="font-size:15px;font-weight:600;color:#171717;letter-spacing:-0.2px;margin-bottom:6px;"></div>
+          <p id="mic-panel-body" style="font-size:13px;color:#4d4d4d;line-height:1.6;margin:0 0 16px;"></p>
+          <button id="mic-panel-action" type="button" onclick="micPanelAction()"
+            style="padding:0 24px;height:40px;border-radius:100px;background:#171717;color:#fff;font-size:14px;font-weight:500;border:none;cursor:pointer;letter-spacing:-0.2px;"></button>
+          <button id="mic-panel-dismiss" type="button" onclick="hideMicPanel()"
+            style="display:block;margin:10px auto 0;padding:4px 8px;background:none;border:none;color:#888;font-size:13px;cursor:pointer;"></button>
+        </div>
+
         <!-- Buttons -->
-        <div class="btn-row" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <div id="btn-row" class="btn-row" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
           <button id="btn-start" onclick="startMeasuring()"
             style="padding:0 24px;height:44px;border-radius:100px;background:#171717;color:#fff;font-size:14px;font-weight:500;border:none;cursor:pointer;letter-spacing:-0.2px;">
             {idx.btn.start}
@@ -289,7 +315,13 @@ const canonicalUrl = lang === 'en'
 </Layout>
 
 <!-- Inject i18n strings for JS -->
-<script define:vars={{ __i18n: { classes: idx.jsClasses, denied: idx.badge.denied, stopped: idx.badge.stopped } }}>
+<script define:vars={{ __i18n: {
+  classes: idx.jsClasses,
+  denied: idx.badge.denied,
+  stopped: idx.badge.stopped,
+  requesting: idx.badge.requesting,
+  mic: idx.mic,
+} }}>
   window.__i18n = __i18n;
 </script>
 
@@ -299,8 +331,17 @@ var weighting = 'A', samples = [], sessionStart = 0, durationInterval = null;
 var displayDb = 0, lastDisplayUpdate = 0;
 var HISTORY_SECONDS = 60, DB_MAX = 130, ARC_TOTAL = Math.PI * 120, WARMUP_MS = 750;
 
+var liveDotInterval = null, micPermission = 'unknown';
+
 var btnStart   = document.getElementById('btn-start');
 var btnStop    = document.getElementById('btn-stop');
+var btnRow     = document.getElementById('btn-row');
+var micPanel       = document.getElementById('mic-panel');
+var micPanelIcon   = document.getElementById('mic-panel-icon');
+var micPanelTitle  = document.getElementById('mic-panel-title');
+var micPanelBody   = document.getElementById('mic-panel-body');
+var micPanelBtn    = document.getElementById('mic-panel-action');
+var micPanelSkip   = document.getElementById('mic-panel-dismiss');
 var btnExport  = document.getElementById('btn-export');
 var dbValue    = document.getElementById('db-value');
 var statMin    = document.getElementById('stat-min');
@@ -431,36 +472,151 @@ function tick() {
   animFrame = requestAnimationFrame(tick);
 }
 
-function startMeasuring() {
+/* ---- Microphone permission ---------------------------------------------- */
+
+var MIC = window.__i18n.mic;
+var pendingMicAction = null;
+
+function micSupported() {
+  return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+}
+
+// Query the permission state up front so the click handler can branch
+// synchronously — awaiting inside the handler would break the user-gesture
+// chain that Safari requires for getUserMedia.
+function watchMicPermission() {
+  if (!navigator.permissions || !navigator.permissions.query) return;
+  try {
+    navigator.permissions.query({ name: 'microphone' }).then(function(status) {
+      micPermission = status.state;
+      status.onchange = function() { micPermission = status.state; };
+    }).catch(function() { /* name unsupported — stay on 'unknown' */ });
+  } catch (e) { /* older browsers throw synchronously */ }
+}
+
+function showMicPanel(cfg) {
+  micPanelIcon.textContent = cfg.icon;
+  micPanelTitle.textContent = cfg.title;
+  micPanelBody.textContent = cfg.body;
+  pendingMicAction = cfg.onAction || null;
+  micPanelBtn.textContent = cfg.actionLabel || '';
+  micPanelBtn.style.display = cfg.onAction ? 'inline-block' : 'none';
+  micPanelSkip.textContent = cfg.skipLabel;
+  micPanel.setAttribute('data-tone', cfg.tone);
+  micPanel.style.display = 'block';
+  btnRow.style.display = 'none';
+  (cfg.onAction ? micPanelBtn : micPanelSkip).focus();
+}
+
+function hideMicPanel() {
+  micPanel.style.display = 'none';
+  pendingMicAction = null;
+  btnRow.style.display = 'flex';
+}
+
+function micPanelAction() {
+  if (pendingMicAction) pendingMicAction();
+}
+
+function showMicPrime() {
+  showMicPanel({
+    tone: 'prime', icon: '🎤',
+    title: MIC.primeTitle, body: MIC.primeBody,
+    actionLabel: MIC.allow, onAction: requestMic,
+    skipLabel: MIC.notNow,
+  });
+}
+
+function showMicError(key, action) {
+  var err = MIC.errors[key];
+  badgeLabel.textContent = err.title;
+  badge.style.background = '#fff0f0'; badge.style.borderColor = '#ff4d4d';
+  badge.style.color = '#c50000'; badgeDot.style.background = '#ff4d4d';
+  showMicPanel({
+    tone: 'error', icon: '⚠️',
+    title: err.title, body: err.body,
+    actionLabel: action === 'reload' ? MIC.reload : (action === 'retry' ? MIC.retry : ''),
+    onAction: action === 'reload' ? function() { window.location.reload(); }
+            : action === 'retry'  ? requestMic
+            : null,
+    skipLabel: MIC.close,
+  });
+}
+
+// getUserMedia rejects with NotAllowedError both when the user clicks Block and
+// when they dismiss the prompt without choosing. Re-querying tells them apart,
+// which decides whether we show recovery steps or just offer a retry.
+function showDenialError() {
+  var resolve = function(state) {
+    if (state === 'denied') showMicError('blocked', 'reload');
+    else if (state === 'prompt') showMicError('dismissed', 'retry');
+    else showMicError('notAllowed', 'retry');
+  };
+  if (!navigator.permissions || !navigator.permissions.query) { resolve('unknown'); return; }
+  try {
+    navigator.permissions.query({ name: 'microphone' }).then(function(status) {
+      micPermission = status.state;
+      resolve(status.state);
+    }).catch(function() { resolve('unknown'); });
+  } catch (e) { resolve('unknown'); }
+}
+
+function onMicError(err) {
+  var name = (err && err.name) || '';
+  if (name === 'NotAllowedError' || name === 'PermissionDeniedError' || name === 'SecurityError') showDenialError();
+  else if (name === 'NotFoundError' || name === 'DevicesNotFoundError' || name === 'OverconstrainedError') showMicError('notFound', 'retry');
+  else if (name === 'NotReadableError' || name === 'TrackStartError') showMicError('inUse', 'retry');
+  else showMicError('generic', 'retry');
+}
+
+// Must be reached directly from a user gesture (Start button or panel Allow).
+function requestMic() {
+  badgeLabel.textContent = window.__i18n.requesting;
+  micPanelBtn.disabled = true; micPanelBtn.style.opacity = '0.5';
   navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-    .then(function(s) {
-      stream = s; audioCtx = new AudioContext(); analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 2048; analyser.smoothingTimeConstant = 0.7;
-      audioCtx.createMediaStreamSource(stream).connect(analyser);
-      sessionStart = Date.now(); samples = [];
-      btnStart.disabled = true; btnStart.style.opacity = '0.4';
-      btnStop.disabled = false; btnStop.style.opacity = '1';
-      btnExport.disabled = false; btnExport.style.opacity = '1';
-      navLive.style.display = 'flex';
-      durationInterval = setInterval(function() {
-        var elapsed = Math.floor((Date.now() - sessionStart) / 1000);
-        var m = Math.floor(elapsed / 60), sec = elapsed % 60;
-        durLabel.textContent = m + ':' + (sec < 10 ? '0' : '') + sec;
-      }, 1000);
-      var dot = document.getElementById('live-dot');
-      setInterval(function() { dot.style.opacity = dot.style.opacity === '0' ? '1' : '0'; }, 800);
-      tick();
-    })
-    .catch(function() {
-      badgeLabel.textContent = window.__i18n.denied;
-      badge.style.background = '#fff0f0'; badge.style.borderColor = '#ff4d4d';
-      badge.style.color = '#c50000'; badgeDot.style.background = '#ff4d4d';
-    });
+    .then(onMicGranted)
+    .catch(onMicError)
+    .then(function() { micPanelBtn.disabled = false; micPanelBtn.style.opacity = '1'; });
+}
+
+function onMicGranted(s) {
+  micPermission = 'granted';
+  hideMicPanel();
+  stream = s; audioCtx = new AudioContext(); analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 2048; analyser.smoothingTimeConstant = 0.7;
+  audioCtx.createMediaStreamSource(stream).connect(analyser);
+  if (audioCtx.state === 'suspended' && audioCtx.resume) audioCtx.resume();
+  sessionStart = Date.now(); samples = [];
+  btnStart.disabled = true; btnStart.style.opacity = '0.4';
+  btnStop.disabled = false; btnStop.style.opacity = '1';
+  btnExport.disabled = false; btnExport.style.opacity = '1';
+  badge.style.background = ''; badge.style.borderColor = ''; badge.style.color = '';
+  navLive.style.display = 'flex';
+  durationInterval = setInterval(function() {
+    var elapsed = Math.floor((Date.now() - sessionStart) / 1000);
+    var m = Math.floor(elapsed / 60), sec = elapsed % 60;
+    durLabel.textContent = m + ':' + (sec < 10 ? '0' : '') + sec;
+  }, 1000);
+  var dot = document.getElementById('live-dot');
+  if (liveDotInterval) clearInterval(liveDotInterval);
+  liveDotInterval = setInterval(function() { dot.style.opacity = dot.style.opacity === '0' ? '1' : '0'; }, 800);
+  tick();
+}
+
+function startMeasuring() {
+  if (!micSupported()) {
+    showMicError(window.isSecureContext === false ? 'insecure' : 'unsupported', null);
+    return;
+  }
+  if (micPermission === 'granted') requestMic();
+  else if (micPermission === 'denied') showMicError('blocked', 'reload');
+  else showMicPrime();
 }
 
 function stopMeasuring() {
   if (animFrame) cancelAnimationFrame(animFrame);
   if (durationInterval) clearInterval(durationInterval);
+  if (liveDotInterval) { clearInterval(liveDotInterval); liveDotInterval = null; }
   if (stream) stream.getTracks().forEach(function(t) { t.stop(); });
   if (audioCtx) audioCtx.close();
   stream = null; audioCtx = null; analyser = null; displayDb = 0; lastDisplayUpdate = 0;
@@ -496,4 +652,5 @@ function setWeighting(w) {
 }
 
 updateGauge(0);
+watchMicPermission();
 </script>

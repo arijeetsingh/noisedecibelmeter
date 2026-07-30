@@ -23,8 +23,52 @@ const de: Translations = {
     },
     badge: {
       idle: 'Mikrofonzugriff gewähren, um zu beginnen',
+      requesting: 'Warte auf die Mikrofonberechtigung…',
       denied: 'Mikrofonzugriff verweigert — Browserberechtigungen prüfen',
       stopped: 'Messung gestoppt',
+    },
+    mic: {
+      primeTitle: 'Mikrofonzugriff erforderlich',
+      primeBody: 'Ihr Browser fragt gleich nach der Berechtigung. Das Audio wird auf Ihrem Gerät analysiert — nichts wird aufgezeichnet, gespeichert oder an einen Server gesendet.',
+      allow: 'Mikrofon erlauben',
+      notNow: 'Jetzt nicht',
+      retry: 'Erneut versuchen',
+      reload: 'Seite neu laden',
+      close: 'Schließen',
+      errors: {
+        blocked: {
+          title: 'Mikrofon blockiert',
+          body: 'Ihr Browser blockiert das Mikrofon für diese Website. Klicken Sie auf das Schloss- oder Kamerasymbol in der Adressleiste, setzen Sie Mikrofon auf Erlauben und laden Sie die Seite neu. Auf dem Handy ändern Sie dies in den Website-Einstellungen Ihres Browsers.',
+        },
+        dismissed: {
+          title: 'Berechtigung nicht erteilt',
+          body: 'Die Berechtigungsabfrage wurde geschlossen, bevor Sie gewählt haben. Wählen Sie „Erneut versuchen“ und dann „Erlauben“, wenn Ihr Browser fragt.',
+        },
+        notAllowed: {
+          title: 'Mikrofon nicht erlaubt',
+          body: 'Versuchen Sie es erneut und wählen Sie „Erlauben“. Erscheint keine Abfrage, hat Ihr Browser das Mikrofon bereits blockiert — erlauben Sie es über das Schlosssymbol in der Adressleiste und laden Sie die Seite neu.',
+        },
+        notFound: {
+          title: 'Kein Mikrofon gefunden',
+          body: 'Auf Ihrem Gerät ist kein Mikrofon verfügbar. Schließen Sie eines an oder aktivieren Sie es und versuchen Sie es erneut.',
+        },
+        inUse: {
+          title: 'Mikrofon ist belegt',
+          body: 'Eine andere App oder ein anderer Browser-Tab verwendet Ihr Mikrofon. Schließen Sie diese — meist sind es Videoanrufe — und versuchen Sie es erneut.',
+        },
+        insecure: {
+          title: 'Sichere Verbindung erforderlich',
+          body: 'Browser erlauben den Mikrofonzugriff nur über HTTPS. Öffnen Sie diese Seite unter https://noisedecibelmeter.com, um Schallpegel zu messen.',
+        },
+        unsupported: {
+          title: 'Browser nicht unterstützt',
+          body: 'Dieser Browser unterstützt keine Mikrofonaufnahme. Verwenden Sie eine aktuelle Version von Chrome, Firefox, Safari oder Edge.',
+        },
+        generic: {
+          title: 'Mikrofon konnte nicht gestartet werden',
+          body: 'Beim Öffnen Ihres Mikrofons ist etwas schiefgelaufen. Versuchen Sie es erneut und laden Sie die Seite neu, falls das Problem bestehen bleibt.',
+        },
+      },
     },
     btn: { start: 'Messung starten', stop: 'Stopp', export: 'CSV exportieren' },
     stats: { min: 'Min', avg: 'Ø', max: 'Max' },

@@ -23,8 +23,52 @@ const pt: Translations = {
     },
     badge: {
       idle: 'Conceda acesso ao microfone para começar',
+      requesting: 'Aguardando a permissão do microfone…',
       denied: 'Acesso ao microfone negado — verifique as permissões do navegador',
       stopped: 'Medição parada',
+    },
+    mic: {
+      primeTitle: 'É necessário acesso ao microfone',
+      primeBody: 'O seu navegador vai pedir permissão a seguir. O áudio é analisado no seu dispositivo — nada é gravado, armazenado ou enviado para um servidor.',
+      allow: 'Permitir microfone',
+      notNow: 'Agora não',
+      retry: 'Tentar novamente',
+      reload: 'Recarregar página',
+      close: 'Fechar',
+      errors: {
+        blocked: {
+          title: 'Microfone bloqueado',
+          body: 'O seu navegador está bloqueando o microfone neste site. Clique no ícone do cadeado ou da câmera na barra de endereços, defina Microfone como Permitir e recarregue. No celular, altere isso nas configurações do site do seu navegador.',
+        },
+        dismissed: {
+          title: 'Permissão não concedida',
+          body: 'A janela de permissão foi fechada antes da sua escolha. Selecione Tentar novamente e escolha Permitir quando o navegador perguntar.',
+        },
+        notAllowed: {
+          title: 'Microfone não permitido',
+          body: 'Tente novamente e escolha Permitir. Se nenhuma janela aparecer, o navegador já bloqueou — use o ícone do cadeado na barra de endereços para permitir o microfone e recarregue.',
+        },
+        notFound: {
+          title: 'Nenhum microfone encontrado',
+          body: 'Não há microfone disponível no seu dispositivo. Conecte ou ative um e tente novamente.',
+        },
+        inUse: {
+          title: 'O microfone está ocupado',
+          body: 'Outro aplicativo ou aba do navegador está usando o seu microfone. Feche-o — chamadas de vídeo costumam ser a causa — e tente novamente.',
+        },
+        insecure: {
+          title: 'Conexão segura necessária',
+          body: 'Os navegadores só permitem acesso ao microfone por HTTPS. Abra esta página em https://noisedecibelmeter.com para medir os níveis de som.',
+        },
+        unsupported: {
+          title: 'Navegador não compatível',
+          body: 'Este navegador não suporta gravação por microfone. Experimente uma versão recente do Chrome, Firefox, Safari ou Edge.',
+        },
+        generic: {
+          title: 'Não foi possível iniciar o microfone',
+          body: 'Algo deu errado ao abrir o seu microfone. Tente novamente e recarregue a página se o problema continuar.',
+        },
+      },
     },
     btn: { start: 'Iniciar Medição', stop: 'Parar', export: 'Exportar CSV' },
     stats: { min: 'Mín', avg: 'Méd', max: 'Máx' },

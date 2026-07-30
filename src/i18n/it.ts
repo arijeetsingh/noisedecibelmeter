@@ -23,8 +23,52 @@ const it: Translations = {
     },
     badge: {
       idle: 'Consenti l\'accesso al microfono per iniziare',
+      requesting: 'In attesa dell\'autorizzazione al microfono…',
       denied: 'Accesso al microfono negato — controlla i permessi del browser',
       stopped: 'Misurazione interrotta',
+    },
+    mic: {
+      primeTitle: 'Serve l\'accesso al microfono',
+      primeBody: 'Il browser ti chiederà l\'autorizzazione tra poco. L\'audio viene analizzato sul tuo dispositivo — nulla viene registrato, archiviato o inviato a un server.',
+      allow: 'Consenti il microfono',
+      notNow: 'Non ora',
+      retry: 'Riprova',
+      reload: 'Ricarica la pagina',
+      close: 'Chiudi',
+      errors: {
+        blocked: {
+          title: 'Microfono bloccato',
+          body: 'Il browser sta bloccando il microfono per questo sito. Fai clic sull\'icona del lucchetto o della fotocamera nella barra degli indirizzi, imposta Microfono su Consenti e ricarica. Su mobile, modifica l\'impostazione nelle impostazioni del sito del browser.',
+        },
+        dismissed: {
+          title: 'Autorizzazione non concessa',
+          body: 'La richiesta di autorizzazione è stata chiusa prima della tua scelta. Seleziona Riprova e scegli Consenti quando il browser te lo chiede.',
+        },
+        notAllowed: {
+          title: 'Microfono non consentito',
+          body: 'Riprova e scegli Consenti. Se non compare alcuna richiesta, il browser l\'ha già bloccato — usa l\'icona del lucchetto nella barra degli indirizzi per consentire il microfono, poi ricarica.',
+        },
+        notFound: {
+          title: 'Nessun microfono trovato',
+          body: 'Sul tuo dispositivo non è disponibile alcun microfono. Collegane o attivane uno, poi riprova.',
+        },
+        inUse: {
+          title: 'Il microfono è occupato',
+          body: 'Un\'altra app o scheda del browser sta usando il microfono. Chiudila — di solito sono le videochiamate — e riprova.',
+        },
+        insecure: {
+          title: 'Connessione sicura richiesta',
+          body: 'I browser consentono l\'accesso al microfono solo tramite HTTPS. Apri questa pagina su https://noisedecibelmeter.com per misurare i livelli sonori.',
+        },
+        unsupported: {
+          title: 'Browser non supportato',
+          body: 'Questo browser non supporta la registrazione dal microfono. Prova una versione recente di Chrome, Firefox, Safari o Edge.',
+        },
+        generic: {
+          title: 'Impossibile avviare il microfono',
+          body: 'Qualcosa è andato storto durante l\'apertura del microfono. Riprova e ricarica la pagina se il problema persiste.',
+        },
+      },
     },
     btn: { start: 'Avvia misurazione', stop: 'Stop', export: 'Esporta CSV' },
     stats: { min: 'Min', avg: 'Med', max: 'Max' },
