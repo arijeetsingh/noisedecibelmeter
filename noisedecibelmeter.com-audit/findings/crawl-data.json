@@ -1,0 +1,911 @@
+[
+ {
+  "page": "about",
+  "lang": "en",
+  "oglocale": "en_US",
+  "title": "About \u2014 Noise Decibel Meter",
+  "tlen": 27,
+  "desc_len": 163,
+  "canon": "https://noisedecibelmeter.com/about/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 3,
+  "h3": 0,
+  "h1txt": "A simple tool that does one thing well.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 280
+ },
+ {
+  "page": "contact",
+  "lang": "en",
+  "oglocale": "en_US",
+  "title": "Contact \u2014 Noise Decibel Meter",
+  "tlen": 29,
+  "desc_len": 108,
+  "canon": "https://noisedecibelmeter.com/contact/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 0,
+  "h3": 0,
+  "h1txt": "Get in touch.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 112
+ },
+ {
+  "page": "de",
+  "lang": "de",
+  "oglocale": "de_DE",
+  "title": "Dezibelmesser Online Kostenlos \u2014 Echtzeit-Schallpegelmesser",
+  "tlen": 59,
+  "desc_len": 173,
+  "canon": "https://noisedecibelmeter.com/de/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Online-Dezibelmesser.Schallpegel in Echtzeit.",
+  "imgs": 3,
+  "noalt": 0,
+  "schema": [
+   "FAQPage",
+   "WebApplication"
+  ],
+  "words": 939
+ },
+ {
+  "page": "de_about",
+  "lang": "de",
+  "oglocale": "de_DE",
+  "title": "\u00dcber uns \u2014 Noise Decibel Meter",
+  "tlen": 30,
+  "desc_len": 187,
+  "canon": "https://noisedecibelmeter.com/de/about/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 3,
+  "h3": 0,
+  "h1txt": "Ein einfaches Tool, das eine Sache gut macht.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 252
+ },
+ {
+  "page": "de_contact",
+  "lang": "de",
+  "oglocale": "de_DE",
+  "title": "Kontakt \u2014 Noise Decibel Meter",
+  "tlen": 29,
+  "desc_len": 121,
+  "canon": "https://noisedecibelmeter.com/de/contact/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 0,
+  "h3": 0,
+  "h1txt": "Kontaktieren Sie uns.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 97
+ },
+ {
+  "page": "de_privacy-policy",
+  "lang": "de",
+  "oglocale": "de_DE",
+  "title": "Datenschutzrichtlinie \u2014 Noise Decibel Meter",
+  "tlen": 43,
+  "desc_len": 155,
+  "canon": "https://noisedecibelmeter.com/de/privacy-policy/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Datenschutzrichtlinie",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 273
+ },
+ {
+  "page": "de_terms",
+  "lang": "de",
+  "oglocale": "de_DE",
+  "title": "Nutzungsbedingungen \u2014 Noise Decibel Meter",
+  "tlen": 41,
+  "desc_len": 121,
+  "canon": "https://noisedecibelmeter.com/de/terms/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 9,
+  "h3": 0,
+  "h1txt": "Nutzungsbedingungen",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 326
+ },
+ {
+  "page": "es",
+  "lang": "es",
+  "oglocale": "es_ES",
+  "title": "Medidor de Decibelios Online Gratis \u2014 Medidor de Nivel de Sonido en Tiempo Real",
+  "tlen": 79,
+  "desc_len": 202,
+  "canon": "https://noisedecibelmeter.com/es/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Medidor de decibelios en l\u00ednea.Niveles de sonido en tiempo real.",
+  "imgs": 3,
+  "noalt": 0,
+  "schema": [
+   "FAQPage",
+   "WebApplication"
+  ],
+  "words": 1151
+ },
+ {
+  "page": "es_about",
+  "lang": "es",
+  "oglocale": "es_ES",
+  "title": "Acerca de \u2014 Noise Decibel Meter",
+  "tlen": 31,
+  "desc_len": 169,
+  "canon": "https://noisedecibelmeter.com/es/about/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 3,
+  "h3": 0,
+  "h1txt": "Una herramienta simple que hace una sola cosa bien.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 316
+ },
+ {
+  "page": "es_contact",
+  "lang": "es",
+  "oglocale": "es_ES",
+  "title": "Contacto \u2014 Noise Decibel Meter",
+  "tlen": 30,
+  "desc_len": 120,
+  "canon": "https://noisedecibelmeter.com/es/contact/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 0,
+  "h3": 0,
+  "h1txt": "Ponte en contacto.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 118
+ },
+ {
+  "page": "es_privacy-policy",
+  "lang": "es",
+  "oglocale": "es_ES",
+  "title": "Pol\u00edtica de Privacidad \u2014 Noise Decibel Meter",
+  "tlen": 44,
+  "desc_len": 150,
+  "canon": "https://noisedecibelmeter.com/es/privacy-policy/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Pol\u00edtica de Privacidad",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 321
+ },
+ {
+  "page": "es_terms",
+  "lang": "es",
+  "oglocale": "es_ES",
+  "title": "T\u00e9rminos y Condiciones \u2014 Noise Decibel Meter",
+  "tlen": 44,
+  "desc_len": 136,
+  "canon": "https://noisedecibelmeter.com/es/terms/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 9,
+  "h3": 0,
+  "h1txt": "T\u00e9rminos y Condiciones",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 357
+ },
+ {
+  "page": "fr",
+  "lang": "fr",
+  "oglocale": "fr_FR",
+  "title": "Sonom\u00e8tre en Ligne Gratuit \u2014 Mesure de Niveau Sonore en Temps R\u00e9el",
+  "tlen": 66,
+  "desc_len": 195,
+  "canon": "https://noisedecibelmeter.com/fr/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Sonom\u00e8tre en ligne.Niveaux sonores en temps r\u00e9el.",
+  "imgs": 3,
+  "noalt": 0,
+  "schema": [
+   "FAQPage",
+   "WebApplication"
+  ],
+  "words": 1085
+ },
+ {
+  "page": "fr_about",
+  "lang": "fr",
+  "oglocale": "fr_FR",
+  "title": "\u00c0 propos \u2014 Noise Decibel Meter",
+  "tlen": 30,
+  "desc_len": 149,
+  "canon": "https://noisedecibelmeter.com/fr/about/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 3,
+  "h3": 0,
+  "h1txt": "Un outil simple qui fait une seule chose bien.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 314
+ },
+ {
+  "page": "fr_contact",
+  "lang": "fr",
+  "oglocale": "fr_FR",
+  "title": "Contact \u2014 Noise Decibel Meter",
+  "tlen": 29,
+  "desc_len": 117,
+  "canon": "https://noisedecibelmeter.com/fr/contact/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 0,
+  "h3": 0,
+  "h1txt": "Prenez contact.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 117
+ },
+ {
+  "page": "fr_privacy-policy",
+  "lang": "fr",
+  "oglocale": "fr_FR",
+  "title": "Politique de Confidentialit\u00e9 \u2014 Noise Decibel Meter",
+  "tlen": 50,
+  "desc_len": 156,
+  "canon": "https://noisedecibelmeter.com/fr/privacy-policy/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Politique de Confidentialit\u00e9",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 342
+ },
+ {
+  "page": "fr_terms",
+  "lang": "fr",
+  "oglocale": "fr_FR",
+  "title": "Conditions G\u00e9n\u00e9rales \u2014 Noise Decibel Meter",
+  "tlen": 42,
+  "desc_len": 137,
+  "canon": "https://noisedecibelmeter.com/fr/terms/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 9,
+  "h3": 0,
+  "h1txt": "Conditions G\u00e9n\u00e9rales d&#39;Utilisation",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 376
+ },
+ {
+  "page": "it",
+  "lang": "it",
+  "oglocale": "it_IT",
+  "title": "Fonometro Online Gratuito \u2014 Misuratore di Livello Sonoro in Tempo Reale",
+  "tlen": 71,
+  "desc_len": 198,
+  "canon": "https://noisedecibelmeter.com/it/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Fonometro online.Livelli sonori in tempo reale.",
+  "imgs": 3,
+  "noalt": 0,
+  "schema": [
+   "FAQPage",
+   "WebApplication"
+  ],
+  "words": 1069
+ },
+ {
+  "page": "it_about",
+  "lang": "it",
+  "oglocale": "it_IT",
+  "title": "Chi siamo \u2014 Noise Decibel Meter",
+  "tlen": 31,
+  "desc_len": 185,
+  "canon": "https://noisedecibelmeter.com/it/about/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 3,
+  "h3": 0,
+  "h1txt": "Uno strumento semplice che fa una cosa bene.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 306
+ },
+ {
+  "page": "it_contact",
+  "lang": "it",
+  "oglocale": "it_IT",
+  "title": "Contatti \u2014 Noise Decibel Meter",
+  "tlen": 30,
+  "desc_len": 107,
+  "canon": "https://noisedecibelmeter.com/it/contact/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 0,
+  "h3": 0,
+  "h1txt": "Contattaci.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 106
+ },
+ {
+  "page": "it_privacy-policy",
+  "lang": "it",
+  "oglocale": "it_IT",
+  "title": "Privacy Policy \u2014 Noise Decibel Meter",
+  "tlen": 36,
+  "desc_len": 148,
+  "canon": "https://noisedecibelmeter.com/it/privacy-policy/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Privacy Policy",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 307
+ },
+ {
+  "page": "it_terms",
+  "lang": "it",
+  "oglocale": "it_IT",
+  "title": "Termini e Condizioni \u2014 Noise Decibel Meter",
+  "tlen": 42,
+  "desc_len": 151,
+  "canon": "https://noisedecibelmeter.com/it/terms/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 9,
+  "h3": 0,
+  "h1txt": "Termini e Condizioni",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 341
+ },
+ {
+  "page": "ja",
+  "lang": "ja",
+  "oglocale": "ja_JP",
+  "title": "\u30aa\u30f3\u30e9\u30a4\u30f3\u9a12\u97f3\u8a08 \u7121\u6599 \u2014 \u30ea\u30a2\u30eb\u30bf\u30a4\u30e0\u97f3\u91cf\u30ec\u30d9\u30eb\u6e2c\u5b9a | Noise Decibel Meter",
+  "tlen": 49,
+  "desc_len": 75,
+  "canon": "https://noisedecibelmeter.com/ja/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "\u30aa\u30f3\u30e9\u30a4\u30f3\u9a12\u97f3\u8a08\u3002\u30ea\u30a2\u30eb\u30bf\u30a4\u30e0\u97f3\u91cf\u6e2c\u5b9a\u3002",
+  "imgs": 3,
+  "noalt": 0,
+  "schema": [
+   "FAQPage",
+   "WebApplication"
+  ],
+  "words": 162
+ },
+ {
+  "page": "ja_about",
+  "lang": "ja",
+  "oglocale": "ja_JP",
+  "title": "\u6982\u8981 \u2014 Noise Decibel Meter",
+  "tlen": 24,
+  "desc_len": 79,
+  "canon": "https://noisedecibelmeter.com/ja/about/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 3,
+  "h3": 0,
+  "h1txt": "\u30b7\u30f3\u30d7\u30eb\u306b\u3001\u4e00\u3064\u306e\u3053\u3068\u3092\u5b8c\u74a7\u306b\u3053\u306a\u3059\u30c4\u30fc\u30eb\u3002",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 62
+ },
+ {
+  "page": "ja_contact",
+  "lang": "ja",
+  "oglocale": "ja_JP",
+  "title": "\u304a\u554f\u3044\u5408\u308f\u305b \u2014 Noise Decibel Meter",
+  "tlen": 28,
+  "desc_len": 67,
+  "canon": "https://noisedecibelmeter.com/ja/contact/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 0,
+  "h3": 0,
+  "h1txt": "\u304a\u6c17\u8efd\u306b\u3054\u9023\u7d61\u304f\u3060\u3055\u3044\u3002",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 45
+ },
+ {
+  "page": "ja_privacy-policy",
+  "lang": "ja",
+  "oglocale": "ja_JP",
+  "title": "\u30d7\u30e9\u30a4\u30d0\u30b7\u30fc\u30dd\u30ea\u30b7\u30fc \u2014 Noise Decibel Meter",
+  "tlen": 32,
+  "desc_len": 69,
+  "canon": "https://noisedecibelmeter.com/ja/privacy-policy/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "\u30d7\u30e9\u30a4\u30d0\u30b7\u30fc\u30dd\u30ea\u30b7\u30fc",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 56
+ },
+ {
+  "page": "ja_terms",
+  "lang": "ja",
+  "oglocale": "ja_JP",
+  "title": "\u5229\u7528\u898f\u7d04 \u2014 Noise Decibel Meter",
+  "tlen": 26,
+  "desc_len": 57,
+  "canon": "https://noisedecibelmeter.com/ja/terms/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 9,
+  "h3": 0,
+  "h1txt": "\u5229\u7528\u898f\u7d04",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 69
+ },
+ {
+  "page": "privacy-policy",
+  "lang": "en",
+  "oglocale": "en_US",
+  "title": "Privacy Policy \u2014 Noise Decibel Meter",
+  "tlen": 36,
+  "desc_len": 120,
+  "canon": "https://noisedecibelmeter.com/privacy-policy/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Privacy Policy",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 321
+ },
+ {
+  "page": "pt",
+  "lang": "pt",
+  "oglocale": "pt_BR",
+  "title": "Medidor de Decib\u00e9is Online Gr\u00e1tis \u2014 Medidor de N\u00edvel Sonoro em Tempo Real",
+  "tlen": 73,
+  "desc_len": 197,
+  "canon": "https://noisedecibelmeter.com/pt/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Medidor de decib\u00e9is online.N\u00edveis de som em tempo real.",
+  "imgs": 3,
+  "noalt": 0,
+  "schema": [
+   "FAQPage",
+   "WebApplication"
+  ],
+  "words": 1134
+ },
+ {
+  "page": "pt_about",
+  "lang": "pt",
+  "oglocale": "pt_BR",
+  "title": "Sobre \u2014 Noise Decibel Meter",
+  "tlen": 27,
+  "desc_len": 158,
+  "canon": "https://noisedecibelmeter.com/pt/about/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 3,
+  "h3": 0,
+  "h1txt": "Uma ferramenta simples que faz uma coisa muito bem.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 318
+ },
+ {
+  "page": "pt_contact",
+  "lang": "pt",
+  "oglocale": "pt_BR",
+  "title": "Contato \u2014 Noise Decibel Meter",
+  "tlen": 29,
+  "desc_len": 121,
+  "canon": "https://noisedecibelmeter.com/pt/contact/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 0,
+  "h3": 0,
+  "h1txt": "Entre em contato.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 114
+ },
+ {
+  "page": "pt_privacy-policy",
+  "lang": "pt",
+  "oglocale": "pt_BR",
+  "title": "Pol\u00edtica de Privacidade \u2014 Noise Decibel Meter",
+  "tlen": 45,
+  "desc_len": 157,
+  "canon": "https://noisedecibelmeter.com/pt/privacy-policy/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Pol\u00edtica de Privacidade",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 332
+ },
+ {
+  "page": "pt_terms",
+  "lang": "pt",
+  "oglocale": "pt_BR",
+  "title": "Termos e Condi\u00e7\u00f5es \u2014 Noise Decibel Meter",
+  "tlen": 40,
+  "desc_len": 152,
+  "canon": "https://noisedecibelmeter.com/pt/terms/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 9,
+  "h3": 0,
+  "h1txt": "Termos e Condi\u00e7\u00f5es",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 351
+ },
+ {
+  "page": "root",
+  "lang": "en",
+  "oglocale": "en_US",
+  "title": "Decibel Meter Online Free \u2014 Real-Time Sound Level Meter | Noise Decibel Meter",
+  "tlen": 77,
+  "desc_len": 182,
+  "canon": "https://noisedecibelmeter.com/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "Online decibel meter.Real-time sound levels.",
+  "imgs": 3,
+  "noalt": 0,
+  "schema": [
+   "FAQPage",
+   "WebApplication"
+  ],
+  "words": 1062
+ },
+ {
+  "page": "ru",
+  "lang": "ru",
+  "oglocale": "ru_RU",
+  "title": "\u0418\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0414\u0435\u0446\u0438\u0431\u0435\u043b \u041e\u043d\u043b\u0430\u0439\u043d \u0411\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e \u2014 \u0418\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0423\u0440\u043e\u0432\u043d\u044f \u0417\u0432\u0443\u043a\u0430 \u0432 \u0420\u0435\u0430\u043b\u044c\u043d\u043e\u043c \u0412\u0440\u0435\u043c\u0435\u043d\u0438",
+  "tlen": 80,
+  "desc_len": 172,
+  "canon": "https://noisedecibelmeter.com/ru/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "\u041e\u043d\u043b\u0430\u0439\u043d-\u0438\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0434\u0435\u0446\u0438\u0431\u0435\u043b.\u0423\u0440\u043e\u0432\u0435\u043d\u044c \u0437\u0432\u0443\u043a\u0430 \u0432 \u0440\u0435\u0430\u043b\u044c\u043d\u043e\u043c \u0432\u0440\u0435\u043c\u0435\u043d\u0438.",
+  "imgs": 3,
+  "noalt": 0,
+  "schema": [
+   "FAQPage",
+   "WebApplication"
+  ],
+  "words": 930
+ },
+ {
+  "page": "ru_about",
+  "lang": "ru",
+  "oglocale": "ru_RU",
+  "title": "\u041e \u043d\u0430\u0441 \u2014 Noise Decibel Meter",
+  "tlen": 27,
+  "desc_len": 159,
+  "canon": "https://noisedecibelmeter.com/ru/about/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 3,
+  "h3": 0,
+  "h1txt": "\u041f\u0440\u043e\u0441\u0442\u043e\u0439 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442, \u043a\u043e\u0442\u043e\u0440\u044b\u0439 \u043e\u0442\u043b\u0438\u0447\u043d\u043e \u0434\u0435\u043b\u0430\u0435\u0442 \u043e\u0434\u043d\u043e \u0434\u0435\u043b\u043e.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 263
+ },
+ {
+  "page": "ru_contact",
+  "lang": "ru",
+  "oglocale": "ru_RU",
+  "title": "\u041a\u043e\u043d\u0442\u0430\u043a\u0442\u044b \u2014 Noise Decibel Meter",
+  "tlen": 30,
+  "desc_len": 112,
+  "canon": "https://noisedecibelmeter.com/ru/contact/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 0,
+  "h3": 0,
+  "h1txt": "\u0421\u0432\u044f\u0436\u0438\u0442\u0435\u0441\u044c \u0441 \u043d\u0430\u043c\u0438.",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 105
+ },
+ {
+  "page": "ru_privacy-policy",
+  "lang": "ru",
+  "oglocale": "ru_RU",
+  "title": "\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u2014 Noise Decibel Meter",
+  "tlen": 49,
+  "desc_len": 157,
+  "canon": "https://noisedecibelmeter.com/ru/privacy-policy/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 285
+ },
+ {
+  "page": "ru_terms",
+  "lang": "ru",
+  "oglocale": "ru_RU",
+  "title": "\u0423\u0441\u043b\u043e\u0432\u0438\u044f \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u044f \u2014 Noise Decibel Meter",
+  "tlen": 43,
+  "desc_len": 138,
+  "canon": "https://noisedecibelmeter.com/ru/terms/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 9,
+  "h3": 0,
+  "h1txt": "\u0423\u0441\u043b\u043e\u0432\u0438\u044f \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u044f",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 304
+ },
+ {
+  "page": "terms",
+  "lang": "en",
+  "oglocale": "en_US",
+  "title": "Terms &amp; Conditions \u2014 Noise Decibel Meter",
+  "tlen": 44,
+  "desc_len": 136,
+  "canon": "https://noisedecibelmeter.com/terms/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 9,
+  "h3": 0,
+  "h1txt": "Terms &amp; Conditions",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 357
+ },
+ {
+  "page": "zh",
+  "lang": "zh-Hans",
+  "oglocale": "zh_CN",
+  "title": "\u5728\u7ebf\u5206\u8d1d\u8ba1\u514d\u8d39 \u2014 \u5b9e\u65f6\u58f0\u7ea7\u6d4b\u91cf | Noise Decibel Meter",
+  "tlen": 38,
+  "desc_len": 52,
+  "canon": "https://noisedecibelmeter.com/zh/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "\u5728\u7ebf\u5206\u8d1d\u8ba1\u3002\u5b9e\u65f6\u58f0\u97f3\u7ea7\u522b\u3002",
+  "imgs": 3,
+  "noalt": 0,
+  "schema": [
+   "FAQPage",
+   "WebApplication"
+  ],
+  "words": 192
+ },
+ {
+  "page": "zh_about",
+  "lang": "zh-Hans",
+  "oglocale": "zh_CN",
+  "title": "\u5173\u4e8e \u2014 Noise Decibel Meter",
+  "tlen": 24,
+  "desc_len": 62,
+  "canon": "https://noisedecibelmeter.com/zh/about/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 3,
+  "h3": 0,
+  "h1txt": "\u4e00\u4e2a\u7b80\u5355\u7684\u5de5\u5177\uff0c\u4e13\u6ce8\u628a\u4e00\u4ef6\u4e8b\u505a\u597d\u3002",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 68
+ },
+ {
+  "page": "zh_contact",
+  "lang": "zh-Hans",
+  "oglocale": "zh_CN",
+  "title": "\u8054\u7cfb\u6211\u4eec \u2014 Noise Decibel Meter",
+  "tlen": 26,
+  "desc_len": 47,
+  "canon": "https://noisedecibelmeter.com/zh/contact/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 0,
+  "h3": 0,
+  "h1txt": "\u4e0e\u6211\u4eec\u8054\u7cfb\u3002",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 47
+ },
+ {
+  "page": "zh_privacy-policy",
+  "lang": "zh-Hans",
+  "oglocale": "zh_CN",
+  "title": "\u9690\u79c1\u653f\u7b56 \u2014 Noise Decibel Meter",
+  "tlen": 26,
+  "desc_len": 58,
+  "canon": "https://noisedecibelmeter.com/zh/privacy-policy/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 7,
+  "h3": 0,
+  "h1txt": "\u9690\u79c1\u653f\u7b56",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 56
+ },
+ {
+  "page": "zh_terms",
+  "lang": "zh-Hans",
+  "oglocale": "zh_CN",
+  "title": "\u6761\u6b3e\u4e0e\u6761\u4ef6 \u2014 Noise Decibel Meter",
+  "tlen": 27,
+  "desc_len": 51,
+  "canon": "https://noisedecibelmeter.com/zh/terms/",
+  "nhreflang": 10,
+  "h1": 1,
+  "h2": 9,
+  "h3": 0,
+  "h1txt": "\u6761\u6b3e\u4e0e\u6761\u4ef6",
+  "imgs": 0,
+  "noalt": 0,
+  "schema": [
+   "WebApplication"
+  ],
+  "words": 71
+ }
+]
