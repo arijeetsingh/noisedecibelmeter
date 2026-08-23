@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { getTranslations, localePath } from '../i18n/index';
+import { author } from '../data/author';
 
 interface Props {
   title?: string;
@@ -11,6 +12,13 @@ interface Props {
   lang?: string;
   pagePath?: string;
   ogLocale?: string;
+  /** false for English-only pages: suppresses hreflang alternates and points the
+   *  language switcher at locale home pages instead of URLs that do not exist. */
+  localized?: boolean;
+  /** set on reference/editorial pages: emits Article + Person instead of a bare WebPage */
+  articleMode?: boolean;
+  datePublished?: string;
+  dateModified?: string;
 }
 
 const {
@@ -22,6 +30,10 @@ const {
   lang = 'en',
   pagePath = '',
   ogLocale,
+  localized = true,
+  articleMode = false,
+  datePublished,
+  dateModified,
 } = Astro.props;
 
 const t = getTranslations(lang);
@@ -39,6 +51,7 @@ const langLabels: Record<string, string> = { en: 'English', es: 'Español', fr: 
 // emitted only on the tool page; BreadcrumbList only on sub-pages.
 const orgId = `${baseUrl}/#organization`;
 const siteId = `${baseUrl}/#website`;
+const personId = `${baseUrl}/#maintainer`;
 const localeHome = `${baseUrl}${homeHref}`;
 
 const breadcrumbLabels: Record<string, string> = {
@@ -46,6 +59,8 @@ const breadcrumbLabels: Record<string, string> = {
   'contact': t.footer.contact,
   'privacy-policy': t.footer.privacy,
   'terms': t.footer.terms,
+  'decibel-chart': 'Decibel Chart',
+  'methodology': 'Methodology',
 };
 
 const schemaGraph: Record<string, unknown>[] = [
@@ -60,6 +75,16 @@ const schemaGraph: Record<string, unknown>[] = [
       "width": 512,
       "height": 512,
     },
+    "founder": { "@id": personId },
+  },
+  {
+    "@type": "Person",
+    "@id": personId,
+    "name": author.name,
+    "url": author.url,
+    "jobTitle": author.role,
+    "description": author.bio,
+    ...(author.credentials ? { "hasCredential": author.credentials } : {}),
   },
   {
     "@type": "WebSite",
@@ -96,14 +121,25 @@ if (pagePath === '') {
   });
 } else {
   schemaGraph.push({
-    "@type": "WebPage",
+    "@type": articleMode ? "Article" : "WebPage",
     "@id": `${canonicalUrl}#webpage`,
     "name": title,
+    ...(articleMode ? { "headline": title } : {}),
     "url": canonicalUrl,
     "description": description,
     "inLanguage": t.htmlLang,
     "isPartOf": { "@id": siteId },
     "publisher": { "@id": orgId },
+    ...(articleMode ? {
+      "author": { "@id": personId },
+      "citation": [
+        "https://www.osha.gov/noise",
+        "https://www.cdc.gov/niosh/topics/noise/default.html",
+        "https://www.who.int/europe/publications/i/item/9789289053563",
+      ],
+      ...(datePublished ? { "datePublished": datePublished } : {}),
+      ...(dateModified ? { "dateModified": dateModified } : {}),
+    } : {}),
   });
   schemaGraph.push({
     "@type": "BreadcrumbList",
@@ -204,15 +240,15 @@ if (pagePath === '') {
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalUrl} />
 
-    <!-- hreflang alternate links -->
-    {allLocales.map(l => (
+    <!-- hreflang alternate links — only for pages that exist in every locale -->
+    {localized && allLocales.map(l => (
       <link
         rel="alternate"
         hreflang={l === 'zh' ? 'zh-Hans' : l}
         href={`${baseUrl}${localePath(l, pagePath)}`}
       />
     ))}
-    <link rel="alternate" hreflang="x-default" href={`${baseUrl}${localePath('en', pagePath)}`} />
+    {localized && <link rel="alternate" hreflang="x-default" href={`${baseUrl}${localePath('en', pagePath)}`} />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -335,7 +371,7 @@ if (pagePath === '') {
             </button>
             <div class="lang-menu" role="listbox">
               {allLocales.map(l => (
-                <a href={localePath(l, pagePath)} class={l === lang ? 'active' : ''} role="option" aria-selected={l === lang}>
+                <a href={localized ? localePath(l, pagePath) : localePath(l, '')} class={l === lang ? 'active' : ''} role="option" aria-selected={l === lang}>
                   {langLabels[l]}
                 </a>
               ))}
@@ -371,6 +407,14 @@ if (pagePath === '') {
           <span class="footer-tagline" style="font-size:14px;color:#888;">— {t.footer.tagline}</span>
         </div>
         <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;">
+          {lang === 'en' && (
+            <>
+              <a href="/decibel-chart/" class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">Decibel Chart</a>
+              <span class="footer-divider" style="color:#ccc;font-size:13px;">·</span>
+              <a href="/methodology/" class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">Methodology</a>
+              <span class="footer-divider" style="color:#ccc;font-size:13px;">·</span>
+            </>
+          )}
           <a href={`${prefix}/about/`} class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">{t.footer.about}</a>
           <span class="footer-divider" style="color:#ccc;font-size:13px;">·</span>
           <a href={`${prefix}/privacy-policy/`} class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">{t.footer.privacy}</a>

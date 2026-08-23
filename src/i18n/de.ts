@@ -118,7 +118,7 @@ const de: Translations = {
         { q: 'Was ist der normale Dezibelbereich?', a: 'Für alltägliche Umgebungen gelten 40–65 dB als normal und komfortabel. Ein ruhiges Schlafzimmer hat 30–40 dB, ein normales Gespräch 55–65 dB und ein geschäftiges Büro etwa 65–70 dB.' },
         { q: 'Was ist ein Dezibelmesser?', a: 'Ein Dezibelmesser misst die Schallintensität in Dezibel (dB) auf einer logarithmischen Skala. Er wird von Ingenieuren, Sicherheitsinspektoren, Musikern und Alltagsnutzern eingesetzt, um Lärmpegel in Häusern, Arbeitsplätzen und im Freien zu überwachen.' },
         { q: 'Wie verwendet man einen Dezibelmesser?', a: 'Klicken Sie auf „Messung starten" und erlauben Sie den Mikrofonzugriff. Die Anzeige zeigt Live-dB-Werte. Wechseln Sie zwischen dBA- und dBC-Modi, beobachten Sie das 60-Sekunden-Verlaufsdiagramm und nutzen Sie die Min/Ø/Max-Statistiken. Klicken Sie auf Stopp, wenn Sie fertig sind, und exportieren Sie dann CSV, um ein Protokoll zu speichern.' },
-        { q: 'Sind Dezibelmesser-Apps genau?', a: 'Browserbasierte Apps sind innerhalb von ±2–3 dB genau — ausgezeichnet für Trendüberwachung und allgemeines Bewusstsein. Für rechtlich konforme Arbeitsschutzbeurteilungen (OSHA, ISO 61672) ist ein zertifizierter Hardware-Schallpegelmesser erforderlich.' },
+        { q: 'Sind Dezibelmesser-Apps genau?', a: 'Browserbasierte Apps sind innerhalb von ±2–3 dB genau — ausgezeichnet für Trendüberwachung und allgemeines Bewusstsein. Für rechtlich konforme Arbeitsschutzbeurteilungen (OSHA, IEC 61672) ist ein zertifizierter Hardware-Schallpegelmesser erforderlich.' },
         { q: 'Wie funktioniert ein Dezibelmesser?', a: 'Ein Dezibelmesser erfasst Schall über ein Mikrofon, wandelt ihn in ein elektrisches Signal um und berechnet die RMS-Amplitude. Diese wird dann mit einer logarithmischen Formel in dB umgerechnet. Dieses Tool verwendet die Web Audio API und verarbeitet alles lokal in Ihrem Browser.' },
         { q: 'Was misst ein Dezibelmesser?', a: 'Ein Dezibelmesser misst den Schalldruckpegel (SPL) — die Gesamtlautstärke aller kombinierten Frequenzen. Bewertete Modi wie dBA und dBC wenden Filter an, um besser widerzuspiegeln, wie Menschen Schall wahrnehmen.' },
         { q: 'Ist dieser Dezibelmesser kostenlos?', a: 'Ja — 100% kostenlos, für immer. Kein Abonnement, kein Konto, keine versteckten Kosten. Das Tool läuft vollständig im Browser ohne Installation.' },
@@ -151,7 +151,7 @@ const de: Translations = {
     ],
     accuracyH2: 'Genauigkeit',
     accuracyP1: 'Browserbasierte Dezibelmesser sind für den Alltagsgebrauch genau genug — typischerweise innerhalb von ±2–3 dB — was sie hervorragend für Trendüberwachung, Lärmbeschwerden und allgemeines Bewusstsein macht.',
-    accuracyP2: 'Für rechtlich konforme Arbeitsschutzbeurteilungen (OSHA, ISO 61672) ist ein zertifizierter Hardware-Schallpegelmesser erforderlich. Telefon-Mikrofone sind nicht werksseitig nach diesen Standards kalibriert.',
+    accuracyP2: 'Für rechtlich konforme Arbeitsschutzbeurteilungen (OSHA, IEC 61672) ist ein zertifizierter Hardware-Schallpegelmesser erforderlich. Telefon-Mikrofone sind nicht werksseitig nach diesen Standards kalibriert.',
   },
 
   contact: {

@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AuthorByline from '../components/AuthorByline.astro';
+import Sources from '../components/Sources.astro';
+
+const canonicalUrl = 'https://noisedecibelmeter.com/methodology/';
+const updated = '2026-08-23';
+
+const bodyStyle  = 'font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;';
+const h2Style    = 'font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:36px 0 12px;';
+---
+<Layout
+  title="How This Decibel Meter Measures Sound — Methodology"
+  description="How Noise Decibel Meter turns microphone input into a decibel reading: RMS, A- and C-weighting, and why a browser reading lands within about ±2–3 dB."
+  canonicalUrl={canonicalUrl}
+  lang="en"
+  pagePath="methodology"
+  localized={false}
+  articleMode={true}
+  datePublished="2026-08-23"
+  dateModified={updated}
+>
+  <main style="max-width:720px;margin:0 auto;padding:64px 24px 96px;">
+    <p class="page-label" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px;">Methodology</p>
+    <h1 class="page-title" style="font-size:40px;font-weight:600;color:#171717;letter-spacing:-1.8px;line-height:1.1;margin:0 0 20px;">How this meter measures sound.</h1>
+    <p class="page-body" style="font-size:17px;color:#4d4d4d;line-height:1.75;margin:0 0 32px;">
+      Every number this tool shows comes from your device's microphone and a short chain of
+      arithmetic. This page documents that chain, and is equally clear about where it stops
+      being trustworthy.
+    </p>
+
+    <AuthorByline updated={updated} />
+
+    <h2 class="page-h2" style={h2Style}>From microphone to decibels</h2>
+    <p class="page-body" style={bodyStyle}>
+      The browser's Web Audio API hands the page a stream of raw audio samples, each a
+      number between &minus;1 and 1 representing instantaneous air pressure. For every
+      analysis frame the tool computes the <strong>root mean square</strong> of those
+      samples &mdash; square each one, average them, take the square root. RMS is used
+      rather than a simple average because sound waves swing symmetrically around zero and
+      would otherwise cancel out to nothing.
+    </p>
+    <p class="page-body" style={bodyStyle}>
+      That RMS amplitude is converted to a decibel value with the standard logarithmic
+      formula, <code style="font-family:'JetBrains Mono',monospace;font-size:14px;background:#f2f2f2;padding:2px 6px;border-radius:3px;">dB = 20 &times; log₁₀(RMS / reference)</code>,
+      then offset into the range a sound level meter reports. The scale is logarithmic, so
+      a 10 dB rise is roughly ten times the sound intensity and about twice the perceived
+      loudness.
+    </p>
+
+    <h2 class="page-h2" style={h2Style}>A-weighting and C-weighting</h2>
+    <p class="page-body" style={bodyStyle}>
+      Human hearing is not equally sensitive across frequencies &mdash; we hear a 1 kHz tone
+      far more readily than a 50 Hz one at the same pressure. Weighting curves correct for
+      that.
+    </p>
+    <p class="page-body" style={bodyStyle}>
+      <strong>dBA</strong> applies A-weighting, which discounts low frequencies steeply to
+      approximate how the ear responds. It is what occupational limits are written in, and
+      it is the mode to use for almost everything. <strong>dBC</strong> applies far less
+      correction and stays close to flat across the audible range, which makes it the right
+      choice for bass-heavy music, machinery, and other low-frequency sources that
+      A-weighting would understate.
+    </p>
+
+    <h2 class="page-h2" style={h2Style}>Why the reading is approximate</h2>
+    <p class="page-body" style={bodyStyle}>
+      Expect this tool to land within roughly <strong>&plusmn;2&ndash;3 dB</strong> of a
+      calibrated meter under ordinary conditions. Three things account for the gap:
+    </p>
+    <ul class="page-body" style="font-size:16px;color:#4d4d4d;line-height:1.9;margin:0 0 20px;padding-left:24px;">
+      <li><strong>Uncalibrated microphones.</strong> Phone and laptop microphones are tuned for speech intelligibility, not measurement, and no two models respond identically.</li>
+      <li><strong>Browser audio processing.</strong> Automatic gain control, echo cancellation, and noise suppression are designed to make voices clearer, which is the opposite of what a meter wants. The tool disables these where the browser allows it, but support varies.</li>
+      <li><strong>The upper and lower ends.</strong> Very quiet rooms sit near the noise floor of the hardware, and very loud sources clip the input. Readings compress at both extremes.</li>
+    </ul>
+
+    <h2 class="page-h2" style={h2Style}>Where this tool is not enough</h2>
+    <p class="page-body" style={bodyStyle}>
+      A browser reading is genuinely useful for trend monitoring, comparing one room to
+      another, checking whether a space is getting louder, and building intuition about the
+      scale. It is <strong>not</strong> a substitute for certified equipment.
+    </p>
+    <p class="page-body" style={bodyStyle}>
+      Any legally consequential measurement &mdash; an OSHA hearing-conservation
+      assessment, a noise-ordinance complaint intended to stand up, an occupational
+      exposure record &mdash; requires a sound level meter built and verified to
+      <strong>IEC 61672-1</strong>, the standard that defines Class 1 (precision, ±1.1 dB
+      at 1 kHz) and Class 2 (general purpose, ±1.4 dB at 1 kHz) instruments. Those meters
+      are also field-calibrated against a reference source before use. A phone microphone
+      is neither built nor calibrated to that specification, and no amount of software can
+      make it so.
+    </p>
+
+    <h2 class="page-h2" style={h2Style}>Privacy</h2>
+    <p class="page-body" style={bodyStyle}>
+      All of the above happens on your device. Audio samples are analysed in the page and
+      discarded frame by frame. Nothing is recorded, stored, or transmitted &mdash; there
+      is no server to send it to.
+    </p>
+
+    <div style="margin:44px 0 0;padding:22px 24px;background:#fff;border:1px solid #ebebeb;border-radius:10px;" class="cta-card">
+      <p class="cta-text" style="margin:0 0 14px;font-size:15px;color:#4d4d4d;line-height:1.6;">Now that you know what the number means, take a reading.</p>
+      <a href="/" class="cta-link" style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#171717;text-decoration:none;border-bottom:2px solid #171717;padding-bottom:2px;">Open the decibel meter &rarr;</a>
+    </div>
+  </main>
+
+  <Sources />
+</Layout>
+
+<style is:global>
+  html[data-dark] .page-title { color: #f2f2f2 !important; }
+  html[data-dark] .page-h2    { color: #f2f2f2 !important; }
+  html[data-dark] .page-body  { color: #b0b0b0 !important; }
+  html[data-dark] .page-body code { background: #222 !important; color: #f2f2f2 !important; }
+  html[data-dark] .cta-card   { background: #141414 !important; border-color: #222 !important; }
+  html[data-dark] .cta-text   { color: #b0b0b0 !important; }
+  html[data-dark] .cta-link   { color: #f2f2f2 !important; border-bottom-color: #f2f2f2 !important; }
+  @media (max-width: 640px) {
+    .page-title { font-size: 30px !important; letter-spacing: -1.2px !important; }
+  }
+</style>

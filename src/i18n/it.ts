@@ -118,7 +118,7 @@ const it: Translations = {
         { q: 'Qual è il range normale di decibel?', a: 'Per gli ambienti quotidiani, 40–65 dB è considerato normale e confortevole. Una camera da letto silenziosa è 30–40 dB, una conversazione normale 55–65 dB e un ufficio affollato circa 65–70 dB.' },
         { q: 'Cos\'è un fonometro?', a: 'Un fonometro misura l\'intensità del suono in decibel (dB) su una scala logaritmica. È usato da ingegneri, ispettori di sicurezza, musicisti e utenti comuni per monitorare i livelli di rumore in case, luoghi di lavoro e ambienti esterni.' },
         { q: 'Come si usa un fonometro?', a: 'Clicca su "Avvia misurazione" e consenti l\'accesso al microfono. Il misuratore mostra letture dB in diretta. Passa tra le modalità dBA e dBC, osserva il grafico storico di 60 secondi e usa le statistiche Min/Med/Max. Clicca su Stop quando hai finito, poi esporta CSV per salvare un registro.' },
-        { q: 'Le app fonometro sono accurate?', a: 'Le app basate su browser sono accurate entro ±2–3 dB — eccellenti per il monitoraggio delle tendenze. Per valutazioni di sicurezza occupazionale conformi alla legge (OSHA, ISO 61672) è richiesto un fonometro hardware certificato.' },
+        { q: 'Le app fonometro sono accurate?', a: 'Le app basate su browser sono accurate entro ±2–3 dB — eccellenti per il monitoraggio delle tendenze. Per valutazioni di sicurezza occupazionale conformi alla legge (OSHA, IEC 61672) è richiesto un fonometro hardware certificato.' },
         { q: 'Come funziona un fonometro?', a: 'Un fonometro cattura il suono tramite un microfono, lo converte in segnale elettrico e calcola l\'ampiezza RMS. Questa viene poi convertita in dB usando una formula logaritmica. Questo strumento usa la Web Audio API ed elabora tutto localmente nel browser.' },
         { q: 'Cosa misura un fonometro?', a: 'Un fonometro misura il livello di pressione sonora (SPL) — la loudness complessiva di tutte le frequenze combinate. Le modalità pesate come dBA e dBC applicano filtri per riflettere meglio come gli esseri umani percepiscono il suono.' },
         { q: 'Questo fonometro è gratuito?', a: 'Sì — 100% gratuito, per sempre. Nessun abbonamento, nessun account, nessun costo nascosto. Lo strumento funziona interamente nel browser senza installazione.' },
@@ -151,7 +151,7 @@ const it: Translations = {
     ],
     accuracyH2: 'Precisione',
     accuracyP1: 'I fonometri basati su browser sono abbastanza precisi per l\'uso quotidiano — tipicamente entro ±2–3 dB — rendendoli eccellenti per il monitoraggio delle tendenze, le segnalazioni di rumore e la consapevolezza generale.',
-    accuracyP2: 'Per le valutazioni di sicurezza occupazionale conformi alla legge (OSHA, ISO 61672) è richiesto un fonometro hardware certificato. I microfoni dei telefoni non sono calibrati in fabbrica secondo questi standard.',
+    accuracyP2: 'Per le valutazioni di sicurezza occupazionale conformi alla legge (OSHA, IEC 61672) è richiesto un fonometro hardware certificato. I microfoni dei telefoni non sono calibrati in fabbrica secondo questi standard.',
   },
 
   contact: {
@@ -201,7 +201,7 @@ const it: Translations = {
     sections: [
       { h2: '1. Accettazione dei termini', body: 'Accedendo o utilizzando Noise Decibel Meter ("il Servizio"), accetti di essere vincolato da questi Termini e Condizioni. Se non sei d\'accordo, interrompi l\'utilizzo del Servizio.' },
       { h2: '2. Descrizione del servizio', body: 'Noise Decibel Meter è uno strumento gratuito basato su browser per la misurazione del livello sonoro. Utilizza il microfono del tuo dispositivo e la Web Audio API per stimare i livelli di pressione sonora in decibel. Il Servizio è fornito gratuitamente e non richiede registrazione.' },
-      { h2: '3. Precisione e limitazioni', body: 'Il Servizio fornisce letture approssimative di decibel adatte all\'uso informativo quotidiano. Il Servizio non è un sostituto di strumentazione professionale certificata — non affidarti ad esso per valutazioni del rumore occupazionale richieste per legge (ad es., conformità OSHA, ISO 61672).' },
+      { h2: '3. Precisione e limitazioni', body: 'Il Servizio fornisce letture approssimative di decibel adatte all\'uso informativo quotidiano. Il Servizio non è un sostituto di strumentazione professionale certificata — non affidarti ad esso per valutazioni del rumore occupazionale richieste per legge (ad es., conformità OSHA, IEC 61672).' },
       { h2: '4. Uso consentito', body: 'Puoi utilizzare il Servizio per scopi informativi personali e commerciali leciti. Accetti di non effettuare reverse engineering o scraping del Servizio, non utilizzarlo in violazione delle leggi applicabili e non presentare le letture di questo strumento come misurazioni professionali certificate.' },
       { h2: '5. Proprietà intellettuale', body: 'Tutti i contenuti, il design e il codice del Servizio sono di proprietà di Noise Decibel Meter e protetti dalle leggi sulla proprietà intellettuale applicabili. Non puoi copiare, riprodurre o ridistribuire senza previa autorizzazione scritta.' },
       { h2: '6. Esclusione di garanzie', body: 'Il Servizio è fornito "così com\'è" e "come disponibile" senza garanzie di alcun tipo, inclusa l\'accuratezza, l\'idoneità a uno scopo particolare o la disponibilità ininterrotta.' },

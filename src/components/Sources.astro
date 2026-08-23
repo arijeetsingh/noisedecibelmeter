@@ -1,0 +1,24 @@
+---
+import { sources } from '../data/author';
+interface Props { heading?: string; }
+const { heading = 'Sources' } = Astro.props;
+---
+<section class="sources" style="max-width:720px;margin:0 auto 64px;padding:22px 24px;background:#fff;border:1px solid #ebebeb;border-radius:10px;">
+  <h2 class="sources-h" style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#888;margin:0 0 14px;">{heading}</h2>
+  <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;">
+    {sources.map(s => (
+      <li>
+        <a class="sources-link" href={s.url} target="_blank" rel="noopener noreferrer"
+           style="font-size:14.5px;font-weight:500;color:#171717;text-decoration:none;border-bottom:1px solid #d0d0d0;">{s.label}</a>
+        <p class="sources-note" style="margin:4px 0 0;font-size:13px;color:#888;line-height:1.55;">{s.note}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+<style is:global>
+  html[data-dark] .sources { background: #141414 !important; border-color: #222 !important; }
+  html[data-dark] .sources-link { color: #f2f2f2 !important; border-bottom-color: #444 !important; }
+  html[data-dark] .sources-note { color: #888 !important; }
+  .sources-link:hover { border-bottom-color: #171717; }
+  html[data-dark] .sources-link:hover { border-bottom-color: #f2f2f2 !important; }
+</style>

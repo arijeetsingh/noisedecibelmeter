@@ -1,0 +1,31 @@
+---
+import { author } from '../data/author';
+interface Props { updated?: string; compact?: boolean; }
+const { updated, compact = false } = Astro.props;
+const credentialSuffix = author.credentials ? `, ${author.credentials}` : '';
+---
+<div class="byline" style={`display:flex;gap:14px;align-items:flex-start;${compact ? '' : 'background:#fff;border:1px solid #ebebeb;border-radius:10px;padding:18px 20px;'}margin:0 0 32px;`}>
+  <div class="byline-avatar" aria-hidden="true" style="flex:none;width:38px;height:38px;border-radius:50%;background:#f2f2f2;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#4d4d4d;">
+    {author.name.split(' ').map(w => w[0]).join('')}
+  </div>
+  <div style="min-width:0;">
+    <p class="byline-name" style="margin:0;font-size:14px;font-weight:600;color:#171717;">
+      {author.name}{credentialSuffix}
+      <span class="byline-role" style="font-weight:400;color:#888;"> &middot; {author.role}</span>
+    </p>
+    {!compact && (
+      <p class="byline-bio" style="margin:6px 0 0;font-size:13.5px;color:#4d4d4d;line-height:1.6;">{author.bio}</p>
+    )}
+    {updated && (
+      <p class="byline-date" style="margin:8px 0 0;font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.08em;">
+        Last reviewed <time datetime={updated}>{new Date(updated + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</time>
+      </p>
+    )}
+  </div>
+</div>
+<style is:global>
+  html[data-dark] .byline { background: #141414 !important; border-color: #222 !important; }
+  html[data-dark] .byline-avatar { background: #222 !important; color: #b0b0b0 !important; }
+  html[data-dark] .byline-name { color: #f2f2f2 !important; }
+  html[data-dark] .byline-bio  { color: #b0b0b0 !important; }
+</style>

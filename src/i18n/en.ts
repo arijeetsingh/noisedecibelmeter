@@ -116,7 +116,7 @@ const en = {
         { q: 'What is the normal decibel range?', a: 'For everyday environments, 40–65 dB is considered normal and comfortable. A quiet bedroom is 30–40 dB, a normal conversation 55–65 dB, and a busy office around 65–70 dB.' },
         { q: 'What is a decibel meter?', a: 'A decibel meter measures the intensity of sound in decibels (dB) using a logarithmic scale. Used by engineers, safety inspectors, musicians, and everyday users to monitor noise levels in homes, workplaces, and outdoor environments.' },
         { q: 'How to use a decibel meter?', a: 'Click Start Measuring and allow microphone access. The gauge displays live dB readings. Switch between dBA and dBC modes, watch the 60-second history graph, and use the Min/Avg/Max stats. Hit Stop when done, then Export CSV to save a log.' },
-        { q: 'Are decibel meter apps accurate?', a: 'Browser-based apps are accurate within ±2–3 dB — excellent for trend monitoring and general awareness. For legally compliant occupational safety assessments (OSHA, ISO 61672), a certified hardware sound level meter is required.' },
+        { q: 'Are decibel meter apps accurate?', a: 'Browser-based apps are accurate within ±2–3 dB — excellent for trend monitoring and general awareness. For legally compliant occupational safety assessments (OSHA, IEC 61672), a certified hardware sound level meter is required.' },
         { q: 'How does a decibel meter work?', a: 'A decibel meter captures sound via a microphone, converts it to an electrical signal, and calculates the RMS amplitude. This is then converted to dB using a logarithmic formula. This tool uses the Web Audio API, processing everything locally in your browser.' },
         { q: 'What does a decibel meter measure?', a: 'A decibel meter measures sound pressure level (SPL) — the overall loudness of all frequencies combined. Weighted modes like dBA and dBC apply filters to better reflect how humans perceive sound.' },
         { q: 'Is this decibel meter free to use?', a: 'Yes — 100% free, forever. No subscription, no account, no hidden costs. The tool runs entirely in your browser with no installation required.' },
@@ -149,7 +149,7 @@ const en = {
     ],
     accuracyH2: 'Accuracy',
     accuracyP1: 'Browser-based decibel meters are accurate enough for everyday use — typically within ±2–3 dB — making them excellent for trend monitoring, noise complaints, and general awareness.',
-    accuracyP2: 'For legally compliant occupational safety assessments (OSHA, ISO 61672), a certified hardware sound level meter is required. Phone microphones are not factory-calibrated to those standards.',
+    accuracyP2: 'For legally compliant occupational safety assessments (OSHA, IEC 61672), a certified hardware sound level meter is required. Phone microphones are not factory-calibrated to those standards.',
   },
 
   contact: {
@@ -199,7 +199,7 @@ const en = {
     sections: [
       { h2: '1. Acceptance of terms', body: 'By accessing or using Noise Decibel Meter ("the Service"), you agree to be bound by these Terms & Conditions. If you do not agree, please discontinue use of the Service.' },
       { h2: '2. Description of service', body: 'Noise Decibel Meter is a free, browser-based sound level measurement tool. It uses your device\'s microphone and the Web Audio API to estimate sound pressure levels in decibels. The Service is provided free of charge and requires no registration.' },
-      { h2: '3. Accuracy and limitations', body: 'The Service provides approximate decibel readings suitable for everyday informational use. Measurements may vary depending on your device\'s microphone hardware, browser, and acoustic environment. The Service is not a substitute for certified professional equipment — do not rely on it for legally required occupational noise assessments (e.g., OSHA, ISO 61672 compliance).' },
+      { h2: '3. Accuracy and limitations', body: 'The Service provides approximate decibel readings suitable for everyday informational use. Measurements may vary depending on your device\'s microphone hardware, browser, and acoustic environment. The Service is not a substitute for certified professional equipment — do not rely on it for legally required occupational noise assessments (e.g., OSHA, IEC 61672 compliance).' },
       { h2: '4. Permitted use', body: 'You may use the Service for lawful personal and commercial informational purposes. You agree not to: reverse-engineer or scrape the Service; use the Service in violation of applicable laws; or misrepresent readings from this tool as certified professional measurements.' },
       { h2: '5. Intellectual property', body: 'All content, design, and code comprising the Service are the property of Noise Decibel Meter and protected by applicable intellectual property laws. You may not copy, reproduce, or redistribute without prior written permission.' },
       { h2: '6. Disclaimer of warranties', body: 'The Service is provided "as is" and "as available" without warranties of any kind, including accuracy, fitness for a particular purpose, or uninterrupted availability.' },

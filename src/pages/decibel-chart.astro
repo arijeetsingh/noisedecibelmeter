@@ -1,0 +1,294 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AuthorByline from '../components/AuthorByline.astro';
+import Sources from '../components/Sources.astro';
+import {
+  sounds, refLabels, zoneMeta, zoneFor,
+  oshaHours, nioshHours, formatDuration,
+} from '../data/decibelChart';
+
+const canonicalUrl = 'https://noisedecibelmeter.com/decibel-chart/';
+const updated = '2026-08-23';
+
+const rows = sounds
+  .slice()
+  .sort((a, b) => a.low - b.low || a.high - b.high)
+  .map(s => {
+    const mid = Math.round((s.low + s.high) / 2);
+    const zone = zoneFor(mid);
+    return {
+      ...s, mid, zone,
+      osha: formatDuration(oshaHours(mid)),
+      niosh: formatDuration(nioshHours(mid)),
+      display: s.low === s.high ? `${s.low}` : `${s.low}–${s.high}`,
+    };
+  });
+
+const zoneOrder = ['safe', 'caution', 'danger', 'extreme'] as const;
+const counts = Object.fromEntries(zoneOrder.map(z => [z, rows.filter(r => r.zone === z).length]));
+
+// Dataset schema for the table
+const datasetLd = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Decibel levels of common sounds",
+  "description": `Sound pressure levels in dBA for ${rows.length} common sources, with OSHA and NIOSH maximum daily exposure times for each.`,
+  "url": canonicalUrl,
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": { "@id": "https://noisedecibelmeter.com/#organization" },
+  "variableMeasured": [
+    { "@type": "PropertyValue", "name": "Sound pressure level", "unitText": "dBA" },
+    { "@type": "PropertyValue", "name": "OSHA maximum daily exposure", "unitText": "hours" },
+    { "@type": "PropertyValue", "name": "NIOSH maximum daily exposure", "unitText": "hours" },
+  ],
+};
+
+const bodyStyle = 'font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;';
+const h2Style   = 'font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:40px 0 12px;';
+---
+<Layout
+  title="Decibel Chart — Noise Levels of 50 Common Sounds"
+  description="A sourced decibel chart of 50 common sounds, 0 to 180 dB, each with OSHA and NIOSH safe exposure times. Filter by loudness, then measure it yourself."
+  canonicalUrl={canonicalUrl}
+  lang="en"
+  pagePath="decibel-chart"
+  localized={false}
+  articleMode={true}
+  datePublished="2026-08-23"
+  dateModified={updated}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(datasetLd)} />
+
+  <main style="max-width:860px;margin:0 auto;padding:64px 24px 40px;">
+    <p class="page-label" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px;">Reference</p>
+    <h1 class="page-title" style="font-size:40px;font-weight:600;color:#171717;letter-spacing:-1.8px;line-height:1.1;margin:0 0 20px;">Decibel chart of common sounds.</h1>
+    <p class="page-lede" style="font-size:17px;color:#4d4d4d;line-height:1.75;margin:0 0 8px;max-width:66ch;">
+      {rows.length} everyday sounds from silence to a rocket launch, each with the range you
+      would actually measure and how long you can safely be exposed to it — under both the
+      OSHA and NIOSH standards, which do not agree.
+    </p>
+    <p class="page-lede" style="font-size:15px;color:#888;line-height:1.7;margin:0 0 32px;max-width:66ch;">
+      Levels are given as ranges because that is the honest answer. A petrol lawn mower is
+      quoted anywhere between 85 and 105 dB depending on who measured it, on what, and from
+      how far away.
+    </p>
+
+    <AuthorByline updated={updated} />
+
+    <!-- Zone legend / filter -->
+    <div class="zones" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 20px;">
+      {zoneOrder.map(z => (
+        <button type="button" class="zone-btn" data-zone={z} aria-pressed="false"
+          style={`text-align:left;cursor:pointer;background:#fff;border:1px solid #ebebeb;border-radius:10px;padding:14px 16px;font-family:inherit;border-left:3px solid ${zoneMeta[z].color};`}>
+          <span style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="zone-name" style="font-size:13px;font-weight:600;color:#171717;">{zoneMeta[z].label}</span>
+            <span class="zone-count" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;">{counts[z]}</span>
+          </span>
+          <span class="zone-range" style="display:block;font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;margin-bottom:3px;">{zoneMeta[z].range}</span>
+          <span class="zone-desc" style="display:block;font-size:12px;color:#4d4d4d;line-height:1.45;">{zoneMeta[z].desc}</span>
+        </button>
+      ))}
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 14px;">
+      <label class="sr-only" for="chart-search" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Search sounds</label>
+      <input id="chart-search" type="search" placeholder="Search sounds…" autocomplete="off"
+        style="flex:1;min-width:200px;font-family:inherit;font-size:14px;padding:10px 14px;border:1px solid #ebebeb;border-radius:8px;background:#fff;color:#171717;" />
+      <button type="button" id="chart-reset"
+        style="cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;background:none;border:1px solid #ebebeb;border-radius:8px;padding:10px 14px;">Reset</button>
+    </div>
+    <p id="chart-status" role="status" aria-live="polite" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;margin:0 0 10px;">Showing all {rows.length} sounds</p>
+
+    <!-- The chart -->
+    <div style="overflow-x:auto;border:1px solid #ebebeb;border-radius:10px;background:#fff;" class="chart-wrap">
+      <table id="chart" style="border-collapse:collapse;width:100%;font-size:14px;min-width:640px;">
+        <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">
+          Decibel levels of common sounds with OSHA and NIOSH maximum daily exposure times
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col" style="text-align:left;">Sound</th>
+            <th scope="col" style="text-align:right;">dBA</th>
+            <th scope="col" style="text-align:right;">OSHA max</th>
+            <th scope="col" style="text-align:right;">NIOSH max</th>
+            <th scope="col" style="text-align:left;">Source</th>
+            <th scope="col"><span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Measure</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(r => (
+            <tr data-zone={r.zone} data-name={r.name.toLowerCase()}>
+              <th scope="row" style="text-align:left;font-weight:500;">
+                <span style="display:flex;align-items:center;gap:9px;">
+                  <span aria-hidden="true" style={`flex:none;width:8px;height:8px;border-radius:50%;background:${zoneMeta[r.zone].color};`}></span>
+                  <span>
+                    <span class="row-name">{r.name}</span>
+                    {r.note && <span class="row-note" style="display:block;font-size:12px;color:#888;line-height:1.45;margin-top:2px;max-width:38ch;">{r.note}</span>}
+                  </span>
+                </span>
+              </th>
+              <td class="num">{r.display}</td>
+              <td class="num">{r.osha}</td>
+              <td class="num" style="font-weight:600;">{r.niosh}</td>
+              <td class="ref">{refLabels[r.ref]}</td>
+              <td style="text-align:right;white-space:nowrap;">
+                <a class="row-measure" href="/" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#888;text-decoration:none;border-bottom:1px solid #d0d0d0;">Measure</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p id="chart-empty" hidden style="font-size:14px;color:#888;margin:16px 0 0;">No sounds match that search.</p>
+
+    <article style="max-width:720px;margin:8px auto 0;">
+      <h2 class="page-h2" style={h2Style}>Why OSHA and NIOSH give different answers</h2>
+      <p class="page-body" style={bodyStyle}>
+        Both columns above are correct. They come from two standards that were written for
+        different purposes, and confusing them is the single most common error on pages like
+        this one.
+      </p>
+      <p class="page-body" style={bodyStyle}>
+        <strong>OSHA</strong> sets a permissible exposure limit of 90 dBA averaged over an
+        eight-hour shift, using a <strong>5 dB exchange rate</strong> — every 5 dB increase
+        halves the permitted time. It is an enforceable legal limit, and it dates from 1971.
+      </p>
+      <p class="page-body" style={bodyStyle}>
+        <strong>NIOSH</strong> recommends 85 dBA over eight hours with a
+        <strong> 3 dB exchange rate</strong>, which is the rate that actually matches how
+        sound energy accumulates. It is a health recommendation, not a law, and it is
+        substantially stricter. At 100 dBA, OSHA permits two hours; NIOSH recommends fifteen
+        minutes. That is an eight-fold difference for the same noise.
+      </p>
+      <p class="page-body" style={bodyStyle}>
+        If you are protecting your own hearing rather than demonstrating legal compliance,
+        <strong> use the NIOSH column</strong>.
+      </p>
+
+      <h2 class="page-h2" style={h2Style}>How to read the decibel scale</h2>
+      <p class="page-body" style={bodyStyle}>
+        Decibels are logarithmic, which makes the numbers deceptive. A 10 dB increase is
+        roughly ten times the sound intensity but only about twice as loud to your ear. A
+        3 dB increase doubles the energy — which is exactly why NIOSH halves the safe time
+        every 3 dB.
+      </p>
+      <p class="page-body" style={bodyStyle}>
+        Damage is a product of level and time. Eight hours at 85 dBA and fifteen minutes at
+        100 dBA carry a comparable risk. Brief exposure to a loud sound is usually fine;
+        the exception is impulse noise like a gunshot or a firework, where a single event
+        above roughly 140 dB can cause permanent damage instantly.
+      </p>
+
+      <h2 class="page-h2" style={h2Style}>Measuring these yourself</h2>
+      <p class="page-body" style={bodyStyle}>
+        Every figure above is a typical range, not a reading of your particular room, tool,
+        or venue. Distance alone changes everything — sound pressure falls about 6 dB each
+        time you double your distance from the source.
+      </p>
+      <p class="page-body" style={bodyStyle}>
+        The free <a href="/" class="inline-link" style="color:#171717;border-bottom:1px solid #d0d0d0;text-decoration:none;">decibel meter on this site</a>
+        gives you a live dBA reading from your browser in a couple of seconds, with no
+        install. It lands within about ±2–3 dB of a calibrated meter — good enough to place
+        a sound on this chart, not good enough for a compliance record. The
+        <a href="/methodology/" class="inline-link" style="color:#171717;border-bottom:1px solid #d0d0d0;text-decoration:none;">methodology page</a>
+        explains exactly how it works and where it stops being reliable.
+      </p>
+
+      <div style="margin:36px 0 0;padding:22px 24px;background:#fff;border:1px solid #ebebeb;border-radius:10px;" class="cta-card">
+        <p class="cta-text" style="margin:0 0 14px;font-size:15px;color:#4d4d4d;line-height:1.6;">How loud is it where you are right now?</p>
+        <a href="/" class="cta-link" style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#171717;text-decoration:none;border-bottom:2px solid #171717;padding-bottom:2px;">Open the decibel meter &rarr;</a>
+      </div>
+    </article>
+  </main>
+
+  <Sources />
+</Layout>
+
+<style is:global>
+  #chart th, #chart td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  #chart thead th {
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase; color: #888;
+    background: #fafafa; border-bottom: 1px solid #ebebeb; white-space: nowrap; position: sticky; top: 0;
+  }
+  #chart tbody tr:last-child th, #chart tbody tr:last-child td { border-bottom: 0; }
+  #chart td.num {
+    font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums;
+    text-align: right; white-space: nowrap; color: #171717;
+  }
+  #chart td.ref { font-size: 12px; color: #888; white-space: nowrap; }
+  #chart tbody tr:hover { background: #fafafa; }
+  .row-measure:hover { color: #171717; border-bottom-color: #171717; }
+  .zone-btn[aria-pressed="true"] { background: #fafafa; box-shadow: inset 0 0 0 1px #d0d0d0; }
+  .zone-btn:focus-visible, #chart-search:focus-visible, #chart-reset:focus-visible,
+  .row-measure:focus-visible, .inline-link:focus-visible {
+    outline: 2px solid #171717; outline-offset: 2px;
+  }
+  .inline-link:hover { border-bottom-color: #171717 !important; }
+
+  html[data-dark] .page-title, html[data-dark] .page-h2 { color: #f2f2f2 !important; }
+  html[data-dark] .page-body, html[data-dark] .page-lede { color: #b0b0b0 !important; }
+  html[data-dark] .chart-wrap { background: #141414 !important; border-color: #222 !important; }
+  html[data-dark] #chart thead th { background: #1a1a1a !important; border-bottom-color: #222 !important; color: #888 !important; }
+  html[data-dark] #chart th, html[data-dark] #chart td { border-bottom-color: #1e1e1e !important; }
+  html[data-dark] #chart td.num, html[data-dark] .row-name { color: #f2f2f2 !important; }
+  html[data-dark] #chart tbody tr:hover { background: #1a1a1a !important; }
+  html[data-dark] .zone-btn { background: #141414 !important; border-color: #222 !important; }
+  html[data-dark] .zone-btn[aria-pressed="true"] { background: #1e1e1e !important; box-shadow: inset 0 0 0 1px #444 !important; }
+  html[data-dark] .zone-name { color: #f2f2f2 !important; }
+  html[data-dark] .zone-desc { color: #b0b0b0 !important; }
+  html[data-dark] #chart-search { background: #141414 !important; border-color: #222 !important; color: #f2f2f2 !important; }
+  html[data-dark] #chart-reset { border-color: #222 !important; }
+  html[data-dark] .cta-card { background: #141414 !important; border-color: #222 !important; }
+  html[data-dark] .cta-text { color: #b0b0b0 !important; }
+  html[data-dark] .cta-link { color: #f2f2f2 !important; border-bottom-color: #f2f2f2 !important; }
+  html[data-dark] .inline-link { color: #f2f2f2 !important; border-bottom-color: #444 !important; }
+  html[data-dark] .zone-btn:focus-visible, html[data-dark] #chart-search:focus-visible { outline-color: #f2f2f2 !important; }
+
+  @media (max-width: 640px) { .page-title { font-size: 30px !important; letter-spacing: -1.2px !important; } }
+</style>
+
+<script is:inline>
+  (function () {
+    var table = document.getElementById('chart');
+    if (!table) return;
+    var rows = Array.prototype.slice.call(table.tBodies[0].rows);
+    var search = document.getElementById('chart-search');
+    var reset = document.getElementById('chart-reset');
+    var status = document.getElementById('chart-status');
+    var empty = document.getElementById('chart-empty');
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.zone-btn'));
+    var active = null;
+
+    function apply() {
+      var q = (search.value || '').trim().toLowerCase();
+      var shown = 0;
+      rows.forEach(function (r) {
+        var okZone = !active || r.dataset.zone === active;
+        var okText = !q || r.dataset.name.indexOf(q) !== -1;
+        var show = okZone && okText;
+        r.hidden = !show;
+        if (show) shown++;
+      });
+      empty.hidden = shown !== 0;
+      status.textContent = shown === rows.length
+        ? 'Showing all ' + rows.length + ' sounds'
+        : 'Showing ' + shown + ' of ' + rows.length + ' sounds';
+    }
+
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        active = active === b.dataset.zone ? null : b.dataset.zone;
+        btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.zone === active)); });
+        apply();
+      });
+    });
+    search.addEventListener('input', apply);
+    reset.addEventListener('click', function () {
+      active = null; search.value = '';
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      apply();
+      search.focus();
+    });
+  })();
+</script>

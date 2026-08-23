@@ -118,7 +118,7 @@ const pt: Translations = {
         { q: 'Qual é a faixa normal de decibéis?', a: 'Para ambientes cotidianos, 40–65 dB é considerado normal e confortável. Um quarto silencioso fica em 30–40 dB, uma conversa normal em 55–65 dB e um escritório movimentado em torno de 65–70 dB.' },
         { q: 'O que é um medidor de decibéis?', a: 'Um medidor de decibéis mede a intensidade do som em decibéis (dB) usando uma escala logarítmica. Usado por engenheiros, inspetores de segurança, músicos e usuários comuns para monitorar ruído em residências, locais de trabalho e ambientes externos.' },
         { q: 'Como usar um medidor de decibéis?', a: 'Clique em Iniciar Medição e permita o acesso ao microfone. O medidor exibe leituras em dB ao vivo. Alterne entre os modos dBA e dBC, observe o gráfico histórico de 60 segundos e use as estatísticas Mín/Méd/Máx. Clique em Parar quando terminar e exporte o CSV para salvar um registro.' },
-        { q: 'Os aplicativos de medidor de decibéis são precisos?', a: 'Aplicativos baseados em navegador têm precisão de ±2–3 dB — excelentes para monitoramento de tendências. Para avaliações de segurança ocupacional conformes à lei (OSHA, ISO 61672), é necessário um sonômetro de hardware certificado.' },
+        { q: 'Os aplicativos de medidor de decibéis são precisos?', a: 'Aplicativos baseados em navegador têm precisão de ±2–3 dB — excelentes para monitoramento de tendências. Para avaliações de segurança ocupacional conformes à lei (OSHA, IEC 61672), é necessário um sonômetro de hardware certificado.' },
         { q: 'Como funciona um medidor de decibéis?', a: 'Um medidor de decibéis captura o som por meio de um microfone, converte-o em sinal elétrico e calcula a amplitude RMS, que é então convertida em dB usando uma fórmula logarítmica. Esta ferramenta usa a Web Audio API e processa tudo localmente no navegador.' },
         { q: 'O que um medidor de decibéis mede?', a: 'Um medidor de decibéis mede o nível de pressão sonora (SPL) — a sonoridade geral de todas as frequências combinadas. Os modos ponderados dBA e dBC aplicam filtros para refletir melhor como os humanos percebem o som.' },
         { q: 'Este medidor de decibéis é gratuito?', a: 'Sim — 100% gratuito, para sempre. Sem assinatura, sem conta, sem custos ocultos. A ferramenta funciona inteiramente no seu navegador, sem instalação necessária.' },
@@ -151,7 +151,7 @@ const pt: Translations = {
     ],
     accuracyH2: 'Precisão',
     accuracyP1: 'Sonômetros baseados em navegador são suficientemente precisos para uso cotidiano — tipicamente dentro de ±2–3 dB — excelentes para monitoramento de tendências, reclamações de ruído e conscientização geral.',
-    accuracyP2: 'Para avaliações de segurança ocupacional conformes à lei (OSHA, ISO 61672), é necessário um sonômetro de hardware certificado. Os microfones de celular não são calibrados de fábrica de acordo com esses padrões.',
+    accuracyP2: 'Para avaliações de segurança ocupacional conformes à lei (OSHA, IEC 61672), é necessário um sonômetro de hardware certificado. Os microfones de celular não são calibrados de fábrica de acordo com esses padrões.',
   },
 
   contact: {
@@ -201,7 +201,7 @@ const pt: Translations = {
     sections: [
       { h2: '1. Aceitação dos termos', body: 'Ao acessar ou usar o Noise Decibel Meter ("o Serviço"), você concorda em estar vinculado a estes Termos e Condições. Se não concordar, por favor, pare de usar o Serviço.' },
       { h2: '2. Descrição do serviço', body: 'O Noise Decibel Meter é uma ferramenta gratuita de medição de nível sonoro baseada em navegador. Usa o microfone do seu dispositivo e a Web Audio API para estimar os níveis de pressão sonora em decibéis. O Serviço é fornecido gratuitamente e não requer cadastro.' },
-      { h2: '3. Precisão e limitações', body: 'O Serviço fornece leituras aproximadas de decibéis adequadas para uso informativo cotidiano. O Serviço não substitui equipamentos profissionais certificados — não o utilize para avaliações de ruído ocupacional legalmente exigidas (ex.: conformidade com OSHA, ISO 61672).' },
+      { h2: '3. Precisão e limitações', body: 'O Serviço fornece leituras aproximadas de decibéis adequadas para uso informativo cotidiano. O Serviço não substitui equipamentos profissionais certificados — não o utilize para avaliações de ruído ocupacional legalmente exigidas (ex.: conformidade com OSHA, IEC 61672).' },
       { h2: '4. Uso permitido', body: 'Você pode usar o Serviço para fins informativos pessoais e comerciais lícitos. Você concorda em não tentar fazer engenharia reversa do Serviço, usá-lo em violação de leis aplicáveis, ou deturpar as leituras desta ferramenta como medições profissionais certificadas.' },
       { h2: '5. Propriedade intelectual', body: 'Todo o conteúdo, design e código que compõem o Serviço são propriedade do Noise Decibel Meter e protegidos pelas leis de propriedade intelectual aplicáveis. Você não pode copiar, reproduzir ou redistribuir sem permissão prévia por escrito.' },
       { h2: '6. Isenção de garantias', body: 'O Serviço é fornecido "no estado em que se encontra" e "conforme disponível", sem garantias de qualquer tipo, incluindo precisão, adequação a uma finalidade específica ou disponibilidade ininterrupta.' },
