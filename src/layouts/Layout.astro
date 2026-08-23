@@ -33,6 +33,87 @@ const homeHref = prefix ? `${prefix}/` : '/';
 const baseUrl = 'https://noisedecibelmeter.com';
 const allLocales = ['en', 'es', 'fr', 'ja', 'zh', 'pt', 'ru', 'de', 'it'];
 const langLabels: Record<string, string> = { en: 'English', es: 'Español', fr: 'Français', ja: '日本語', zh: '中文', pt: 'Português', ru: 'Русский', de: 'Deutsch', it: 'Italiano' };
+
+// ── Structured data ────────────────────────────────────────
+// One @graph per page: Organization + WebSite are site-wide; WebApplication is
+// emitted only on the tool page; BreadcrumbList only on sub-pages.
+const orgId = `${baseUrl}/#organization`;
+const siteId = `${baseUrl}/#website`;
+const localeHome = `${baseUrl}${homeHref}`;
+
+const breadcrumbLabels: Record<string, string> = {
+  'about': t.footer.about,
+  'contact': t.footer.contact,
+  'privacy-policy': t.footer.privacy,
+  'terms': t.footer.terms,
+};
+
+const schemaGraph: Record<string, unknown>[] = [
+  {
+    "@type": "Organization",
+    "@id": orgId,
+    "name": siteName,
+    "url": `${baseUrl}/`,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${baseUrl}/web-app-manifest-512x512.png`,
+      "width": 512,
+      "height": 512,
+    },
+  },
+  {
+    "@type": "WebSite",
+    "@id": siteId,
+    "name": siteName,
+    "url": localeHome,
+    "inLanguage": t.htmlLang,
+    "publisher": { "@id": orgId },
+  },
+];
+
+if (pagePath === '') {
+  schemaGraph.push({
+    "@type": "WebApplication",
+    "@id": `${canonicalUrl}#webapp`,
+    "name": siteName,
+    "url": canonicalUrl,
+    "description": description,
+    "inLanguage": t.htmlLang,
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires a browser with Web Audio API and microphone access",
+    "isPartOf": { "@id": siteId },
+    "publisher": { "@id": orgId },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Real-time decibel measurement",
+      "dBA and dBC weighting",
+      "60-second history graph",
+      "CSV export",
+      "No installation required",
+      "Works in any modern browser",
+    ],
+  });
+} else {
+  schemaGraph.push({
+    "@type": "WebPage",
+    "@id": `${canonicalUrl}#webpage`,
+    "name": title,
+    "url": canonicalUrl,
+    "description": description,
+    "inLanguage": t.htmlLang,
+    "isPartOf": { "@id": siteId },
+    "publisher": { "@id": orgId },
+  });
+  schemaGraph.push({
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": siteName, "item": localeHome },
+      { "@type": "ListItem", "position": 2, "name": breadcrumbLabels[pagePath] ?? title },
+    ],
+  });
+}
 ---
 
 <style is:global>
@@ -160,10 +241,51 @@ const langLabels: Record<string, string> = { en: 'English', es: 'Español', fr: 
     <meta name="apple-mobile-web-app-title" content="NoiseDb" />
     <link rel="manifest" href="/site.webmanifest" />
 
+    <!-- Preload the faces used above the fold (latin); other subsets load on demand. -->
+    <link rel="preload" href="/fonts/Inter-600-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/JetBrainsMono-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2770876005595835" crossorigin="anonymous"></script>
+    <!-- Google AdSense — deferred off the critical path.
+         Loads on the first user interaction, or after 2.5s, whichever comes first.
+         Keeps ~1s of parse/compile work out of the initial main-thread budget so the
+         "Start Measuring" tap stays responsive (INP), without dropping ad coverage. -->
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+    <script is:inline>
+      (function () {
+        var loaded = false;
+        function loadAds() {
+          if (loaded) return;
+          loaded = true;
+          cleanup();
+          var s = document.createElement('script');
+          s.async = true;
+          s.crossOrigin = 'anonymous';
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2770876005595835';
+          document.head.appendChild(s);
+        }
+        var events = ['pointerdown', 'keydown', 'touchstart', 'scroll', 'wheel'];
+        function cleanup() {
+          for (var i = 0; i < events.length; i++) {
+            window.removeEventListener(events[i], loadAds, { passive: true });
+          }
+        }
+        for (var i = 0; i < events.length; i++) {
+          window.addEventListener(events[i], loadAds, { passive: true, once: true });
+        }
+        // requestIdleCallback alone fires ~1s in on a fast page, which puts the ad
+        // script's ~1.4s parse right where the first tap lands. Hold a quiet window
+        // first, then load on the next idle moment.
+        setTimeout(function () {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadAds, { timeout: 2000 });
+          } else {
+            loadAds();
+          }
+        }, 3500);
+      })();
+    </script>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VFVTC4G1G1"></script>
@@ -177,21 +299,7 @@ const langLabels: Record<string, string> = { en: 'English', es: 'Español', fr: 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Noise Decibel Meter",
-      "url": canonicalUrl,
-      "description": description,
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "Any",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": [
-        "Real-time decibel measurement",
-        "dBA and dBC weighting",
-        "60-second history graph",
-        "CSV export",
-        "No installation required",
-        "Works in any modern browser"
-      ]
+      "@graph": schemaGraph,
     })} />
 
     <slot name="head" />

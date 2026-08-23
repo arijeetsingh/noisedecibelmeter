@@ -1,28 +1,30 @@
 {
   "summary": {
-    "health_score": 66,
+    "health_score": 70,
     "business_type": "Utility / free web tool (single-purpose, ad-monetised, 9 locales)",
     "audit_date": "2026-08-23",
     "urls_crawled": 45,
     "top_findings": [
-      "Cloudflare managed robots.txt serves Disallow: / to GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended, Bytespider and meta-externalagent",
-      "og-image.png returns 404 while being referenced by og:image and twitter:image on all 45 pages",
-      "favicon.svg and favicon.ico return 404; source files are named 'favicon copy.svg' and 'favicon copy.ico'",
-      "FAQPage JSON-LD is emitted between <!DOCTYPE html> and <html>, pushing meta charset past the 1024-byte window",
-      "Site is only 5 unique templates; no informational content targets the long-tail its own H2s name"
+      "Cloudflare managed robots.txt still serves Disallow: / to GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended, Bytespider and meta-externalagent",
+      "Site is only 5 unique templates; no informational content targets the long-tail its own H2s name",
+      "Content quotes OSHA, WHO and ISO 61672 but links to none of them, and names no author",
+      "Six titles exceed the ~60 char SERP limit: ru 80, es 79, en 77, pt 73, it 71, fr 66",
+      "www host returns 200 instead of 301 to apex"
     ],
     "quick_wins": [
-      "Create and deploy public/og-image.png at 1200x630",
-      "git mv 'public/favicon copy.svg' public/favicon.svg and the .ico likewise",
-      "Move the FAQPage script inside <Layout> in IndexPage.astro:98",
       "Unblock retrieval AI agents in the Cloudflare AI Crawl Control dashboard",
-      "Trim 6 titles over 60 chars and 4 descriptions over 160 chars in src/i18n/*.ts"
-    ]
+      "Trim 6 titles over 60 chars and 4 descriptions over 160 chars in src/i18n/*.ts",
+      "301 www to apex via Cloudflare bulk redirect",
+      "Add HSTS and Permissions-Policy headers in public/_headers",
+      "Gate WebApplication to the tool page; add Organization and WebSite nodes"
+    ],
+    "previous_health_score": 66,
+    "reverified": "2026-08-23, after Phase 1 deploy"
   },
   "categories": [
     {
       "name": "Technical SEO",
-      "score": 78,
+      "score": 84,
       "weight": 22,
       "what_works": [
         "All 45 sitemap URLs return HTTP 200 with no redirect chains",
@@ -33,12 +35,39 @@
         "Hreflang complete and reciprocal across all 45 URLs with x-default"
       ],
       "findings": [
-        {"title": "JSON-LD emitted before <html>", "severity": "Medium", "description": "A ~5KB script sits between <!DOCTYPE html> and <html> at byte offset 5. Parsers relocate it, but <meta charset> lands at ~5030 bytes, outside the 1024-byte scan window. Saved only by the charset=utf-8 HTTP header.", "recommendation": "Move the JSON-LD block inside <Layout> in src/components/IndexPage.astro:98"},
-        {"title": "www host returns 200 instead of 301", "severity": "Medium", "description": "https://www.noisedecibelmeter.com/ serves a full 200 response. Mitigated by a correct cross-host canonical to the apex, but splits crawl budget.", "recommendation": "Add a Cloudflare bulk redirect from www to apex"},
-        {"title": "No Strict-Transport-Security header", "severity": "Medium", "description": "Only x-content-type-options and referrer-policy are set.", "recommendation": "Add HSTS via public/_headers"},
-        {"title": "No CSP or Permissions-Policy", "severity": "Low", "description": "A microphone-based tool has a natural case for an explicit Permissions-Policy.", "recommendation": "Add Permissions-Policy: microphone=(self), camera=(), geolocation=()"},
-        {"title": "Sitemap lacks xhtml:link hreflang annotations", "severity": "Low", "description": "On-page hreflang is correct, so this is redundancy rather than a defect.", "recommendation": "Optional: add xhtml:link alternates to sitemap.xml"}
-      ]
+        {
+          "title": "JSON-LD emitted before <html>",
+          "severity": "Resolved",
+          "description": "A ~5KB script sits between <!DOCTYPE html> and <html> at byte offset 5. Parsers relocate it, but <meta charset> lands at ~5030 bytes, outside the 1024-byte scan window. Saved only by the charset=utf-8 HTTP header.",
+          "recommendation": "Move the JSON-LD block inside <Layout> in src/components/IndexPage.astro:98",
+          "status": "resolved"
+        },
+        {
+          "title": "www host returns 200 instead of 301",
+          "severity": "Medium",
+          "description": "https://www.noisedecibelmeter.com/ serves a full 200 response. Mitigated by a correct cross-host canonical to the apex, but splits crawl budget.",
+          "recommendation": "Add a Cloudflare bulk redirect from www to apex"
+        },
+        {
+          "title": "No Strict-Transport-Security header",
+          "severity": "Medium",
+          "description": "Only x-content-type-options and referrer-policy are set.",
+          "recommendation": "Add HSTS via public/_headers"
+        },
+        {
+          "title": "No CSP or Permissions-Policy",
+          "severity": "Low",
+          "description": "A microphone-based tool has a natural case for an explicit Permissions-Policy.",
+          "recommendation": "Add Permissions-Policy: microphone=(self), camera=(), geolocation=()"
+        },
+        {
+          "title": "Sitemap lacks xhtml:link hreflang annotations",
+          "severity": "Low",
+          "description": "On-page hreflang is correct, so this is redundancy rather than a defect.",
+          "recommendation": "Optional: add xhtml:link alternates to sitemap.xml"
+        }
+      ],
+      "previous_score": 78
     },
     {
       "name": "Content Quality",
@@ -51,11 +80,32 @@
         "Locale content parity holds; ja/zh char counts match normal CJK compression and section structure is identical"
       ],
       "findings": [
-        {"title": "Only 5 unique templates exist", "severity": "High", "description": "No page targets 'decibel chart', 'how loud is X', or OSHA/WHO threshold queries, despite the homepage H2s naming those topics.", "recommendation": "Build a small informational layer in English first; validate in GSC before translating"},
-        {"title": "No authorship or source citations", "severity": "Medium", "description": "Content quotes OSHA, WHO and ISO 61672 but links to none of them, and no author or organisation is named anywhere.", "recommendation": "Add outbound citations and a named maintainer with stated expertise"},
-        {"title": "Thin about and contact pages", "severity": "Medium", "description": "/contact/ is ~112 words, /about/ ~280.", "recommendation": "Expand with substantive detail on who runs the tool and how it works"},
-        {"title": "H1 concatenates without a space in extracted text", "severity": "Low", "description": "Renders as 'Online decibel meter.Real-time sound levels.' because of a <br/> with no surrounding whitespace. Visually fine; that is the string crawlers and LLMs read.", "recommendation": "Add a space, or split into separate elements"}
-      ]
+        {
+          "title": "Only 5 unique templates exist",
+          "severity": "High",
+          "description": "No page targets 'decibel chart', 'how loud is X', or OSHA/WHO threshold queries, despite the homepage H2s naming those topics.",
+          "recommendation": "Build a small informational layer in English first; validate in GSC before translating"
+        },
+        {
+          "title": "No authorship or source citations",
+          "severity": "Medium",
+          "description": "Content quotes OSHA, WHO and ISO 61672 but links to none of them, and no author or organisation is named anywhere.",
+          "recommendation": "Add outbound citations and a named maintainer with stated expertise"
+        },
+        {
+          "title": "Thin about and contact pages",
+          "severity": "Medium",
+          "description": "/contact/ is ~112 words, /about/ ~280.",
+          "recommendation": "Expand with substantive detail on who runs the tool and how it works"
+        },
+        {
+          "title": "H1 concatenates without a space in extracted text",
+          "severity": "Low",
+          "description": "Renders as 'Online decibel meter.Real-time sound levels.' because of a <br/> with no surrounding whitespace. Visually fine; that is the string crawlers and LLMs read.",
+          "recommendation": "Add a space, or split into separate elements"
+        }
+      ],
+      "previous_score": 62
     },
     {
       "name": "On-Page SEO",
@@ -67,17 +117,48 @@
         "Complete OG and Twitter card tag sets"
       ],
       "findings": [
-        {"title": "Six titles exceed the ~60 char SERP limit", "severity": "Medium", "description": "ru 80, es 79, en 77, pt 73, it 71, fr 66 characters.", "recommendation": "Trim title values in src/i18n/*.ts"},
-        {"title": "Four descriptions exceed ~160 chars", "severity": "Medium", "description": "es 202, it 198, pt 197, fr 195 characters.", "recommendation": "Trim description values in src/i18n/*.ts"},
-        {"title": "About and contact titles are near-empty of intent", "severity": "Medium", "description": "/about/ title is 27 chars, /contact/ is 29.", "recommendation": "Rewrite to include the brand and a qualifying term"},
-        {"title": "ja and zh descriptions are short", "severity": "Low", "description": "ja 75 and zh 52 characters, short even allowing for CJK density.", "recommendation": "Expand toward the CJK equivalent of ~120 chars"},
-        {"title": "Obsolete meta keywords tag", "severity": "Low", "description": "Present on every page. Ignored by all engines.", "recommendation": "Remove from Layout.astro"},
-        {"title": "Internal linking is nav and footer only", "severity": "Low", "description": "14 links, zero contextual. Largely a consequence of having only 5 pages.", "recommendation": "Resolves naturally once the informational layer exists"}
-      ]
+        {
+          "title": "Six titles exceed the ~60 char SERP limit",
+          "severity": "Medium",
+          "description": "ru 80, es 79, en 77, pt 73, it 71, fr 66 characters.",
+          "recommendation": "Trim title values in src/i18n/*.ts"
+        },
+        {
+          "title": "Four descriptions exceed ~160 chars",
+          "severity": "Medium",
+          "description": "es 202, it 198, pt 197, fr 195 characters.",
+          "recommendation": "Trim description values in src/i18n/*.ts"
+        },
+        {
+          "title": "About and contact titles are near-empty of intent",
+          "severity": "Medium",
+          "description": "/about/ title is 27 chars, /contact/ is 29.",
+          "recommendation": "Rewrite to include the brand and a qualifying term"
+        },
+        {
+          "title": "ja and zh descriptions are short",
+          "severity": "Low",
+          "description": "ja 75 and zh 52 characters, short even allowing for CJK density.",
+          "recommendation": "Expand toward the CJK equivalent of ~120 chars"
+        },
+        {
+          "title": "Obsolete meta keywords tag",
+          "severity": "Low",
+          "description": "Present on every page. Ignored by all engines.",
+          "recommendation": "Remove from Layout.astro"
+        },
+        {
+          "title": "Internal linking is nav and footer only",
+          "severity": "Low",
+          "description": "14 links, zero contextual. Largely a consequence of having only 5 pages.",
+          "recommendation": "Resolves naturally once the informational layer exists"
+        }
+      ],
+      "previous_score": 70
     },
     {
       "name": "Schema / Structured Data",
-      "score": 58,
+      "score": 62,
       "weight": 10,
       "what_works": [
         "Valid JSON-LD that parses cleanly on all pages",
@@ -85,11 +166,32 @@
         "FAQPage covers all 15 on-page questions with matching visible content"
       ],
       "findings": [
-        {"title": "WebApplication emitted on non-application pages", "severity": "Medium", "description": "Present on /privacy-policy/, /terms/, /contact/ and /about/, which are not the application.", "recommendation": "Gate the WebApplication node to the tool page only"},
-        {"title": "No Organization or WebSite node", "severity": "Medium", "description": "Nothing establishes the publisher entity for search engines or AI systems.", "recommendation": "Add site-wide Organization (name, url, logo) and WebSite nodes"},
-        {"title": "No BreadcrumbList on sub-pages", "severity": "Low", "description": "Four sub-pages have no breadcrumb markup.", "recommendation": "Add BreadcrumbList to about, contact, privacy-policy and terms"},
-        {"title": "FAQPage no longer yields a Google rich result", "severity": "Info", "description": "Google retired FAQ rich results for all sites on 7 May 2026. The markup is still valid and still describes the page to non-Google consumers.", "recommendation": "Keep it; do not expect SERP real estate from it"}
-      ]
+        {
+          "title": "WebApplication emitted on non-application pages",
+          "severity": "Medium",
+          "description": "Present on /privacy-policy/, /terms/, /contact/ and /about/, which are not the application.",
+          "recommendation": "Gate the WebApplication node to the tool page only"
+        },
+        {
+          "title": "No Organization or WebSite node",
+          "severity": "Medium",
+          "description": "Nothing establishes the publisher entity for search engines or AI systems.",
+          "recommendation": "Add site-wide Organization (name, url, logo) and WebSite nodes"
+        },
+        {
+          "title": "No BreadcrumbList on sub-pages",
+          "severity": "Low",
+          "description": "Four sub-pages have no breadcrumb markup.",
+          "recommendation": "Add BreadcrumbList to about, contact, privacy-policy and terms"
+        },
+        {
+          "title": "FAQPage no longer yields a Google rich result",
+          "severity": "Info",
+          "description": "Google retired FAQ rich results for all sites on 7 May 2026. The markup is still valid and still describes the page to non-Google consumers.",
+          "recommendation": "Keep it; do not expect SERP real estate from it"
+        }
+      ],
+      "previous_score": 58
     },
     {
       "name": "Performance (CWV)",
@@ -101,71 +203,156 @@
         "TTFB 275ms desktop and 206ms mobile"
       ],
       "findings": [
-        {"title": "Desktop TBT of 1165ms", "severity": "Medium", "description": "Main-thread time from AdSense and GTM, against 0ms on mobile. TBT is the lab proxy for INP, and this page's core interaction is a button tap.", "recommendation": "Delay AdSense init until first interaction or requestIdleCallback"},
-        {"title": "19 of 25 requests are third-party", "severity": "Medium", "description": "Twelve distinct hosts: AdSense, DoubleClick, adtrafficquality x2, GTM, Google Fonts x2, Cloudflare Insights, ProductHunt, toolfame, sellwithboost.", "recommendation": "Self-host fonts and badges to cut cross-origin connections"},
-        {"title": "Google Fonts loaded cross-origin", "severity": "Low", "description": "fonts.googleapis.com and fonts.gstatic.com sit on the critical path.", "recommendation": "Self-host the two font files"}
-      ]
+        {
+          "title": "Desktop TBT of 1165ms",
+          "severity": "Medium",
+          "description": "Main-thread time from AdSense and GTM, against 0ms on mobile. TBT is the lab proxy for INP, and this page's core interaction is a button tap.",
+          "recommendation": "Delay AdSense init until first interaction or requestIdleCallback"
+        },
+        {
+          "title": "19 of 25 requests are third-party",
+          "severity": "Medium",
+          "description": "Twelve distinct hosts: AdSense, DoubleClick, adtrafficquality x2, GTM, Google Fonts x2, Cloudflare Insights, ProductHunt, toolfame, sellwithboost.",
+          "recommendation": "Self-host fonts and badges to cut cross-origin connections"
+        },
+        {
+          "title": "Google Fonts loaded cross-origin",
+          "severity": "Low",
+          "description": "fonts.googleapis.com and fonts.gstatic.com sit on the critical path.",
+          "recommendation": "Self-host the two font files"
+        }
+      ],
+      "previous_score": 85
     },
     {
       "name": "AI Search Readiness",
-      "score": 35,
+      "score": 48,
       "weight": 10,
       "what_works": [
         "FAQ answers are specific, numeric and genuinely citable",
         "PerplexityBot and OAI-SearchBot are not named in the block list, so they fall through to Allow: /"
       ],
       "findings": [
-        {"title": "Blanket AI crawler block at the CDN", "severity": "High", "description": "Cloudflare managed robots.txt serves Disallow: / to GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended, Bytespider and meta-externalagent, plus Content-Signal: ai-train=no. The repo's public/robots.txt is clean and is being overridden at the edge.", "recommendation": "Decide the posture deliberately in Cloudflare AI Crawl Control; consider allowing retrieval agents while keeping bulk scrapers blocked"},
-        {"title": "og:image 404s, so every LLM and social unfurl renders blank", "severity": "High", "description": "All 45 pages reference a missing 1200x630 image.", "recommendation": "Ship public/og-image.png"},
-        {"title": "No Organization entity for AI systems to attach a brand to", "severity": "Medium", "description": "No consistent name/url/logo triple exists in structured data.", "recommendation": "Add Organization schema"},
-        {"title": "FAQ answers are not individually addressable", "severity": "Medium", "description": "15 answers sit inside <summary> elements rather than headings. Indexable, but with no h3 anchor structure for passage extraction.", "recommendation": "Wrap each summary question in an h3"},
-        {"title": "No /llms.txt", "severity": "Low", "description": "Optional and ignored by Google Search. Cheap for a 5-page site.", "recommendation": "Add after the crawler posture is resolved; pointless while agents are disallowed"}
-      ]
+        {
+          "title": "Blanket AI crawler block at the CDN",
+          "severity": "High",
+          "description": "Cloudflare managed robots.txt serves Disallow: / to GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended, Bytespider and meta-externalagent, plus Content-Signal: ai-train=no. The repo's public/robots.txt is clean and is being overridden at the edge.",
+          "recommendation": "Decide the posture deliberately in Cloudflare AI Crawl Control; consider allowing retrieval agents while keeping bulk scrapers blocked"
+        },
+        {
+          "title": "og:image 404s, so every LLM and social unfurl renders blank",
+          "severity": "Resolved",
+          "description": "All 45 pages reference a missing 1200x630 image.",
+          "recommendation": "Ship public/og-image.png",
+          "status": "resolved"
+        },
+        {
+          "title": "No Organization entity for AI systems to attach a brand to",
+          "severity": "Medium",
+          "description": "No consistent name/url/logo triple exists in structured data.",
+          "recommendation": "Add Organization schema"
+        },
+        {
+          "title": "FAQ answers are not individually addressable",
+          "severity": "Medium",
+          "description": "15 answers sit inside <summary> elements rather than headings. Indexable, but with no h3 anchor structure for passage extraction.",
+          "recommendation": "Wrap each summary question in an h3"
+        },
+        {
+          "title": "No /llms.txt",
+          "severity": "Low",
+          "description": "Optional and ignored by Google Search. Cheap for a 5-page site.",
+          "recommendation": "Add after the crawler posture is resolved; pointless while agents are disallowed"
+        }
+      ],
+      "previous_score": 35
     },
     {
       "name": "Images",
-      "score": 55,
+      "score": 78,
       "weight": 5,
       "what_works": [
         "Alt text present and descriptive on all 3 homepage images",
         "Only 3 images total, so image weight is not a performance factor"
       ],
       "findings": [
-        {"title": "og-image.png returns 404", "severity": "High", "description": "Referenced by og:image and twitter:image on all 45 pages and declared 1200x630, but the file does not exist in public/.", "recommendation": "Create and deploy public/og-image.png"},
-        {"title": "favicon.svg and favicon.ico return 404", "severity": "Medium", "description": "Source files exist as 'favicon copy.svg' and 'favicon copy.ico'; the literal space-copy in the filename breaks both references.", "recommendation": "git mv both files to the names Layout.astro already references"},
-        {"title": "All homepage images hot-linked from third parties", "severity": "Medium", "description": "toolfame.com, api.producthunt.com and sellwithboost.com. External render dependency and a privacy leak.", "recommendation": "Self-host the three badge assets"},
-        {"title": "Badge images lack dimensions and lazy loading", "severity": "Low", "description": "No width, height or loading attribute. Measured CLS is ~0 today but nothing prevents regression.", "recommendation": "Add width, height and loading=lazy"}
-      ]
+        {
+          "title": "og-image.png returns 404",
+          "severity": "Resolved",
+          "description": "Referenced by og:image and twitter:image on all 45 pages and declared 1200x630, but the file does not exist in public/.",
+          "recommendation": "Create and deploy public/og-image.png",
+          "status": "resolved"
+        },
+        {
+          "title": "favicon.svg and favicon.ico return 404",
+          "severity": "Resolved",
+          "description": "Source files exist as 'favicon copy.svg' and 'favicon copy.ico'; the literal space-copy in the filename breaks both references.",
+          "recommendation": "git mv both files to the names Layout.astro already references",
+          "status": "resolved"
+        },
+        {
+          "title": "All homepage images hot-linked from third parties",
+          "severity": "Medium",
+          "description": "toolfame.com, api.producthunt.com and sellwithboost.com. External render dependency and a privacy leak.",
+          "recommendation": "Self-host the three badge assets"
+        },
+        {
+          "title": "Badge images lack dimensions and lazy loading",
+          "severity": "Low",
+          "description": "No width, height or loading attribute. Measured CLS is ~0 today but nothing prevents regression.",
+          "recommendation": "Add width, height and loading=lazy"
+        }
+      ],
+      "previous_score": 55
     }
   ],
   "action_plan": {
     "phases": [
-      {"name": "Phase 1: Critical Fixes", "timeframe": "Week 1", "items": [
-        "Ship public/og-image.png at 1200x630 (15 min)",
-        "Rename 'favicon copy.svg' and 'favicon copy.ico' to favicon.svg and favicon.ico (2 min)",
-        "Move FAQPage JSON-LD inside <Layout> in IndexPage.astro:98 (5 min)",
-        "Decide AI crawler posture in Cloudflare AI Crawl Control (30 min)"
-      ]},
-      {"name": "Phase 2: High-Impact Improvements", "timeframe": "Weeks 2-3", "items": [
-        "Trim 6 over-length titles and 4 over-length descriptions in src/i18n/*.ts (1 hr)",
-        "301 www to apex via Cloudflare bulk redirect (10 min)",
-        "Fix schema typing: gate WebApplication, add Organization, WebSite, BreadcrumbList (1 hr)",
-        "Reduce third-party main-thread cost; self-host fonts and badges (2-4 hrs)",
-        "Add HSTS and Permissions-Policy headers (20 min)"
-      ]},
-      {"name": "Phase 3: Content & Authority", "timeframe": "Month 2", "items": [
-        "Build the informational layer: decibel chart, 'how loud is X', OSHA/WHO reference",
-        "Add outbound citations and a named author with stated expertise (2 hrs)",
-        "Wrap FAQ summary questions in h3 for passage extraction (1 hr)",
-        "Add /llms.txt once crawler posture is resolved (15 min)"
-      ]},
-      {"name": "Phase 4: Monitoring & Iteration", "timeframe": "Ongoing", "items": [
-        "Verify apex and www in Search Console; watch retired /blog/* drop from Coverage",
-        "Track CrUX field INP monthly; it is the metric most at risk from AdSense",
-        "Re-run this audit after Phase 2; expect 66 -> ~82 from Phases 1-2 alone",
-        "Monthly: query ChatGPT and Perplexity for 'free online decibel meter' and log citation presence"
-      ]}
+      {
+        "name": "Phase 1: Critical Fixes (3 of 4 shipped)",
+        "timeframe": "Week 1",
+        "items": [
+          "[DONE] Ship public/og-image.png at 1200x630 \u2014 live, 200, 194KB",
+          "[DONE] Rename favicon copy.svg / favicon copy.ico \u2014 live, both 200",
+          "[DONE] Move FAQPage JSON-LD inside <Layout> \u2014 <html> now at byte 15 on all 45 pages",
+          "Decide AI crawler posture in Cloudflare AI Crawl Control (30 min) \u2014 still open"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Trim 6 over-length titles and 4 over-length descriptions in src/i18n/*.ts (1 hr)",
+          "301 www to apex via Cloudflare bulk redirect (10 min)",
+          "Fix schema typing: gate WebApplication, add Organization, WebSite, BreadcrumbList (1 hr)",
+          "Reduce third-party main-thread cost; self-host fonts and badges (2-4 hrs)",
+          "Add HSTS and Permissions-Policy headers (20 min)"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Build the informational layer: decibel chart, 'how loud is X', OSHA/WHO reference",
+          "Add outbound citations and a named author with stated expertise (2 hrs)",
+          "Wrap FAQ summary questions in h3 for passage extraction (1 hr)",
+          "Add /llms.txt once crawler posture is resolved (15 min)"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Verify apex and www in Search Console; watch retired /blog/* drop from Coverage",
+          "Track CrUX field INP monthly; it is the metric most at risk from AdSense",
+          "Re-run this audit after Phase 2; expect 66 -> ~82 from Phases 1-2 alone",
+          "Monthly: query ChatGPT and Perplexity for 'free online decibel meter' and log citation presence"
+        ]
+      }
     ]
   },
-  "artifacts": {"findings_dir": "findings/", "screenshots_dir": "screenshots/"}
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
 }

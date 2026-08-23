@@ -13,8 +13,8 @@ const fr: Translations = {
   },
 
   index: {
-    title: 'Sonomètre en Ligne Gratuit — Mesure de Niveau Sonore en Temps Réel',
-    description: 'Sonomètre en ligne gratuit qui mesure les niveaux sonores en temps réel via le microphone de votre navigateur. Sans téléchargement. Le meilleur sonomètre pour la maison, le bureau et l\'extérieur.',
+    title: 'Sonomètre en Ligne Gratuit — Niveau Sonore en Temps Réel',
+    description: 'Sonomètre en ligne gratuit qui mesure le niveau sonore en temps réel via le microphone de votre navigateur. Sans téléchargement ni compte.',
     hero: {
       tag: 'Sonomètre en ligne gratuit — aucun téléchargement requis',
       h1_1: 'Sonomètre en ligne.',
@@ -132,7 +132,7 @@ const fr: Translations = {
 
 
   about: {
-    title: 'À propos — Noise Decibel Meter',
+    title: 'À propos du Sonomètre en Ligne — Noise Decibel Meter',
     description: 'Découvrez Noise Decibel Meter — un outil de navigateur gratuit qui mesure les niveaux sonores en temps réel sans installation ni collecte de données.',
     label: 'À propos',
     h1: 'Un outil simple qui fait une seule chose bien.',
@@ -155,7 +155,7 @@ const fr: Translations = {
   },
 
   contact: {
-    title: 'Contact — Noise Decibel Meter',
+    title: 'Contact et Support — Noise Decibel Meter',
     description: 'Contactez l\'équipe Noise Decibel Meter. Questions, commentaires ou signalements de bugs — nous lisons chaque message.',
     label: 'Contact',
     h1: 'Prenez contact.',

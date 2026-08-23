@@ -14,7 +14,7 @@ const zh: Translations = {
 
   index: {
     title: '在线分贝计免费 — 实时声级测量 | Noise Decibel Meter',
-    description: '免费在线分贝计，通过浏览器麦克风实时测量声音级别。无需下载。适合家庭、办公室和户外使用的最佳噪音分贝计。',
+    description: '免费在线分贝计，通过浏览器麦克风实时测量声音级别。无需下载，无需注册，适合家庭、办公室和户外的噪音检测，支持dBA与dBC加权。',
     hero: {
       tag: '免费在线分贝计 — 无需下载',
       h1_1: '在线分贝计。',
@@ -132,7 +132,7 @@ const zh: Translations = {
 
 
   about: {
-    title: '关于 — Noise Decibel Meter',
+    title: '关于在线分贝计 — Noise Decibel Meter',
     description: '了解Noise Decibel Meter — 一款免费的浏览器工具，无需安装、无需账户、不收集数据，即可实时测量声音级别。',
     label: '关于',
     h1: '一个简单的工具，专注把一件事做好。',
@@ -155,7 +155,7 @@ const zh: Translations = {
   },
 
   contact: {
-    title: '联系我们 — Noise Decibel Meter',
+    title: '联系我们与支持 — Noise Decibel Meter',
     description: '联系Noise Decibel Meter团队。问题、反馈或错误报告 — 我们阅读每一条消息。',
     label: '联系我们',
     h1: '与我们联系。',

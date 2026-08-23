@@ -5,9 +5,9 @@ know it failed, and a leading indicator you can watch without re-running this au
 
 ---
 
-## Phase 1 — Critical Fixes (Week 1)
+## Phase 1 — Critical Fixes — **3 of 4 shipped and verified live**
 
-### 1.1 Ship `og-image.png` · 15 min · High impact
+### ✅ 1.1 Ship `og-image.png` · 15 min · High impact  — **DONE**
 `og:image` and `twitter:image` on all 45 pages point at a file that 404s.
 - Create a 1200×630 PNG, place at `public/og-image.png`, redeploy.
 - Consider per-locale variants later; one shared image is fine now.
@@ -16,7 +16,7 @@ know it failed, and a leading indicator you can watch without re-running this au
   Facebook Sharing Debugger / X Card Validator.
 - **Watch:** referral traffic from social/chat sources in GA4.
 
-### 1.2 Fix the two favicon 404s · 2 min · Medium-High impact
+### ✅ 1.2 Fix the two favicon 404s · 2 min · Medium-High impact  — **DONE**
 ```bash
 git mv "public/favicon copy.svg" public/favicon.svg
 git mv "public/favicon copy.ico" public/favicon.ico
@@ -26,7 +26,7 @@ correct paths.
 - **Fails if:** `curl -I .../favicon.svg` still 404s.
 - **Watch:** the tab icon appears in a fresh incognito window.
 
-### 1.3 Move the FAQPage JSON-LD inside `<Layout>` · 5 min · Medium impact
+### ✅ 1.3 Move the FAQPage JSON-LD inside `<Layout>` · 5 min · Medium impact  — **DONE**
 `src/components/IndexPage.astro:98` — the `<script type="application/ld+json">` block sits
 before the `<Layout>` component, so it is emitted between `<!DOCTYPE html>` and `<html>`.
 Move it inside the `<Layout>` element (or pass it through a head slot).
@@ -34,7 +34,7 @@ Move it inside the `<Layout>` element (or pass it through a head slot).
   `<html lang="en">` immediately after the doctype.
 - **Watch:** Rich Results Test still detects FAQPage after the move.
 
-### 1.4 Decide the AI-crawler posture · 30 min · High impact
+### 1.4 Decide the AI-crawler posture · 30 min · High impact — **STILL OPEN**
 This is a Cloudflare dashboard setting, **not** a repo change — `public/robots.txt` is clean
 and is being overridden at the edge by managed robots.txt / AI Crawl Control.
 

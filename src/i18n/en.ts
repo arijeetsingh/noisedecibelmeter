@@ -11,8 +11,8 @@ const en = {
   },
 
   index: {
-    title: 'Decibel Meter Online Free — Real-Time Sound Level Meter | Noise Decibel Meter',
-    description: 'Free online decibel meter that measures sound levels in real time using your browser microphone. No download required. The best noise decibel meter for home, office, and outdoor use.',
+    title: 'Decibel Meter Online — Free Real-Time Sound Level Meter',
+    description: 'Free online decibel meter that measures sound levels in real time using your browser microphone. No download, no account, works on any device.',
     hero: {
       tag: 'Free online decibel meter — no download required',
       h1_1: 'Online decibel meter.',
@@ -130,8 +130,8 @@ const en = {
 
 
   about: {
-    title: 'About — Noise Decibel Meter',
-    description: 'Learn about Noise Decibel Meter — a free, privacy-first browser tool that measures real-time sound levels with no installation, no account, and no data collection.',
+    title: 'About the Noise Decibel Meter — Free Browser Tool',
+    description: 'Noise Decibel Meter is a free, privacy-first browser tool that measures real-time sound levels. No installation, no account, no data collection.',
     label: 'About',
     h1: 'A simple tool that does one thing well.',
     intro: 'Noise Decibel Meter is a free, browser-based sound level meter built for anyone who needs a quick, accurate decibel reading — without installing an app, creating an account, or giving away personal data.',
@@ -153,7 +153,7 @@ const en = {
   },
 
   contact: {
-    title: 'Contact — Noise Decibel Meter',
+    title: 'Contact Noise Decibel Meter — Support & Feedback',
     description: 'Get in touch with the Noise Decibel Meter team. Questions, feedback, or bug reports — we read every message.',
     label: 'Contact',
     h1: 'Get in touch.',

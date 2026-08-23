@@ -13,8 +13,8 @@ const it: Translations = {
   },
 
   index: {
-    title: 'Fonometro Online Gratuito — Misuratore di Livello Sonoro in Tempo Reale',
-    description: 'Fonometro online gratuito che misura i livelli sonori in tempo reale tramite il microfono del browser. Nessun download necessario. Il miglior misuratore di rumore per casa, ufficio e uso all\'aperto.',
+    title: 'Fonometro Online Gratuito — Livello Sonoro in Tempo Reale',
+    description: 'Fonometro online gratuito che misura il livello sonoro in tempo reale tramite il microfono del browser. Nessun download, nessun account.',
     hero: {
       tag: 'Fonometro online — nessun download necessario',
       h1_1: 'Fonometro online.',
@@ -132,8 +132,8 @@ const it: Translations = {
 
 
   about: {
-    title: 'Chi siamo — Noise Decibel Meter',
-    description: 'Scopri Noise Decibel Meter — uno strumento browser gratuito e orientato alla privacy che misura i livelli sonori in tempo reale senza installazione, senza account e senza raccolta dati.',
+    title: 'Chi siamo — Fonometro Online Gratuito',
+    description: 'Noise Decibel Meter è uno strumento browser gratuito che misura il livello sonoro in tempo reale. Nessuna installazione, account o tracciamento.',
     label: 'Chi siamo',
     h1: 'Uno strumento semplice che fa una cosa bene.',
     intro: 'Noise Decibel Meter è un fonometro gratuito basato su browser per chiunque abbia bisogno di una lettura rapida e accurata dei decibel — senza installare un\'app, creare un account o cedere dati personali.',
@@ -155,7 +155,7 @@ const it: Translations = {
   },
 
   contact: {
-    title: 'Contatti — Noise Decibel Meter',
+    title: 'Contatti e Supporto — Noise Decibel Meter',
     description: 'Contatta il team di Noise Decibel Meter. Domande, feedback o segnalazioni di bug — leggiamo ogni messaggio.',
     label: 'Contatti',
     h1: 'Contattaci.',

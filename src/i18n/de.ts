@@ -14,7 +14,7 @@ const de: Translations = {
 
   index: {
     title: 'Dezibelmesser Online Kostenlos — Echtzeit-Schallpegelmesser',
-    description: 'Kostenloser Online-Dezibelmesser, der Schallpegel in Echtzeit über das Browsermikrofon misst. Kein Download erforderlich. Der beste Lärmmesser für Zuhause, Büro und Outdoor.',
+    description: 'Kostenloser Online-Dezibelmesser, der den Schallpegel in Echtzeit über das Browsermikrofon misst. Kein Download, kein Konto, jedes Gerät.',
     hero: {
       tag: 'Online-Dezibelmesser — kein Download erforderlich',
       h1_1: 'Online-Dezibelmesser.',
@@ -132,8 +132,8 @@ const de: Translations = {
 
 
   about: {
-    title: 'Über uns — Noise Decibel Meter',
-    description: 'Erfahren Sie mehr über Noise Decibel Meter — ein kostenloses, datenschutzorientiertes Browser-Tool, das Schallpegel in Echtzeit ohne Installation, ohne Konto und ohne Datenerhebung misst.',
+    title: 'Über den Dezibelmesser — Noise Decibel Meter',
+    description: 'Noise Decibel Meter ist ein kostenloses Browser-Tool, das den Schallpegel in Echtzeit misst. Ohne Installation, ohne Konto, ohne Tracking.',
     label: 'Über uns',
     h1: 'Ein einfaches Tool, das eine Sache gut macht.',
     intro: 'Noise Decibel Meter ist ein kostenloser, browserbasierter Schallpegelmesser für alle, die eine schnelle, genaue Dezibelablesung benötigen — ohne App zu installieren, ein Konto zu erstellen oder persönliche Daten preiszugeben.',
@@ -155,7 +155,7 @@ const de: Translations = {
   },
 
   contact: {
-    title: 'Kontakt — Noise Decibel Meter',
+    title: 'Kontakt und Support — Noise Decibel Meter',
     description: 'Nehmen Sie Kontakt mit dem Noise Decibel Meter-Team auf. Fragen, Feedback oder Fehlerberichte — wir lesen jede Nachricht.',
     label: 'Kontakt',
     h1: 'Kontaktieren Sie uns.',

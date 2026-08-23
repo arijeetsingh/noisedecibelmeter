@@ -14,7 +14,7 @@ const ja: Translations = {
 
   index: {
     title: 'オンライン騒音計 無料 — リアルタイム音量レベル測定 | Noise Decibel Meter',
-    description: 'ブラウザのマイクを使ってリアルタイムで音量レベルを測定する無料のオンライン騒音計。ダウンロード不要。家庭・オフィス・屋外に最適な騒音デシベルメーター。',
+    description: 'ブラウザのマイクでリアルタイムに音量レベルを測定できる無料のオンライン騒音計。ダウンロードもアカウントも不要。家庭・オフィス・屋外の騒音チェックに最適です。',
     hero: {
       tag: 'オンライン騒音計 — ダウンロード不要',
       h1_1: 'オンライン騒音計。',
@@ -132,7 +132,7 @@ const ja: Translations = {
 
 
   about: {
-    title: '概要 — Noise Decibel Meter',
+    title: '騒音計について — Noise Decibel Meter',
     description: 'Noise Decibel Meterについて — インストール不要、アカウント不要、データ収集なしでリアルタイムの音量レベルを測定する無料のブラウザツール。',
     label: '概要',
     h1: 'シンプルに、一つのことを完璧にこなすツール。',
@@ -155,7 +155,7 @@ const ja: Translations = {
   },
 
   contact: {
-    title: 'お問い合わせ — Noise Decibel Meter',
+    title: 'お問い合わせ・サポート — Noise Decibel Meter',
     description: 'Noise Decibel Meterチームへのお問い合わせ。ご質問、フィードバック、バグ報告など、すべてのメッセージを読んでいます。',
     label: 'お問い合わせ',
     h1: 'お気軽にご連絡ください。',

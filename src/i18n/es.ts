@@ -13,8 +13,8 @@ const es: Translations = {
   },
 
   index: {
-    title: 'Medidor de Decibelios Online Gratis — Medidor de Nivel de Sonido en Tiempo Real',
-    description: 'Medidor de decibelios en línea gratuito que mide los niveles de sonido en tiempo real usando el micrófono de tu navegador. Sin descargas. El mejor medidor de ruido para el hogar, oficina y uso exterior.',
+    title: 'Medidor de Decibelios Online Gratis — Nivel de Sonido',
+    description: 'Medidor de decibelios online gratuito que mide el nivel de sonido en tiempo real con el micrófono de tu navegador. Sin descargas ni cuenta.',
     hero: {
       tag: 'Medidor de decibelios en línea — sin descarga requerida',
       h1_1: 'Medidor de decibelios en línea.',
@@ -132,8 +132,8 @@ const es: Translations = {
 
 
   about: {
-    title: 'Acerca de — Noise Decibel Meter',
-    description: 'Conoce Noise Decibel Meter — una herramienta gratuita de navegador que mide los niveles de sonido en tiempo real sin instalación, sin cuenta y sin recopilación de datos.',
+    title: 'Acerca del Medidor de Decibelios — Noise Decibel Meter',
+    description: 'Noise Decibel Meter es una herramienta de navegador gratuita que mide el nivel de sonido en tiempo real. Sin instalación, cuenta ni seguimiento.',
     label: 'Acerca de',
     h1: 'Una herramienta simple que hace una sola cosa bien.',
     intro: 'Noise Decibel Meter es un sonómetro gratuito basado en navegador para cualquiera que necesite una lectura de decibelios rápida y precisa — sin instalar una app, crear una cuenta ni compartir datos personales.',
@@ -155,7 +155,7 @@ const es: Translations = {
   },
 
   contact: {
-    title: 'Contacto — Noise Decibel Meter',
+    title: 'Contacto y Soporte — Noise Decibel Meter',
     description: 'Contacta con el equipo de Noise Decibel Meter. Preguntas, comentarios o informes de errores — leemos todos los mensajes.',
     label: 'Contacto',
     h1: 'Ponte en contacto.',

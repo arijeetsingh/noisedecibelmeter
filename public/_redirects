@@ -1,3 +1,6 @@
+# Canonical host: www -> apex (the cross-host canonical already points here).
+https://www.noisedecibelmeter.com/*  https://noisedecibelmeter.com/:splat  301
+
 # Blog removed 2026-08-23 — 301 indexed blog URLs to the locale home page.
 /es/blog/*  /es/  301
 /fr/blog/*  /fr/  301

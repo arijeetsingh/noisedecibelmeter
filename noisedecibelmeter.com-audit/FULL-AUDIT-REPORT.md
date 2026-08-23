@@ -2,17 +2,21 @@
 
 **Date:** 2026-08-23 · **Scope:** live site, all 45 sitemap URLs crawled (100% HTTP 200)
 **Business type:** Utility / free web tool (single-purpose, ad-monetised, 9 locales)
-**SEO Health Score: 66 / 100**
+**SEO Health Score: 70 / 100**  *(was 66 — re-verified live after the Phase 1 deploy)*
+
+> **Phase 1 status:** `og-image.png`, `favicon.svg` and `favicon.ico` now return 200. The
+> FAQPage JSON-LD sits inside `<head>` and `<html>` starts at byte 15 on all 45 pages.
+> The AI crawler block is still in place — it is a Cloudflare dashboard setting.
 
 | Category | Weight | Score |
 |---|---|---|
-| Technical SEO | 22% | 78 |
+| Technical SEO | 22% | 78 → **84** |
 | Content Quality | 23% | 62 |
 | On-Page SEO | 20% | 70 |
-| Schema / Structured Data | 10% | 58 |
+| Schema / Structured Data | 10% | 58 → **62** |
 | Performance (CWV) | 10% | 85 |
-| AI Search Readiness | 10% | **35** |
-| Images | 5% | 55 |
+| AI Search Readiness | 10% | 35 → **48** |
+| Images | 5% | 55 → **78** |
 
 ---
 

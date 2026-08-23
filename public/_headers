@@ -1,2 +1,8 @@
 https://noisedecibelmeter.pages.dev/*
   X-Robots-Tag: noindex
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: microphone=(self), camera=(), geolocation=(), payment=(), usb=()
+  X-Frame-Options: SAMEORIGIN
+  Cross-Origin-Opener-Policy: same-origin
