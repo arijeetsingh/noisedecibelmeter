@@ -130,17 +130,6 @@ const zh: Translations = {
     },
   },
 
-  blog: {
-    title: '博客 — Noise Decibel Meter',
-    description: '关于测量和理解声级、分贝和噪音的指南、比较和说明文章。',
-    label: '博客',
-    h1: '博客',
-    intro: '关于测量和理解声音的指南、比较和说明。',
-    empty: '暂无文章，敬请期待。',
-    readMore: '阅读更多',
-    backToBlog: '← 返回博客',
-    publishedOn: '发布于',
-  },
 
   about: {
     title: '关于 — Noise Decibel Meter',

@@ -130,17 +130,6 @@ const it: Translations = {
     },
   },
 
-  blog: {
-    title: 'Blog — Noise Decibel Meter',
-    description: 'Guide, confronti e spiegazioni su come misurare e comprendere i livelli sonori, i decibel e il rumore.',
-    label: 'Blog',
-    h1: 'Blog',
-    intro: 'Guide, confronti e spiegazioni su come misurare e comprendere il suono.',
-    empty: 'Ancora nessun articolo — torna presto.',
-    readMore: 'Leggi di più',
-    backToBlog: '← Torna al blog',
-    publishedOn: 'Pubblicato il',
-  },
 
   about: {
     title: 'Chi siamo — Noise Decibel Meter',

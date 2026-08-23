@@ -1,0 +1,10 @@
+# Blog removed 2026-08-23 — 301 indexed blog URLs to the locale home page.
+/es/blog/*  /es/  301
+/fr/blog/*  /fr/  301
+/ja/blog/*  /ja/  301
+/zh/blog/*  /zh/  301
+/pt/blog/*  /pt/  301
+/ru/blog/*  /ru/  301
+/de/blog/*  /de/  301
+/it/blog/*  /it/  301
+/blog/*     /     301
