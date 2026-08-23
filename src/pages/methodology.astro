@@ -88,7 +88,9 @@ const h2Style    = 'font-size:22px;font-weight:600;color:#171717;letter-spacing:
       at 1 kHz) and Class 2 (general purpose, ±1.4 dB at 1 kHz) instruments. Those meters
       are also field-calibrated against a reference source before use. A phone microphone
       is neither built nor calibrated to that specification, and no amount of software can
-      make it so.
+      make it so. If you need to know how long a given level is safe for, the
+      <a href="/noise-exposure-limits/" class="inline-link" style="color:#171717;border-bottom:1px solid #d0d0d0;text-decoration:none;">exposure limit calculator</a>
+      applies both the OSHA and NIOSH rules.
     </p>
 
     <h2 class="page-h2" style={h2Style}>Privacy</h2>
@@ -115,6 +117,9 @@ const h2Style    = 'font-size:22px;font-weight:600;color:#171717;letter-spacing:
   html[data-dark] .cta-card   { background: #141414 !important; border-color: #222 !important; }
   html[data-dark] .cta-text   { color: #b0b0b0 !important; }
   html[data-dark] .cta-link   { color: #f2f2f2 !important; border-bottom-color: #f2f2f2 !important; }
+  .inline-link:hover { border-bottom-color: #171717 !important; }
+  .inline-link:focus-visible { outline: 2px solid #171717; outline-offset: 2px; }
+  html[data-dark] .inline-link { color: #f2f2f2 !important; border-bottom-color: #444 !important; }
   @media (max-width: 640px) {
     .page-title { font-size: 30px !important; letter-spacing: -1.2px !important; }
   }

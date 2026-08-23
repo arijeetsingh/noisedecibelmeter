@@ -61,6 +61,7 @@ const breadcrumbLabels: Record<string, string> = {
   'terms': t.footer.terms,
   'decibel-chart': 'Decibel Chart',
   'methodology': 'Methodology',
+  'noise-exposure-limits': 'Noise Exposure Limits',
 };
 
 const schemaGraph: Record<string, unknown>[] = [
@@ -410,6 +411,8 @@ if (pagePath === '') {
           {lang === 'en' && (
             <>
               <a href="/decibel-chart/" class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">Decibel Chart</a>
+              <span class="footer-divider" style="color:#ccc;font-size:13px;">·</span>
+              <a href="/noise-exposure-limits/" class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">Exposure Limits</a>
               <span class="footer-divider" style="color:#ccc;font-size:13px;">·</span>
               <a href="/methodology/" class="footer-link" style="font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;">Methodology</a>
               <span class="footer-divider" style="color:#ccc;font-size:13px;">·</span>

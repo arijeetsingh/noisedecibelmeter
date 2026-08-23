@@ -1,0 +1,289 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AuthorByline from '../components/AuthorByline.astro';
+import Sources from '../components/Sources.astro';
+import { oshaHours, nioshHours, formatDuration } from '../data/decibelChart';
+
+const canonicalUrl = 'https://noisedecibelmeter.com/noise-exposure-limits/';
+const updated = '2026-08-23';
+
+// Reference table. OSHA rows are the statutory Table G-16 values where one exists,
+// so the published table and the continuous formula are both represented honestly.
+const G16: Record<number, string> = {
+  90: '8 hrs', 92: '6 hrs', 95: '4 hrs', 97: '3 hrs', 100: '2 hrs',
+  102: '1.5 hrs', 105: '1 hr', 110: '30 min', 115: '15 min',
+};
+const levels = [80, 85, 88, 90, 91, 92, 94, 95, 97, 100, 103, 105, 106, 110, 115];
+const table = levels.map(l => ({
+  dba: l,
+  osha: G16[l] ?? formatDuration(oshaHours(l)),
+  oshaStatutory: l in G16,
+  niosh: formatDuration(nioshHours(l)),
+  overPel: l >= 90,
+  overRel: l >= 85,
+}));
+
+const softwareLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Noise Exposure Limit Calculator",
+  "url": canonicalUrl,
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "Calculates the maximum safe daily noise exposure for a given sound level under both the OSHA permissible exposure limit and the NIOSH recommended exposure limit.",
+  "isPartOf": { "@id": "https://noisedecibelmeter.com/#website" },
+  "publisher": { "@id": "https://noisedecibelmeter.com/#organization" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+};
+
+const bodyStyle = 'font-size:16px;color:#4d4d4d;line-height:1.75;margin:0 0 20px;';
+const h2Style   = 'font-size:22px;font-weight:600;color:#171717;letter-spacing:-0.6px;line-height:1.25;margin:40px 0 12px;';
+---
+<Layout
+  title="Noise Exposure Limits Calculator — OSHA vs NIOSH"
+  description="How long is it safe to be exposed to a given noise level? Calculate the limit under both the OSHA PEL and the stricter NIOSH REL, with the full reference table."
+  canonicalUrl={canonicalUrl}
+  lang="en"
+  pagePath="noise-exposure-limits"
+  localized={false}
+  articleMode={true}
+  datePublished="2026-08-23"
+  dateModified={updated}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(softwareLd)} />
+
+  <main style="max-width:820px;margin:0 auto;padding:64px 24px 40px;">
+    <p class="page-label" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 16px;">Calculator</p>
+    <h1 class="page-title" style="font-size:40px;font-weight:600;color:#171717;letter-spacing:-1.8px;line-height:1.1;margin:0 0 20px;">How long is that noise safe?</h1>
+    <p class="page-lede" style="font-size:17px;color:#4d4d4d;line-height:1.75;margin:0 0 32px;max-width:66ch;">
+      Enter a sound level and see the maximum daily exposure under both American standards.
+      They disagree, often by a factor of eight — and knowing which one applies to you
+      matters more than either number on its own.
+    </p>
+
+    <AuthorByline updated={updated} />
+
+    <!-- Calculator -->
+    <div class="calc" style="background:#fff;border:1px solid #ebebeb;border-radius:12px;padding:26px 26px 24px;margin:0 0 20px;">
+      <label for="calc-db" style="display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin:0 0 12px;">
+        Sound level
+      </label>
+      <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 6px;">
+        <output id="calc-out" for="calc-db" class="calc-out" style="font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:700;letter-spacing:-2px;line-height:1;color:#171717;font-variant-numeric:tabular-nums;">95</output>
+        <span class="calc-unit" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;color:#888;">dBA</span>
+      </div>
+      <input id="calc-db" type="range" min="70" max="120" step="1" value="95"
+        aria-describedby="calc-osha-val calc-niosh-val"
+        style="width:100%;margin:14px 0 4px;accent-color:#171717;" />
+      <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;">
+        <span>70</span><span>95</span><span>120</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:24px 0 0;">
+        <div class="verdict" data-std="osha" style="border:1px solid #ebebeb;border-radius:10px;padding:16px 18px;border-left:3px solid #f5a623;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin:0 0 8px;">OSHA · legal limit</p>
+          <p id="calc-osha-val" class="verdict-val" style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#171717;margin:0;font-variant-numeric:tabular-nums;">4 hrs</p>
+          <p id="calc-osha-note" class="verdict-note" style="font-size:12.5px;color:#888;margin:6px 0 0;line-height:1.5;">90 dBA PEL, 5 dB exchange rate</p>
+        </div>
+        <div class="verdict" data-std="niosh" style="border:1px solid #ebebeb;border-radius:10px;padding:16px 18px;border-left:3px solid #ff4d4d;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin:0 0 8px;">NIOSH · health recommendation</p>
+          <p id="calc-niosh-val" class="verdict-val" style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#171717;margin:0;font-variant-numeric:tabular-nums;">1 hr</p>
+          <p id="calc-niosh-note" class="verdict-note" style="font-size:12.5px;color:#888;margin:6px 0 0;line-height:1.5;">85 dBA REL, 3 dB exchange rate</p>
+        </div>
+      </div>
+
+      <p id="calc-gap" role="status" aria-live="polite" class="calc-gap" style="margin:16px 0 0;font-size:14px;color:#4d4d4d;line-height:1.6;"></p>
+    </div>
+
+    <p style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#888;margin:0 0 40px;line-height:1.6;">
+      Values are for continuous noise over a single day. Impulse noise — gunfire, fireworks,
+      nail guns — is governed separately and is not modelled here.
+    </p>
+
+    <article style="max-width:720px;">
+      <h2 class="page-h2" style={h2Style}>Which standard applies to you</h2>
+      <p class="page-body" style={bodyStyle}>
+        <strong>OSHA</strong> publishes a permissible exposure limit of 90 dBA as an
+        eight-hour time-weighted average, set out in 29 CFR 1910.95. It uses a
+        <strong> 5 dB exchange rate</strong>: every 5 dB rise halves the permitted time.
+        This is an enforceable legal ceiling for American workplaces, and it dates from
+        1971. A separate action level at 85 dBA obliges employers to run a hearing
+        conservation programme.
+      </p>
+      <p class="page-body" style={bodyStyle}>
+        <strong>NIOSH</strong> recommends 85 dBA over eight hours with a
+        <strong> 3 dB exchange rate</strong> — the rate that actually reflects how sound
+        energy accumulates, since 3 dB is a doubling of intensity. It carries no legal
+        force but is the better guide to whether your hearing is at risk.
+      </p>
+      <p class="page-body" style={bodyStyle}>
+        The practical rule: <strong>if you are protecting your own hearing, follow NIOSH.
+        If you are demonstrating compliance to a regulator, OSHA is the one that is
+        enforceable.</strong> Meeting OSHA does not mean your hearing is safe.
+      </p>
+
+      <h2 class="page-h2" style={h2Style}>Full reference table</h2>
+      <div style="overflow-x:auto;border:1px solid #ebebeb;border-radius:10px;background:#fff;" class="table-wrap">
+        <table id="limits" style="border-collapse:collapse;width:100%;font-size:14px;min-width:520px;">
+          <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">
+            Maximum daily noise exposure by sound level under OSHA and NIOSH
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" style="text-align:left;">Sound level</th>
+              <th scope="col" style="text-align:right;">OSHA max</th>
+              <th scope="col" style="text-align:right;">NIOSH max</th>
+              <th scope="col" style="text-align:left;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {table.map(r => (
+              <tr>
+                <th scope="row" class="num" style="text-align:left;font-weight:600;">{r.dba} dBA</th>
+                <td class="num">
+                  {r.osha}
+                  {r.oshaStatutory && <span class="statutory" title="Value published in 29 CFR 1910.95 Table G-16" style="color:#888;font-size:11px;"> §</span>}
+                </td>
+                <td class="num" style="font-weight:600;">{r.niosh}</td>
+                <td style="font-size:12.5px;color:#888;">
+                  {r.overPel ? 'Over OSHA PEL' : r.overRel ? 'Over NIOSH REL' : 'Below both limits'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:#888;margin:10px 0 0;line-height:1.6;">
+        <span style="font-weight:600;">§</span> marks a value published directly in
+        29 CFR 1910.95 Table G-16. Other OSHA figures are computed with the formula in
+        Appendix A of the same standard; the two differ only by the table&rsquo;s rounding.
+      </p>
+
+      <h2 class="page-h2" style={h2Style}>Why 3 dB matters so much</h2>
+      <p class="page-body" style={bodyStyle}>
+        The exchange rate is the whole argument between the two standards. A 3 dB increase
+        doubles sound energy, so halving the exposure time keeps the total dose constant —
+        that is the physics, and it is what NIOSH follows. OSHA&rsquo;s 5 dB rate permits
+        substantially more energy before requiring the same reduction in time.
+      </p>
+      <p class="page-body" style={bodyStyle}>
+        Move the slider to 100 dBA and the gap is stark: OSHA allows two hours, NIOSH fifteen
+        minutes. Both numbers are correct for what they measure. Only one of them is about
+        your hearing.
+      </p>
+
+      <h2 class="page-h2" style={h2Style}>Measuring the level you are actually in</h2>
+      <p class="page-body" style={bodyStyle}>
+        This calculator is only as good as the dBA figure you feed it. The
+        <a href="/" class="inline-link" style="color:#171717;border-bottom:1px solid #d0d0d0;text-decoration:none;">free decibel meter on this site</a>
+        gives a live A-weighted reading from your browser in a couple of seconds. Use the
+        average over a representative minute rather than a peak — exposure limits are about
+        sustained level, not the loudest instant.
+      </p>
+      <p class="page-body" style={bodyStyle}>
+        A browser reading lands within roughly ±2–3 dB, which is close enough to tell an
+        85 dBA room from a 100 dBA one. It is not close enough for a compliance record — that
+        needs an IEC 61672-1 Class 1 or Class 2 meter. The
+        <a href="/methodology/" class="inline-link" style="color:#171717;border-bottom:1px solid #d0d0d0;text-decoration:none;">methodology page</a>
+        covers the limits in detail, and the
+        <a href="/decibel-chart/" class="inline-link" style="color:#171717;border-bottom:1px solid #d0d0d0;text-decoration:none;">decibel chart</a>
+        lists typical levels for 50 common sounds.
+      </p>
+
+      <div style="margin:36px 0 0;padding:22px 24px;background:#fff;border:1px solid #ebebeb;border-radius:10px;" class="cta-card">
+        <p class="cta-text" style="margin:0 0 14px;font-size:15px;color:#4d4d4d;line-height:1.6;">Measure your actual level, then come back and check it.</p>
+        <a href="/" class="cta-link" style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#171717;text-decoration:none;border-bottom:2px solid #171717;padding-bottom:2px;">Open the decibel meter &rarr;</a>
+      </div>
+    </article>
+  </main>
+
+  <Sources />
+</Layout>
+
+<style is:global>
+  #limits th, #limits td { padding: 11px 16px; border-bottom: 1px solid #f0f0f0; }
+  #limits thead th {
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase; color: #888;
+    background: #fafafa; border-bottom: 1px solid #ebebeb; white-space: nowrap;
+  }
+  #limits tbody tr:last-child th, #limits tbody tr:last-child td { border-bottom: 0; }
+  #limits .num {
+    font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums;
+    text-align: right; white-space: nowrap; color: #171717;
+  }
+  #limits tbody tr:hover { background: #fafafa; }
+  #calc-db:focus-visible, .inline-link:focus-visible, .cta-link:focus-visible {
+    outline: 2px solid #171717; outline-offset: 3px;
+  }
+  .inline-link:hover { border-bottom-color: #171717 !important; }
+
+  html[data-dark] .page-title, html[data-dark] .page-h2 { color: #f2f2f2 !important; }
+  html[data-dark] .page-body, html[data-dark] .page-lede { color: #b0b0b0 !important; }
+  html[data-dark] .calc { background: #141414 !important; border-color: #222 !important; }
+  html[data-dark] .calc-out, html[data-dark] .verdict-val { color: #f2f2f2 !important; }
+  html[data-dark] .verdict { border-color: #222 !important; }
+  html[data-dark] .calc-gap { color: #b0b0b0 !important; }
+  html[data-dark] #calc-db { accent-color: #f2f2f2 !important; }
+  html[data-dark] .table-wrap { background: #141414 !important; border-color: #222 !important; }
+  html[data-dark] #limits thead th { background: #1a1a1a !important; border-bottom-color: #222 !important; }
+  html[data-dark] #limits th, html[data-dark] #limits td { border-bottom-color: #1e1e1e !important; }
+  html[data-dark] #limits .num { color: #f2f2f2 !important; }
+  html[data-dark] #limits tbody tr:hover { background: #1a1a1a !important; }
+  html[data-dark] .cta-card { background: #141414 !important; border-color: #222 !important; }
+  html[data-dark] .cta-text { color: #b0b0b0 !important; }
+  html[data-dark] .cta-link { color: #f2f2f2 !important; border-bottom-color: #f2f2f2 !important; }
+  html[data-dark] .inline-link { color: #f2f2f2 !important; border-bottom-color: #444 !important; }
+  html[data-dark] #calc-db:focus-visible { outline-color: #f2f2f2 !important; }
+
+  @media (max-width: 640px) { .page-title { font-size: 30px !important; letter-spacing: -1.2px !important; } }
+</style>
+
+<script is:inline>
+  (function () {
+    var slider = document.getElementById('calc-db');
+    if (!slider) return;
+    var out = document.getElementById('calc-out');
+    var oshaEl = document.getElementById('calc-osha-val');
+    var nioshEl = document.getElementById('calc-niosh-val');
+    var oshaNote = document.getElementById('calc-osha-note');
+    var nioshNote = document.getElementById('calc-niosh-note');
+    var gap = document.getElementById('calc-gap');
+
+    // 29 CFR 1910.95: 90 dBA PEL, 5 dB exchange. NIOSH REL: 85 dBA, 3 dB exchange.
+    function oshaH(d) { return d < 90 ? null : 8 / Math.pow(2, (d - 90) / 5); }
+    function nioshH(d) { return d < 85 ? null : 8 / Math.pow(2, (d - 85) / 3); }
+
+    function fmt(h) {
+      if (h === null) return '8 hrs +';
+      if (h >= 1) { var v = Math.round(h * 10) / 10; return v + ' hr' + (v === 1 ? '' : 's'); }
+      var m = h * 60;
+      if (m >= 1) return Math.round(m) + ' min';
+      var s = m * 60;
+      return s >= 1 ? Math.round(s) + ' sec' : '< 1 sec';
+    }
+
+    function update() {
+      var d = Number(slider.value);
+      var o = oshaH(d), n = nioshH(d);
+      out.textContent = String(d);
+      oshaEl.textContent = fmt(o);
+      nioshEl.textContent = fmt(n);
+      oshaNote.textContent = d < 90 ? 'Below the 90 dBA PEL' : '90 dBA PEL, 5 dB exchange rate';
+      nioshNote.textContent = d < 85 ? 'Below the 85 dBA REL' : '85 dBA REL, 3 dB exchange rate';
+
+      if (o === null && n === null) {
+        gap.textContent = 'Below both limits — no daily exposure cap at this level.';
+      } else if (o === null) {
+        gap.textContent = 'OSHA sets no cap here, but NIOSH already recommends limiting exposure to ' + fmt(n) + '.';
+      } else {
+        var ratio = o / n;
+        gap.textContent = 'OSHA permits ' + fmt(o) + '; NIOSH recommends ' + fmt(n) +
+          ' — about ' + (ratio >= 10 ? Math.round(ratio) : Math.round(ratio * 10) / 10) +
+          '× longer under the legal limit than under the health recommendation.';
+      }
+    }
+    slider.addEventListener('input', update);
+    update();
+  })();
+</script>
