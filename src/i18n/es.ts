@@ -5,7 +5,7 @@ const es: Translations = {
   ogLocale: 'es_ES',
 
   footer: {
-    tagline: 'medidor de decibelios en línea gratuito',
+    tagline: 'sonómetro en línea gratuito',
     about: 'Acerca de',
     privacy: 'Política de privacidad',
     terms: 'Términos y condiciones',
@@ -13,13 +13,13 @@ const es: Translations = {
   },
 
   index: {
-    title: 'Medidor de Decibelios Online Gratis — Nivel de Sonido',
-    description: 'Medidor de decibelios online gratuito que mide el nivel de sonido en tiempo real con el micrófono de tu navegador. Sin descargas ni cuenta.',
+    title: 'Sonómetro Online Gratis — Medidor de Decibelios en Tiempo Real',
+    description: 'Sonómetro online gratuito que mide el nivel de sonido en decibelios en tiempo real con el micrófono de tu navegador. Sin descargas ni cuenta.',
     hero: {
-      tag: 'Medidor de decibelios en línea — sin descarga requerida',
-      h1_1: 'Medidor de decibelios en línea.',
+      tag: 'Sonómetro en línea — sin descarga requerida',
+      h1_1: 'Sonómetro en línea.',
       h1_2: 'Niveles de sonido en tiempo real.',
-      body: 'El mejor medidor de decibelios gratuito en línea — mide los niveles de ruido al instante desde el micrófono de tu navegador. Sin instalaciones, sin cuentas.',
+      body: 'El mejor sonómetro gratuito en línea — mide los niveles de ruido en decibelios al instante desde el micrófono de tu navegador. Sin instalaciones, sin cuentas.',
     },
     badge: {
       idle: 'Concede acceso al micrófono para comenzar',
@@ -85,10 +85,10 @@ const es: Translations = {
       'Riesgo de daño auditivo', 'Zona de construcción', 'Peligrosamente ruidoso',
     ],
     article: {
-      h1: 'Medidor de Decibelios en Línea Gratuito — Mide los Niveles de Sonido al Instante',
-      p1: 'Nuestro medidor de decibelios en línea gratuito te permite medir los niveles de sonido en tiempo real directamente en tu navegador — sin descarga, sin registro, sin coste. Haz clic en Iniciar Medición, concede acceso al micrófono y observa los valores de dB en vivo al instante.',
-      whatIsH2: '¿Qué es un Medidor de Decibelios?',
-      whatIsP: 'Un medidor de decibelios — también llamado sonómetro — mide la intensidad del sonido en decibelios (dB). Nuestro medidor en línea replica la funcionalidad de los aparatos profesionales usando el micrófono integrado de tu dispositivo y la Web Audio API.',
+      h1: 'Sonómetro en Línea Gratuito — Mide los Niveles de Sonido al Instante',
+      p1: 'Nuestro sonómetro en línea gratuito te permite medir los niveles de sonido en tiempo real directamente en tu navegador — sin descarga, sin registro, sin coste. Haz clic en Iniciar Medición, concede acceso al micrófono y observa los valores de dB en vivo al instante.',
+      whatIsH2: '¿Qué es un Sonómetro?',
+      whatIsP: 'Un sonómetro — también llamado medidor de decibelios o decibelímetro — mide la intensidad del sonido en decibelios (dB). Nuestro sonómetro en línea replica la funcionalidad de los aparatos profesionales usando el micrófono integrado de tu dispositivo y la Web Audio API.',
       chartH2: 'Tabla de Decibelios — Niveles de Sonido Comunes',
       chartIntro: 'Usa esta tabla de decibelios como referencia mientras mides tu entorno:',
       chartItems: [
@@ -101,12 +101,12 @@ const es: Translations = {
         '100–120 dB — Conciertos, martillo neumático, obra de construcción',
         '120–140 dB — Motor de avión a corta distancia, umbral del dolor',
       ],
-      howToH2: 'Cómo Usar Este Medidor de Sonido',
+      howToH2: 'Cómo Usar Este Sonómetro',
       howToP: 'Haz clic en Iniciar Medición y permite el acceso al micrófono. Cambia entre dBA (ponderación A, para la audición humana) y dBC (ponderación C, para bajas frecuencias). El gráfico de historial de 60 segundos muestra los picos de ruido, y las estadísticas Min/Prom/Máx resumen tu sesión.',
-      whyH2: 'Por Qué Elegir Este Medidor de Decibelios Gratuito',
+      whyH2: 'Por Qué Elegir Este Sonómetro Gratuito',
       whyP: 'A diferencia de las apps que requieren instalación, esta herramienta funciona completamente en tu navegador. Todo el procesamiento de audio ocurre localmente — ningún dato de sonido se envía jamás a un servidor. Privacidad garantizada, instantáneo, funciona en cualquier dispositivo con micrófono.',
       outdoorH2: 'Uso en Exteriores y Aplicaciones Profesionales',
-      outdoorP: 'Como medidor de decibelios exterior, esta herramienta es útil para medir el ruido del tráfico, la contaminación acústica de obras o evaluar un local antes de un evento. Para requisitos profesionales como verificaciones de cumplimiento OSHA, combina las lecturas del navegador con un sonómetro calibrado.',
+      outdoorP: 'Como sonómetro para exteriores, esta herramienta es útil para medir el ruido del tráfico, la contaminación acústica de obras o evaluar un local antes de un evento. Para requisitos profesionales como verificaciones de cumplimiento OSHA, combina las lecturas del navegador con un sonómetro calibrado.',
     },
     faq: {
       title: 'Preguntas Frecuentes',
@@ -116,12 +116,12 @@ const es: Translations = {
         { q: '¿Son realmente fuertes 100 decibelios?', a: 'Sí — 100 dB es muy fuerte y está en la zona de daño auditivo. Comparable a una motocicleta o una motosierra. La OSHA solo permite 2 horas de exposición sin protección a 100 dB. La exposición repetida puede causar pérdida auditiva permanente.' },
         { q: '¿Qué tan fuertes son 50 dB de noche?', a: '50 dB por la noche es moderadamente intrusivo. La OMS recomienda mantener el ruido nocturno exterior por debajo de 40 dB para dormir bien. Las ordenanzas municipales suelen establecer límites nocturnos entre 45–55 dB.' },
         { q: '¿Cuál es el rango normal de decibelios?', a: 'Para entornos cotidianos, 40–65 dB se considera normal. Un dormitorio silencioso es de 30–40 dB, una conversación normal de 55–65 dB y una oficina concurrida alrededor de 65–70 dB.' },
-        { q: '¿Qué es un medidor de decibelios?', a: 'Un medidor de decibelios mide la intensidad del sonido en decibelios (dB) usando una escala logarítmica. Lo usan ingenieros, inspectores de seguridad, músicos y usuarios cotidianos para monitorear el ruido en hogares, lugares de trabajo y exteriores.' },
-        { q: '¿Cómo se usa un medidor de decibelios?', a: 'Haz clic en Iniciar Medición y permite el acceso al micrófono. El indicador muestra lecturas de dB en vivo. Cambia entre los modos dBA y dBC, observa el historial de 60 segundos y usa las estadísticas Min/Prom/Máx. Haz clic en Detener cuando termines y exporta CSV para guardar un registro.' },
-        { q: '¿Son precisas las apps de medidor de decibelios?', a: 'Las apps basadas en navegador son precisas dentro de ±2–3 dB — excelentes para monitoreo de tendencias. Para evaluaciones de seguridad ocupacional conformes con la ley (OSHA, IEC 61672) se requiere un sonómetro certificado.' },
-        { q: '¿Cómo funciona un medidor de decibelios?', a: 'Un medidor de decibelios captura el sonido con un micrófono, lo convierte en señal eléctrica y calcula la amplitud RMS. Luego lo convierte a dB usando una fórmula logarítmica. Esta herramienta usa la Web Audio API y procesa todo localmente en tu navegador.' },
-        { q: '¿Qué mide un medidor de decibelios?', a: 'Un medidor de decibelios mide el nivel de presión sonora (SPL) — la sonoridad general de todas las frecuencias combinadas. Los modos ponderados como dBA y dBC aplican filtros para reflejar mejor cómo los humanos perciben el sonido.' },
-        { q: '¿Este medidor de decibelios es gratuito?', a: 'Sí — 100% gratuito, para siempre. Sin suscripción, sin cuenta, sin costes ocultos. La herramienta funciona completamente en tu navegador sin necesidad de instalación.' },
+        { q: '¿Qué es un sonómetro?', a: 'Un sonómetro — o medidor de decibelios — mide la intensidad del sonido en decibelios (dB) usando una escala logarítmica. Lo usan ingenieros, inspectores de seguridad, músicos y usuarios cotidianos para monitorear el ruido en hogares, lugares de trabajo y exteriores.' },
+        { q: '¿Cómo se usa un sonómetro?', a: 'Haz clic en Iniciar Medición y permite el acceso al micrófono. El sonómetro online muestra lecturas de dB en vivo. Cambia entre los modos dBA y dBC, observa el historial de 60 segundos y usa las estadísticas Min/Prom/Máx. Haz clic en Detener cuando termines y exporta CSV para guardar un registro.' },
+        { q: '¿Son precisos los sonómetros online?', a: 'Un sonómetro online basado en navegador es preciso dentro de ±2–3 dB — excelentes para monitoreo de tendencias. Para evaluaciones de seguridad ocupacional conformes con la ley (OSHA, IEC 61672) se requiere un sonómetro certificado.' },
+        { q: '¿Cómo funciona un sonómetro?', a: 'Un sonómetro captura el sonido con un micrófono, lo convierte en señal eléctrica y calcula la amplitud RMS. Luego lo convierte a dB usando una fórmula logarítmica. Esta herramienta usa la Web Audio API y procesa todo localmente en tu navegador.' },
+        { q: '¿Qué mide un sonómetro?', a: 'Un sonómetro mide el nivel de presión sonora (SPL) — la sonoridad general de todas las frecuencias combinadas. Los modos ponderados como dBA y dBC aplican filtros para reflejar mejor cómo los humanos perciben el sonido.' },
+        { q: '¿Este sonómetro es gratuito?', a: 'Sí — 100% gratuito, para siempre. Sin suscripción, sin cuenta, sin costes ocultos. La herramienta funciona completamente en tu navegador sin necesidad de instalación.' },
         { q: '¿Funciona en móvil?', a: 'Sí. Funciona en cualquier navegador moderno incluyendo Chrome, Safari, Firefox y Edge en escritorio y móvil. Solo necesitas un dispositivo con micrófono que soporte la Web Audio API.' },
         { q: '¿Se graba o almacena mi audio?', a: 'No. Todo el análisis de audio ocurre localmente en tu navegador. Ningún dato de sonido se transmite a ningún servidor, ni se graba ni almacena. Tu privacidad está completamente protegida.' },
         { q: '¿Cuál es la diferencia entre dBA y dBC?', a: 'dBA (ponderación A) filtra las frecuencias según las percibe el oído humano — estándar para evaluaciones de ruido laboral. dBC (ponderación C) aplica mucho menos filtrado y es mejor para medir sonidos de baja frecuencia como música con mucho bajo o maquinaria pesada.' },
@@ -132,17 +132,17 @@ const es: Translations = {
 
 
   about: {
-    title: 'Acerca del Medidor de Decibelios — Noise Decibel Meter',
-    description: 'Noise Decibel Meter es una herramienta de navegador gratuita que mide el nivel de sonido en tiempo real. Sin instalación, cuenta ni seguimiento.',
+    title: 'Acerca del Sonómetro Online — Noise Decibel Meter',
+    description: 'Noise Decibel Meter es un sonómetro online gratuito que mide el nivel de sonido en el navegador en tiempo real. Sin instalación, cuenta ni seguimiento.',
     label: 'Acerca de',
     h1: 'Una herramienta simple que hace una sola cosa bien.',
     intro: 'Noise Decibel Meter es un sonómetro gratuito basado en navegador para cualquiera que necesite una lectura de decibelios rápida y precisa — sin instalar una app, crear una cuenta ni compartir datos personales.',
     whyH2: 'Por qué lo creamos',
-    whyP1: 'Las apps de medición de decibelios existentes suelen requerir instalación, solicitar permisos innecesarios o estar llenas de anuncios. Quisimos algo diferente: abres el navegador, haces clic en un botón y obtienes una lectura. Sin fricción. Sin rastreo.',
+    whyP1: 'Las apps de sonómetro existentes suelen requerir instalación, solicitar permisos innecesarios o estar llenas de anuncios. Quisimos algo diferente: abres el navegador, haces clic en un botón y obtienes una lectura. Sin fricción. Sin rastreo.',
     whyP2: 'La herramienta usa la Web Audio API de tu navegador para procesar los datos del micrófono completamente en tu dispositivo. Ningún audio se transmite a un servidor — tus mediciones son completamente privadas.',
     whatH2: 'Qué hace',
     features: [
-      { icon: '📊', title: 'Lecturas de dB en tiempo real', desc: 'Medidor en vivo y pantalla numérica actualizada en cada fotograma de animación.' },
+      { icon: '📊', title: 'Lecturas de dB en tiempo real', desc: 'Sonómetro en vivo y pantalla numérica actualizada en cada fotograma de animación.' },
       { icon: '⚖️', title: 'Ponderación dBA y dBC',        desc: 'Cambia entre ponderación A (audición humana) y ponderación C (bajas frecuencias).' },
       { icon: '📈', title: 'Historial de 60 segundos',      desc: 'Gráfico de forma de onda visual que rastrea los niveles de ruido durante el último minuto.' },
       { icon: '📁', title: 'Exportación CSV',               desc: 'Descarga un registro con marca de tiempo de cada lectura para documentación.' },
@@ -200,7 +200,7 @@ const es: Translations = {
     updated: 'Última actualización: junio de 2025',
     sections: [
       { h2: '1. Aceptación de los términos', body: 'Al acceder o usar Noise Decibel Meter ("el Servicio"), aceptas quedar vinculado por estos Términos y Condiciones. Si no estás de acuerdo, por favor deja de usar el Servicio.' },
-      { h2: '2. Descripción del servicio', body: 'Noise Decibel Meter es una herramienta gratuita de medición de nivel de sonido basada en navegador. Usa el micrófono de tu dispositivo y la Web Audio API para estimar los niveles de presión sonora en decibelios. El Servicio se proporciona de forma gratuita y no requiere registro.' },
+      { h2: '2. Descripción del servicio', body: 'Noise Decibel Meter es un sonómetro gratuito basado en navegador que mide el nivel de sonido. Usa el micrófono de tu dispositivo y la Web Audio API para estimar los niveles de presión sonora en decibelios. El Servicio se proporciona de forma gratuita y no requiere registro.' },
       { h2: '3. Precisión y limitaciones', body: 'El Servicio proporciona lecturas aproximadas de decibelios adecuadas para uso informativo cotidiano. El Servicio no es sustituto de equipos profesionales certificados — no lo uses para evaluaciones de ruido ocupacional legalmente requeridas (por ejemplo, cumplimiento de OSHA, IEC 61672).' },
       { h2: '4. Uso permitido', body: 'Puedes usar el Servicio para fines informativos personales y comerciales lícitos. Aceptas no intentar realizar ingeniería inversa del Servicio, usarlo en violación de las leyes aplicables, ni presentar las lecturas de esta herramienta como mediciones profesionales certificadas.' },
       { h2: '5. Propiedad intelectual', body: 'Todo el contenido, diseño y código del Servicio son propiedad de Noise Decibel Meter y están protegidos por las leyes de propiedad intelectual aplicables. No puedes copiar, reproducir ni redistribuir sin permiso previo por escrito.' },
