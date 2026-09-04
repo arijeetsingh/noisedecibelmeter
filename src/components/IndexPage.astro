@@ -93,6 +93,39 @@ const canonicalUrl = lang === 'en'
   html[data-dark] .faq-details summary { color: #f2f2f2 !important; }
   html[data-dark] .faq-chevron { border-color: #777 !important; }
   html[data-dark] .faq-answer { color: #b0b0b0 !important; }
+
+  /* Mobile sticky start CTA */
+  #sticky-cta { display: none; }
+  @media (max-width: 768px) {
+    #sticky-cta {
+      display: flex; align-items: center; gap: 12px;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+      background: rgba(255,255,255,0.94);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-top: 1px solid #ebebeb;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+      transform: translateY(140%); transition: transform 0.25s ease;
+      pointer-events: none; visibility: hidden;
+    }
+    #sticky-cta[data-visible] { transform: translateY(0); pointer-events: auto; visibility: visible; }
+    body { padding-bottom: 72px; }
+  }
+  @media (prefers-reduced-motion: reduce) { #sticky-cta { transition: none; } }
+  #sticky-readout { display: none; flex-direction: column; line-height: 1.15; flex-shrink: 0; }
+  #sticky-cta[data-live] #sticky-readout { display: flex; }
+  #sticky-db { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: #171717; letter-spacing: -0.5px; }
+  #sticky-class { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; }
+  #sticky-btn {
+    flex: 1; height: 46px; border-radius: 100px; border: none; cursor: pointer;
+    background: #171717; color: #fff; font-size: 15px; font-weight: 500; letter-spacing: -0.2px;
+  }
+  #sticky-cta[data-live] #sticky-btn { background: #fff; color: #171717; border: 1px solid #ebebeb; }
+
+  html[data-dark] #sticky-cta { background: rgba(10,10,10,0.94) !important; border-top-color: #222 !important; box-shadow: 0 -2px 12px rgba(0,0,0,0.4) !important; }
+  html[data-dark] #sticky-db { color: #f2f2f2 !important; }
+  html[data-dark] #sticky-btn { background: #f2f2f2 !important; color: #0a0a0a !important; }
+  html[data-dark] #sticky-cta[data-live] #sticky-btn { background: #1a1a1a !important; color: #f2f2f2 !important; border-color: #2a2a2a !important; }
 </style>
 
 <Layout
@@ -312,6 +345,15 @@ const canonicalUrl = lang === 'en'
     </div>
 
   </main>
+
+  <!-- Mobile sticky CTA: keeps Start reachable anywhere on the page -->
+  <div id="sticky-cta" aria-hidden="true">
+    <div id="sticky-readout" aria-hidden="true">
+      <span id="sticky-db">--</span>
+      <span id="sticky-class">dB</span>
+    </div>
+    <button id="sticky-btn" type="button" onclick="stickyAction()">{idx.btn.start}</button>
+  </div>
 </Layout>
 
 <!-- Inject i18n strings for JS -->
@@ -321,6 +363,8 @@ const canonicalUrl = lang === 'en'
   stopped: idx.badge.stopped,
   requesting: idx.badge.requesting,
   mic: idx.mic,
+  btnStart: idx.btn.start,
+  btnStop: idx.btn.stop,
 } }}>
   window.__i18n = __i18n;
 </script>
@@ -343,6 +387,10 @@ var micPanelBody   = document.getElementById('mic-panel-body');
 var micPanelBtn    = document.getElementById('mic-panel-action');
 var micPanelSkip   = document.getElementById('mic-panel-dismiss');
 var btnExport  = document.getElementById('btn-export');
+var stickyCta  = document.getElementById('sticky-cta');
+var stickyBtn  = document.getElementById('sticky-btn');
+var stickyDb   = document.getElementById('sticky-db');
+var stickyCls  = document.getElementById('sticky-class');
 var dbValue    = document.getElementById('db-value');
 var statMin    = document.getElementById('stat-min');
 var statAvg    = document.getElementById('stat-avg');
@@ -457,6 +505,7 @@ function tick() {
     var cls = classify(displayDb);
     badgeLabel.textContent = cls.label; badgeDot.style.background = cls.dot;
     badge.style.background = cls.bg; badge.style.borderColor = cls.border; badge.style.color = cls.text;
+    stickyDb.textContent = displayDb.toFixed(1); stickyCls.textContent = cls.label;
     lastDisplayUpdate = now;
   }
   samples.push({ db: db, time: now });
@@ -590,6 +639,7 @@ function onMicGranted(s) {
   btnStart.disabled = true; btnStart.style.opacity = '0.4';
   btnStop.disabled = false; btnStop.style.opacity = '1';
   btnExport.disabled = false; btnExport.style.opacity = '1';
+  syncSticky();
   badge.style.background = ''; badge.style.borderColor = ''; badge.style.color = '';
   navLive.style.display = 'flex';
   durationInterval = setInterval(function() {
@@ -626,6 +676,7 @@ function stopMeasuring() {
   badgeLabel.textContent = window.__i18n.stopped;
   badge.style.background = ''; badge.style.borderColor = ''; badge.style.color = '';
   badgeDot.style.background = '#ddd';
+  syncSticky();
 }
 
 function exportCsv() {
@@ -651,6 +702,46 @@ function setWeighting(w) {
   else { cBtn.classList.remove('weight-inactive'); aBtn.classList.add('weight-inactive'); }
 }
 
+// --- Mobile sticky CTA ---------------------------------------------------
+// Start stays one tap away no matter how far the page is scrolled, and stays
+// clear of anything (ads, banners) covering the top of the viewport.
+function syncSticky() {
+  var live = !!analyser;
+  if (live) stickyCta.setAttribute('data-live', '');
+  else {
+    stickyCta.removeAttribute('data-live');
+    stickyDb.textContent = '--'; stickyCls.textContent = 'dB';
+  }
+  stickyBtn.textContent = live ? window.__i18n.btnStop : window.__i18n.btnStart;
+}
+
+function showSticky(show) {
+  if (show) { stickyCta.setAttribute('data-visible', ''); stickyCta.setAttribute('aria-hidden', 'false'); }
+  else { stickyCta.removeAttribute('data-visible'); stickyCta.setAttribute('aria-hidden', 'true'); }
+}
+
+function stickyAction() {
+  if (analyser) { stopMeasuring(); return; }
+  var card = document.querySelector('.main-card');
+  if (card && card.scrollIntoView) {
+    try { card.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { card.scrollIntoView(); }
+  }
+  // Called synchronously so the tap still counts as a user gesture for getUserMedia.
+  startMeasuring();
+}
+
+if (window.IntersectionObserver) {
+  new IntersectionObserver(function(entries) {
+    showSticky(!entries[0].isIntersecting);
+  }, { rootMargin: '0px 0px -80px 0px' }).observe(btnRow);
+} else {
+  window.addEventListener('scroll', function() {
+    var r = btnRow.getBoundingClientRect();
+    showSticky(r.bottom < 0 || r.top > window.innerHeight);
+  }, { passive: true });
+}
+
+syncSticky();
 updateGauge(0);
 watchMicPermission();
 </script>
